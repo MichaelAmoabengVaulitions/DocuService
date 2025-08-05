@@ -16,6 +16,7 @@ import Language from './Language';
 import Transport from './Transport';
 import Family from './Family';
 import Shopping from './Shopping';
+import DoubleArrowRight from './DoubleArrowRight';
 
 export type DynamicIconName = 
             'Chat'|
@@ -33,6 +34,7 @@ export type DynamicIconName =
             "Transport"|
             "Family"|
             "Shopping"|
+            "DoubleArrowRight"|
             null;
 
 export interface DynamicIconProps extends IconProps {
@@ -105,6 +107,10 @@ const IconList: IconListItem[] = [
     {
         name: 'Shopping',
         icon: Shopping
+    }, 
+    {
+        name: 'DoubleArrowRight',
+        icon: DoubleArrowRight
     }
 ];
 
