@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+// src/navigation/AppTabs.js
+
+import React from 'react';
+import { StyleSheet, View } from 'react-native'; // ← added View
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import firestore from '@react-native-firebase/firestore';
-import { useNavigation } from '@react-navigation/native';
+import { BlurView } from '@react-native-community/blur';
 import {
     CHATS_STACK,
     HOME_STACK,
@@ -10,91 +12,108 @@ import {
 } from '../ScreenNames';
 import HomeStack from './HomeStack';
 import OffersStack from './OffersStack';
+import ChatsStack from '../chats/ChatsStack';
 import ProfileStack from './ProfileStack';
 import TabButton from '../../components/tabs/TabButton';
 import TabLabel from '../../components/tabs/TabLabel';
 import useNotificationPermissions from '../../hooks/notifications/useNotificationPermissions';
-import ChatsStack from '../chats/ChatsStack';
-import { ANIMATION_DISABLED_HEADER } from '../../components/header/ScreenOptions';
-import useChatRooms from '../../hooks/chats/useChatRooms';
+import { BLACK, BLACK_30, BLUE, WHITE_90, WHITE, IOS_BLUE } from '../../theme/Colors';
 
 const Tab = createBottomTabNavigator();
-const { Navigator, Screen } = Tab;
 
 const AppTabs = () => {
     useNotificationPermissions();
 
-    const [unreadMessagesCount, setUnreadMessagesCount] = useState(0);
-    const { fetchUnreadCountInLatestChatRoom } = useChatRooms();
-    const navigation = useNavigation();
-
-    useEffect(() => {
-        const fetchUnread = async () => {
-            const result = await fetchUnreadCountInLatestChatRoom();
-            setUnreadMessagesCount(result);
-        };
-        fetchUnread();
-    }, [navigation]);
-
     return (
-        <Navigator screenOptions={{
-            ...ANIMATION_DISABLED_HEADER,
-            lazy: true,
-            freezeOnBlur: true,
-            animationEnabled: false,
-            gestureEnabled: false,
-        }}
+        <Tab.Navigator
+            screenOptions={{
+                headerShown: false,
+                lazy: true,
+                freezeOnBlur: true,
+                animationEnabled: false,
+                gestureEnabled: false,
+                // dark glass background, clipped to rounded tab bar
+                tabBarBackground: () => (
+                    <View style={styles.blurContainer}>
+                        <BlurView
+                            style={StyleSheet.absoluteFill}
+                            blurType="dark"
+                            blurAmount={40}
+                            pointerEvents="none"  
+                            reducedTransparencyFallbackColor="rgba(0,0,0,0.4)"
+                        />
+                    </View>
+                ),
+                tabBarStyle: {
+                    position: 'absolute',
+                    bottom: 20,
+                    left: '5%',
+                    width: '90%',
+                    height: 70,
+                    backgroundColor: BLACK_30,
+                    borderTopWidth: 0,
+                    borderRadius: 70,
+                    overflow: 'hidden', 
+                    elevation: 8,
+                    shadowColor: '#000000',
+                    shadowOffset: { width: 0, height: 4 },
+                    shadowOpacity: 0.1,
+                    shadowRadius: 16,
+                    alignItems: 'center',
+                    paddingBottom: 5,
+                },
+            }}
         >
-            <Screen
+            <Tab.Screen
                 name={HOME_STACK}
                 component={HomeStack}
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <TabButton focused={focused} icon="home-outline" />
+                        <TabButton focused={focused} icon={'Home'} color={focused ? IOS_BLUE : WHITE} />
                     ),
                     tabBarLabel: (props) => <TabLabel {...props}>Home</TabLabel>,
                 }}
             />
-
-            <Screen
+            <Tab.Screen
                 name={OFFERS_STACK}
                 component={OffersStack}
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <TabButton focused={focused} icon="briefcase" />
+                        <TabButton focused={focused} icon={'Saved'} color={focused ? IOS_BLUE : WHITE} />
                     ),
-                    tabBarLabel: (props) => <TabLabel {...props}>My Projects</TabLabel>,
+                    tabBarLabel: (props) => <TabLabel {...props}>Saved</TabLabel>,
                 }}
             />
-            <Screen
+            <Tab.Screen
                 name={CHATS_STACK}
                 component={ChatsStack}
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <TabButton focused={focused} icon="chatbubbles-outline" />
+                        <TabButton focused={focused} icon={'Chat'} color={focused ? IOS_BLUE : WHITE} />
                     ),
-                    tabBarLabel: (props) => (
-                        <TabLabel
-                            {...props}
-                            showNotification={unreadMessagesCount}
-                        >
-                            Chats
-                        </TabLabel>
-                    ),
+                    tabBarLabel: (props) => <TabLabel {...props}>Chat</TabLabel>,
                 }}
             />
-            <Screen
+            <Tab.Screen
                 name={PROFILE_STACK}
                 component={ProfileStack}
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <TabButton focused={focused} icon="person" />
+                        <TabButton focused={focused} icon={'Profile'} color={focused ? IOS_BLUE : WHITE} />
                     ),
-                    tabBarLabel: (props) => <TabLabel {...props}>My Portfolio</TabLabel>,
+                    tabBarLabel: (props) => <TabLabel {...props}>Profile</TabLabel>,
                 }}
             />
-        </Navigator>
+        </Tab.Navigator>
     );
 };
+
+const styles = StyleSheet.create({
+    blurContainer: {
+        ...StyleSheet.absoluteFillObject,
+        borderRadius: 70,
+        overflow: 'hidden',
+    },
+});
 
 export default AppTabs;

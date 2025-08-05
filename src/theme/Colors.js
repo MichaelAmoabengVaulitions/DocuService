@@ -1,5 +1,5 @@
 export const TRANSPARENT = 'transparent';
-export const BLACK = '#150b2c';
+export const BLACK = '#000000';
 export const BLACK_SECONDARY = '#2D3439';
 export const BLACK_50 = `${BLACK}50`;
 export const BLACK_10 = `${BLACK}10`;

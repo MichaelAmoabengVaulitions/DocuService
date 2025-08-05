@@ -1,0 +1,33 @@
+import * as React from 'react';
+import Svg, { Path } from 'react-native-svg';
+import { WHITE } from '../../theme/Colors';
+import { IconProps } from './IconProps';
+
+const Saved: React.FC<IconProps> = ({
+    color = WHITE,
+    size,
+    style,
+    ...props
+}) => {
+    const ratio = 24 / 24;
+
+    return (
+        <Svg
+            width={size}
+            height={size && size / ratio}
+            style={style}
+            viewBox="0 0 24 24"
+            fill="none"
+            {...props}
+        >
+            <Path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M14.7 2c3.393 0 5.339 1.679 5.339 4.604V21.14a1.68 1.68 0 01-.842 1.466 1.684 1.684 0 01-1.692.014l-5.96-3.367-6.015 3.374c-.26.146-.545.22-.831.22-.295 0-.59-.079-.858-.237A1.68 1.68 0 013 21.145V6.421C3 3.611 4.947 2 8.342 2H14.7zm0 1.5H8.343c-2.55 0-3.842.982-3.842 2.921v14.724c0 .094.054.145.099.171a.187.187 0 00.198.002l6.382-3.58a.753.753 0 01.736.001l6.327 3.574a.187.187 0 00.199-.001.191.191 0 00.098-.172V6.49c-.008-.86-.175-2.99-3.838-2.99zm.44 5.229a.75.75 0 010 1.5H7.822a.75.75 0 010-1.5h7.318z"
+                fill={color}
+            />
+        </Svg>    
+    );
+};
+
+export default Saved;

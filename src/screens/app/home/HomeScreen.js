@@ -7,8 +7,14 @@ import { useIsFocused } from '@react-navigation/native';
 import messaging from '@react-native-firebase/messaging';
 import {
     BLACK,
+    GREY_30,
+    IOS_BLUE,
     LIGHT_GREEN, TRANSPARENT,
     WHITE,
+    WHITE_20,
+    WHITE_50,
+    WHITE_60,
+    WHITE_80,
 } from '../../../theme/Colors';
 import {
     HEADER_MARGIN, IS_ANDROID, SCREEN_WIDTH, WRAPPED_SCREEN_WIDTH,
@@ -39,203 +45,216 @@ import useProfile from '../../../hooks/user/useProfile';
 import FeaturedCreatorsCarousel from '../../brands/admin/components/FeaturedCreatorsCarousel';
 import ProjectsCarousel from './components /ProjectsCarousel';
 import EmergingBrandsCarousel from './components /EmergingBrandsCarousel';
+import DynamicIcon from '../../../components/icons/DynamicIcon';
+import { ca } from 'date-fns/locale';
 
 const HomeScreen = ({ navigation }) => {
     const { auth } = useAuthContext();
+    const dummySmartTasks = [
+        { "title": "Upload work-permit payslips",          "subtitle": "Due in 3 days" },
+        { "title": "Book Bürgeramt appointment (Anmeldung)", "subtitle": "Due tomorrow" },
+    
+    ]
+    const categories = [
+        {id: 'c1', label: 'Immigration',icon: 'Immigration'},
+        {id: 'c2', label: 'Housing', icon: 'House'},
+        {id: 'c3', label: 'Work',  icon: 'Work'},
+        {id: 'c4', label: 'Health', icon: 'Health'},
+        {id: 'c5', label: 'Finance', icon: 'Finance'},
+        {id: 'c6', label: 'Language', icon: 'Language'},
+        {id: 'c7', label: 'Social', icon: 'Social'},
+        {id: 'c8', label: 'Transport', icon: 'Transport'},
+        {id: 'c9', label: 'Family', icon: 'Family'},
+        {id: 'c10', label: 'Shopping', icon: 'Shopping'},
+    ];
 
-    const { features, feed } = useFeatureFlags();
+   // const { features, feed } = useFeatureFlags();
 
-    const brandsCatalogueEnabled = features?.brandsCatalogue?.visible;
+  //  const brandsCatalogueEnabled = features?.brandsCatalogue?.visible;
 
-    const profile = auth?.profile;
-    const { updateProfile } = useProfile();
+    // const profile = auth?.profile;
+    // const { updateProfile } = useProfile();
 
-    const profileImage = profile?.image;
+    // const profileImage = profile?.image;
 
-    const isFocused = useIsFocused();
+    // const isFocused = useIsFocused();
 
-    useEffect(() => {
-        if (isFocused && profile) {
-            auth?.getProfileCompleteStatus();
-        }
-    }, [
-        isFocused,
-        profile,
-    ]);
+    // useEffect(() => {
+    //     if (isFocused && profile) {
+    //         auth?.getProfileCompleteStatus();
+    //     }
+    // }, [
+    //     isFocused,
+    //     profile,
+    // ]);
 
-    useEffect(() => {
-        const unsubscribe = messaging().onTokenRefresh((token) => {
-            if (token) updateFcmToken(token);
-        });
-        return unsubscribe;
-    }, []);
+    // useEffect(() => {
+    //     const unsubscribe = messaging().onTokenRefresh((token) => {
+    //         if (token) updateFcmToken(token);
+    //     });
+    //     return unsubscribe;
+    // }, []);
 
-    const updateFcmToken = async (token) => {
-        await updateProfile({ fcmToken: token }, profile?.id);
-    };
+    // const updateFcmToken = async (token) => {
+    //     await updateProfile({ fcmToken: token }, profile?.id);
+    // };
 
-    const creatorToolsEnabled = features?.openAIScreen;
+    // const creatorToolsEnabled = features?.openAIScreen;
 
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: () => (
-                <HeaderIconButton
-                    title="Creator tools"
-                    onPress={() => (creatorToolsEnabled ? navigation.navigate(UGCAI) : null)}
-                    backDropColor={LIGHT_GREEN}
-                    mr={WRAPPER_MARGIN}
-                />
-            ),
-        });
-    }, [navigation, creatorToolsEnabled]);
+    // useLayoutEffect(() => {
+    //     navigation.setOptions({
+    //         headerRight: () => (
+    //             <TemplateBox
+    //                 mr={WRAPPER_MARGIN}
+    //             >
+    //                 <DynamicIcon name={'Bell'} color={WHITE}/>
+    //             </TemplateBox>
+    //         ),
+    //         headerLeft: () => (
+    //             <TemplateBox alignItems="center" row>
+    //                 <TemplateBox
+    //                     ml={WRAPPER_MARGIN}
+    //                     height={wp(50)}
+    //                     width={wp(50)}
+    //                     borderRadius={wp(30)}
+    //                     alignItems="center"
+    //                     justifyContent="center"
+    //                     backgroundColor={WHITE_20}
+    //                 >
+    //                     <TemplateText color={GREY_30} medium size={18}>MA</TemplateText>
+    //                 </TemplateBox>
+    //                 <TemplateBox ml={8}>
+    //                     <TemplateText color={WHITE} medium size={16}>You have 2 new tasks</TemplateText>
+    //                 </TemplateBox>
+    //             </TemplateBox>
+    //         ),
+    //     });
+    // }, [navigation]);
 
-    useEffect(() => {
-        if (!profileImage) {
-            Alert.alert(
-                'Profile image',
-                'Please upload a profile image to continue',
-                [
-                    {
-                        text: 'OK',
-                        onPress: () => navigation.navigate(PROFILE_STACK),
-                    },
-                ],
-            );
-        }
-    }, [profileImage]);
+    // useEffect(() => {
+    //     if (!profileImage) {
+    //         Alert.alert(
+    //             'Profile image',
+    //             'Please upload a profile image to continue',
+    //             [
+    //                 {
+    //                     text: 'OK',
+    //                     onPress: () => navigation.navigate(PROFILE_STACK),
+    //                 },
+    //             ],
+    //         );
+    //     }
+    // }, [profileImage]);
 
-    const { previousResponse, handleRate } = useAppReview();
+    // const { previousResponse, handleRate } = useAppReview();
 
-    const ugcGuidePdfFeed = useMemo(() => {
-        if (!feed?.feeds?.length) return [];
+    // const ugcGuidePdfFeed = useMemo(() => {
+    //     if (!feed?.feeds?.length) return [];
 
-        return feed?.feeds?.[0];
-    }, [feed]);
+    //     return feed?.feeds?.[0];
+    // }, [feed]);
 
-    const updateLastLogin = async () => {
-        await updateProfile({ lastLoginTime: new Date().toISOString() }, profile?.id);
-    };
+    // const updateLastLogin = async () => {
+    //     await updateProfile({ lastLoginTime: new Date().toISOString() }, profile?.id);
+    // };
 
-    useEffect(() => {
-        updateLastLogin();
-    }, []);
+    // useEffect(() => {
+    //     updateLastLogin();
+    // }, []);
 
     return (
         <ScrollView
             style={styles.container}
             contentContainerStyle={styles.contentContainer}
             showsVerticalScrollIndicator={false}
-            // refreshControl={(
-            //     <RefreshControl
-            //         refreshing={refreshing}
-            //         onRefresh={handleRefresh}
-            //     />
-            // )}
+           
         >
-
-            {!!profile?.userName && (
-                <Greeting userName={profile?.userName} style={styles.greeting} />
-            )}
-
-            <TemplateBox height={236}>
-                <AffiliateBrandsCarousel />
-            </TemplateBox>
-            {features?.showEmergingBrandsCarousel && (
-                <TemplateBox height={236} mt={40}>
-                    <EmergingBrandsCarousel />
-                </TemplateBox>
-            )}
-            <ProjectsCarousel style={styles.projectsCarousel} />
-            <EventsCarousel />
-            {features?.showBrandsCarousel && (
-                <TemplateBox height={236} mb={12}>
-                    <BrandsCarousel />
-                </TemplateBox>
-            )}
-
-            {previousResponse === null && features?.showReviewPrompt && (
+            <TemplateBox alignItems="center" row justifyContent="space-between" mb={20}>
                 <TemplateBox
-                    row
-                    backgroundColor={WHITE}
-                    borderRadius={16}
+                    ml={WRAPPER_MARGIN}
+                    height={wp(50)}
+                    width={wp(50)}
+                        borderRadius={wp(30)}
+                        alignItems="center"
+                        justifyContent="center"
+                        backgroundColor={WHITE_20}
+                    >
+                        <TemplateText color={GREY_30} medium size={18}>MA</TemplateText>
+                    </TemplateBox>
+                    <TemplateBox ml={8}>
+                        <TemplateText color={WHITE} medium size={16}>You have 2 new tasks</TemplateText>
+                    </TemplateBox>
+                    <TemplateBox flex/>
+
+                     <TemplateBox row alignItems="center" justifyContent="space-between" ph={WRAPPER_MARGIN}>
+                 <TemplateBox
+                    mr={WRAPPER_MARGIN}
+                >
+                    <DynamicIcon name={'Bell'} color={WHITE}/>
+                </TemplateBox>
+                </TemplateBox>
+           
+            </TemplateBox>
+          {dummySmartTasks.map(({title , subtitle}) => (
+                <TemplateBox
+                    borderRadius={20}
+                    borderWidth={1}
+                    borderColor={WHITE_20}
                     pAll={16}
                     width={WRAPPED_SCREEN_WIDTH}
-                    mt={WRAPPER_MARGIN}
-                    onPress={handleRate}
-                    style={SHADOW('card', WHITE)}
                     selfCenter
+                    mb={10}
                 >
-                    <TemplateText size={13} onPress={handleRate}>
-                        Please take a moment to rate our app
-                    </TemplateText>
-                    <TemplateBox
-                        onPress={handleRate}
-                        absolute
-                        left={SCREEN_WIDTH - wp(70)}
-                        top={wp(8)}
-                    >
-                        <TemplateIcon
-                            name="close-outline"
-                            size={20}
-                            color={BLACK}
-
-                        />
+                    <TemplateBox>
+                        <TemplateText medium size={14} mb={4}>{title}</TemplateText>
+                        <TemplateText color={WHITE_60}  size={12}>{subtitle}</TemplateText>
                     </TemplateBox>
 
-                </TemplateBox>
-            )}
-            {brandsCatalogueEnabled && (
-                <TemplateBox
-                    row
-                    alignItems="center"
-                    backgroundColor={WHITE}
-                    borderRadius={16}
-                    pAll={20}
-                    width={WRAPPED_SCREEN_WIDTH}
-                    onPress={() => navigation.navigate(BRANDS_CATALOGUE)}
-                    style={SHADOW('card', WHITE)}
-                    selfCenter
-                    mt={35}
-                    mb={20}
-                >
-                    <CatalogueSvg />
-                    <TemplateBox width={16} />
-                    <TemplateBox
-                        width={SCREEN_WIDTH / 1.6}
-                        onPress={() => navigation.navigate(BRANDS_CATALOGUE)}
+                    <TemplateBox 
+                        row 
+                        alignItems="center" 
+                        justifyContent="space-between"
                     >
-                        <TemplateText bold size={16}>Brands Catalogue</TemplateText>
-                        <TemplateBox height={10} />
-                        <TemplateText size={13}>
-                            Discover and explore our extensive catalogue of hundreds of brands
-                        </TemplateText>
+                        <TemplateBox flex/>
+                        <TemplateText size={12}>Dismiss</TemplateText>
+                        <TemplateBox
+                            alignItems="center"
+                            justifyContent="center"
+                            borderRadius={10}
+                            borderWidth={1}
+                            backgroundColor={WHITE_20}
+                            ph={10}
+                            pv={5}
+                            ml={10}
+                        >
+                            <TemplateText color={WHITE_60}  size={13}>Due in 3 days</TemplateText>
+                        </TemplateBox>
                     </TemplateBox>
                 </TemplateBox>
-            )}
-            <FeaturedCreatorsCarousel style={styles.carousel} creator />
+            ))}
 
-            {!!ugcGuidePdfFeed?.title && (
-                <TemplateBox mt={wp(20)} mb={wp(10)}>
-                    <FeedCard
-                        image={{ uri: ugcGuidePdfFeed?.thumbnail }}
-                        title={ugcGuidePdfFeed?.title}
-                        shortDescription={ugcGuidePdfFeed?.description}
-                        subtitle={ugcGuidePdfFeed?.subtitle}
-                        showGradient
-                        cardWidth={SCREEN_WIDTH / 1.12}
-                        aspectRatio={1.5}
-                        icon={getIconByType(ugcGuidePdfFeed?.type)}
-                        onPress={() => navigation.navigate(FEED_DETAILS,
-                            {
-                                selectedFeed: ugcGuidePdfFeed,
-                            })}
-                        style={styles.card}
-                    />
-                </TemplateBox>
-            )}
-            <RecommendedBrandsCarousel style={styles.carousel} />
-            <FeedsTab />
-
+            <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{ paddingHorizontal: WRAPPER_MARGIN, marginVertical: 20 }}
+            >
+                {categories.map((category, index) => (
+                    <TemplateBox
+                        key={category.id}
+                        ph={12}
+                        height={34}
+                        borderRadius={15}
+                        borderWidth={1}
+                        borderColor={index === 0 ? WHITE : WHITE_20}
+                        mr={8}
+                        alignItems="center"
+                        row
+                    >
+                        <TemplateText medium size={14} mr={4} color={index === 0 ? WHITE : WHITE_60}>{category.label}</TemplateText>
+                        <DynamicIcon name={category.icon} color={index === 0 ? WHITE : WHITE_60} size={16}/>
+                    </TemplateBox>
+                ))}
+            </ScrollView>
         </ScrollView>
     );
 };
@@ -243,28 +262,11 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: IS_ANDROID ? TRANSPARENT : WHITE,
+        backgroundColor: BLACK
     },
     contentContainer: {
         flexGrow: 1,
-    },
-    greeting: {
-        marginTop: HEADER_MARGIN,
-        marginBottom: 10,
-        marginHorizontal: WRAPPER_MARGIN,
-    },
-    carousel: {
-        flex: 1,
-        marginBottom: WRAPPER_MARGIN,
-    },
-    projectsCarousel: {
-        flex: 1,
-        marginTop: WRAPPER_MARGIN,
-    },
-
-    card: {
-        marginBottom: 10,
-        alignSelf: 'center',
+        paddingTop: HEADER_MARGIN,
     },
 });
 export default HomeScreen;

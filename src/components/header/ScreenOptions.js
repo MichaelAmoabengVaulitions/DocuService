@@ -18,7 +18,7 @@ export const TRANSPARENT_NO_LOGO_HEADER = {
 };
 
 export const TRANSPARENT_HEADER = {
-    headerTitle: () => <BrandLogo />,
+   headerTitle: () => (IS_ANDROID ? null : ''),
     headerTransparent: true,
     headerBackTitleVisible: false,
     headerTintColor: BLACK,

@@ -1,41 +1,34 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import TemplateIcon from '../TemplateIcon';
 import { BLACK } from '../../theme/Colors';
-import { IS_ANDROID } from '../../theme/Layout';
+import DynamicIcon from '../icons/DynamicIcon';
+import TemplateBox from '../TemplateBox';
+import { StyleSheet } from 'react-native';
 
-const TabButton = ({ focused, icon }) => (
-    <View style={[styles.container, focused && styles.activeContainer]}>
-        <TemplateIcon
+const TabButton = ({ icon , color}) => (
+    
+        <DynamicIcon
             name={icon}
-            style={styles.icon}
             size={24}
-            color={BLACK}
-            family="Ionicons"
+            color={color}
+            style={styles.icon}
         />
-    </View>
+
 );
 
 TabButton.propTypes = {
-    focused: PropTypes.bool.isRequired,
     icon: PropTypes.string.isRequired,
+    color: PropTypes.string,
+};
+
+TabButton.defaultProps = {
+    color: BLACK,
 };
 
 const styles = StyleSheet.create({
-    container: {
-        opacity: 0.3,
-        marginTop: IS_ANDROID ? 5 : 8,
-        width: '100%',
-        flex: 1,
-    },
-    activeContainer: {
-        opacity: 1,
-    },
-    icon: {
-        height: 26,
-        textAlign: 'center',
-    },
-});
+    icon : {
+        marginBottom: 4
+    }
+})
 
 export default TabButton;
