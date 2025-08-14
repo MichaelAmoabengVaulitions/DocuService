@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     default: {
         fontFamily: 'Montserrat',
         fontSize: IS_SHORT_DEVICE ? 15 : 18,
-        color: BLACK,
+        color: WHITE,
     },
 });
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Image, StyleSheet } from 'react-native';
 
@@ -10,8 +10,14 @@ import useImageStorage from '../hooks/Portfolio/useImageStorage';
 import useProfile from '../hooks/user/useProfile';
 import useAuthContext from '../hooks/auth/useAuthContext';
 
-const Avatar = ({
-    style, height, width, borderRadius,
+type AvatarProps = {
+    style?: object | object[];
+    height?: number;
+    width?: number;
+    borderRadius?: number;
+}
+const Avatar: FC<AvatarProps> = ({
+    style, height = 50, width = 50, borderRadius = 25,
 }) => {
     const { image: avatarData, onAddImage: onAddPhoto } = useImageStorage();
 
@@ -26,7 +32,7 @@ const Avatar = ({
         borderRadius,
     };
 
-    const avatar = useMemo(() => {
+    const avatar = useMemo<{ url: string } | null>(() => {
         if (avatarData) {
             return avatarData;
         }
@@ -57,7 +63,6 @@ const Avatar = ({
                     justifyContent="center"
                     alignItems="center"
                     onPress={() => onAddPhoto(true)}
-                    hit
                 >
                     <TemplateIcon
                         name="person-add-outline"
@@ -67,7 +72,7 @@ const Avatar = ({
                 </TemplateBox>
             ) : (
                 <TemplateTouchable onPress={() => onAddPhoto(true)}>
-                     <Image source={{ uri: avatar?.url || profileData?.image }} style={imageStyle} />
+                    <Image source={{ uri: avatar?.url || profileData?.image }} style={imageStyle} />
                 </TemplateTouchable>
             )}
         </TemplateTouchable>

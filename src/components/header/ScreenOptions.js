@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { BLACK } from '../../theme/Colors';
+import { BLACK, WHITE } from '../../theme/Colors';
 
 import { IS_ANDROID, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../theme/Layout';
 import BrandLogo from '../../../assets/svgs/BrandLogo';
@@ -9,7 +9,7 @@ export const TRANSPARENT_NO_LOGO_HEADER = {
     headerTitle: () => (IS_ANDROID ? null : ''),
     headerTransparent: true,
     headerBackTitleVisible: false,
-    headerTintColor: BLACK,
+    headerTintColor: WHITE,
     headerTitleAlign: 'center',
     headerBackground: () => <View style={styles.header} />,
     animationEnabled: true,
@@ -21,7 +21,7 @@ export const TRANSPARENT_HEADER = {
     headerTitle: () => <BrandLogo />,
     headerTransparent: true,
     headerBackTitleVisible: false,
-    headerTintColor: BLACK,
+    headerTintColor: WHITE,
     headerTitleAlign: 'center',
     headerBackground: () => <View style={styles.header} />,
     animationEnabled: true,
@@ -34,7 +34,7 @@ export const TRANSPARENT_HEADER_NO_LOGO = {
     headerTransparent: true,
     headerBackTitleVisible: false,
     headerLeft: null,
-    headerTintColor: BLACK,
+    headerTintColor: WHITE,
     headerTitleAlign: 'center',
     headerBackground: () => <View style={styles.header} />,
     animationEnabled: true,

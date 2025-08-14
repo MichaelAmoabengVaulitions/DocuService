@@ -23,7 +23,7 @@ type ConfigType = {
 type FeatureFlagProviderProps = {
     children:React.ReactNode,
     defaultFeatures: ConfigType,
-    refetch:number
+    refetch?: number
 };
 
 export const FeatureFlagProvider:React.FC<FeatureFlagProviderProps> = ({
