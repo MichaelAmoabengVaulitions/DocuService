@@ -4,7 +4,7 @@ import codePush from 'react-native-code-push';
 import {
     StatusBar, View, StyleSheet,
 } from 'react-native';
-import { AppEventsLogger,Settings} from 'react-native-fbsdk-next';
+import { AppEventsLogger, Settings } from 'react-native-fbsdk-next';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { enableFreeze, enableScreens } from 'react-native-screens';

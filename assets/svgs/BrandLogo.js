@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, {G, Path} from 'react-native-svg';
 import PropTypes from 'prop-types';
-import {BLACK} from '../../src/theme/Colors';
+import {WHITE} from '../../src/theme/Colors';
 
 const BrandLogo = ({height, width, color, ...props}) => {
   return (
@@ -38,6 +38,6 @@ BrandLogo.propTypes = {
 BrandLogo.defaultProps = {
   width: 100,
   height: 100,
-  color: BLACK,
+  color: WHITE,
 };
 export default BrandLogo;

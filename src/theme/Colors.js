@@ -31,7 +31,10 @@ export const WHITE_96 = 'rgba(255, 255, 255, 0.96)';
 
 export const WHITE_70 = 'rgba(255, 255, 255, 0.7)';
 
-export const PRIMARY = '#56CCF2';
+export const PRIMARY = '#1B1A1D';
+export const SECONDARY = '#FFF';
+export const SECONDARY_DARK = '#524548';
+export const GRAY_SCALE_80 = '#66707A';
 
 export const GREEN = 'rgba(0, 197, 102, 1)';
 
@@ -60,6 +63,7 @@ export const LIGHT_PURPLE = '#ECEDFD';
 export const ACCENT = '#A5C4FD';
 
 export const GREY = '#9CA4AB';
+export const GREY_70 = '#78828A';
 export const DARK_GREY = '#636363';
 
 export const GREY_SECONDARY = 'rgba(227, 231, 236, 1)';
@@ -81,3 +85,5 @@ export const OFF_WHITE = '#EFEFEF';
 export const METAL = '#6B7280'
 
 export const DARK_OVERLAY = '#00000033'
+
+export const BACKGROUND = "#0F0F0F"

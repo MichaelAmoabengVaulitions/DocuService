@@ -2,17 +2,16 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Video from 'react-native-video';
 import {
+    BACKGROUND,
     BLACK,
     BLACK_10,
-    BLACK_SECONDARY,
-    BLUE,
-    BRAND_BLUE,
     DARK_OVERLAY,
     ERROR_RED,
     GREY_30,
+    GREY_70,
     ONBOARDING_BLUE,
+    SECONDARY,
     WHITE,
 } from '../../theme/Colors';
 import TemplateText from '../../components/TemplateText';
@@ -30,16 +29,31 @@ import TemplateTouchable from '../../components/TemplateTouchable';
 import TemplateIcon from '../../components/TemplateIcon';
 import TemplateBox from '../../components/TemplateBox';
 import ResizedImage from '../../components/ResizedImage';
+import Box from '../../components/Box';
+import { StackScreenProps } from '@react-navigation/stack';
 
 const creatorAuthImage = require('../../../assets/images/onboarding/login.jpg');
 const brandAuthImage = require('../../../assets/images/onboarding/brand-auth.jpg');
 
 const CREATOR_PLACEHOLDER = 'Your Name';
 const BRAND_PLACEHOLDER = 'Your Brand Name';
-const SignUpScreen = ({ navigation, route }) => {
+
+type RootStackParamList = {
+    SignUpEmailScreen: {
+        type?: string,
+        email?: string
+    } | undefined
+    Login: undefined
+}
+
+type SignUpEmailScreen = StackScreenProps<RootStackParamList, 'SignUpEmailScreen'>;
+
+
+const SignUpEmailScreen: React.FC<SignUpEmailScreen> = ({ navigation, route }) => {
     const { mainDomain } = useConfig();
 
     const type = route.params?.type;
+    const userEmail = route.params?.email;
 
     const isCreator = type === 'creator';
 
@@ -51,8 +65,10 @@ const SignUpScreen = ({ navigation, route }) => {
     }, [type, isCreator]);
 
     const [name, setName] = useState();
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
 
-    const [email, setEmail] = useState();
+    const [email, setEmail] = useState(userEmail);
 
     const [password, setPassword] = useState();
 
@@ -60,15 +76,17 @@ const SignUpScreen = ({ navigation, route }) => {
 
     const [passwordTouched, setPasswordTouched] = useState(false);
 
-    const [nameTouched, setNameTouched] = useState(false);
+    const [firstNameTouched, setFirstNameTouched] = useState(false);
+    const [lastNameTouched, setLastNameTouched] = useState(false);
 
-    const [error, setError] = useState();
+    const [error, setError] = useState<null | string>();
 
     const showEmailError = useMemo(() => emailTouched && !emailValid(email), [email, emailTouched]);
 
     const showPasswordError = useMemo(() => passwordTouched && !passwordValid(password), [password, passwordTouched]);
 
-    const showNameError = useMemo(() => nameTouched && isEmpty(name), [name, nameTouched]);
+    const showFirstNameError = useMemo(() => firstNameTouched && isEmpty(firstName), [firstName, firstNameTouched]);
+    const showLastNameError = useMemo(() => lastNameTouched && isEmpty(lastName), [lastName, lastNameTouched]);
 
     const [loading, setLoading] = useState(false);
 
@@ -76,10 +94,11 @@ const SignUpScreen = ({ navigation, route }) => {
 
     const disabled = useMemo(() => (
         !emailValid(email)
-      || !passwordValid(password)
-      || isEmpty(name)
-      || loading
-      || !!error
+        || !passwordValid(password)
+        || isEmpty(firstName)
+        || isEmpty(lastName)
+        || loading
+        || !!error
     ), [email, password, name, loading, error]);
 
     useEffect(() => {
@@ -118,6 +137,143 @@ const SignUpScreen = ({ navigation, route }) => {
 
     const image = isCreator ? creatorAuthImage : brandAuthImage;
 
+    return (
+        <Box flex backgroundColor={BACKGROUND}>
+            <Wrapper
+                contentContainerStyle={styles.contentContainerStyle}
+                style={styles.container}
+                showsVerticalScrollIndicator={false}
+                keyboard
+            >
+                <Box flex pt={56}>
+
+                    <Box mb={24} center>
+                        <TemplateText size={24} semiBold color={WHITE} mb={8}>
+                            Complete your account
+                        </TemplateText>
+                        <TemplateText size={14} color={GREY_70}>
+                            Sign up to finish creating your profile.
+                        </TemplateText>
+                    </Box>
+
+
+                    <Box mb={16}>
+                        <TemplateText color={WHITE} mb={8} medium>
+                            Email
+                        </TemplateText>
+
+                        <TemplateTextInput
+                            placeholder="Enter your email address"
+                            value={email}
+                            style={[showEmailError && styles.error]}
+                            onChangeText={(text) => setEmail(text)}
+                            keyboardType="email-address"
+                            onBlur={() => setEmailTouched(true)}
+                            autoCapitalize="none"
+                        />
+                        <Error show={showEmailError}>Please enter a valid email</Error>
+                    </Box>
+                    <Box mb={16}>
+                        <TemplateText color={WHITE} mb={8} medium>
+                            First Name
+                        </TemplateText>
+                        <TemplateTextInput
+                            placeholder="Enter your first name"
+                            style={[showFirstNameError && styles.error]}
+                            value={firstName}
+                            onChangeText={(text) => setFirstName(text)}
+                            onBlur={() => setFirstNameTouched(true)}
+                        />
+                        <Error show={showFirstNameError}>Please enter a valid name</Error>
+
+                    </Box>
+
+                    {/* Last Name */}
+                    <Box mb={16}>
+                        <TemplateText color={WHITE} mb={8} medium>
+                            Last Name
+                        </TemplateText>
+
+                        <TemplateTextInput
+                            placeholder="Enter your last name"
+                            style={[showLastNameError && styles.error]}
+                            value={lastName}
+                            onChangeText={(text) => setLastName(text)}
+                            onBlur={() => setLastNameTouched(true)}
+                        />
+                        <Error show={showLastNameError}>Please enter a valid name</Error>
+
+                    </Box>
+
+                    <Box mb={24}>
+                        <TemplateText color={WHITE} mb={8} medium>
+                            Password
+                        </TemplateText>
+                        <Box>
+                            <TemplateTextInput
+                                placeholder="Create a password"
+                                style={[showPasswordError && styles.error]}
+                                value={password}
+                                onChangeText={(text) => setPassword(text)}
+                                onBlur={() => setPasswordTouched(true)}
+                                secureTextEntry={!passwordVisible}
+                                autoCapitalize="none"
+                            />
+
+                            <Box absolute zIndex={99} right={16} height='100%' center onPress={() => setPasswordVisible((prevState) => !prevState)}>
+                                <TemplateIcon
+                                    name={passwordVisible ? 'eye-off-outline' : 'eye-outline'}
+                                    size={20}
+                                    color={WHITE}
+                                    family="Ionicons"
+                                />
+                            </Box>
+                        </Box>
+                        <Error show={showPasswordError}>Please enter a valid password</Error>
+
+
+                    </Box>
+                    <Error show={!!error} style={styles.generalError}>
+                        {error}
+                    </Error>
+
+                    <Button
+                        mt={40}
+                        mb={24}
+                        title="Continue with Email"
+                        onPress={handleSignUp}
+                        loading={loading}
+                        disabled={disabled}
+                    />
+
+                    <Box row justifyContent="center" mv={24} onPress={() => navigation.navigate(LOGIN)}>
+                        <TemplateText color={GREY_70}>Already have an account? </TemplateText>
+                        <TemplateText color={SECONDARY}>Login</TemplateText>
+                    </Box>
+                </Box>
+                <Box alignItems="center" absolute selfCenter bottom={20}
+                    onPress={() => {
+                        if (mainDomain) {
+                            navigation.navigate(WEBVIEW, {
+                                url: mainDomain,
+                            });
+                        }
+                    }}
+                >
+                    <TemplateText size={12} color="#71717A">
+                        By signing up you agree to our{' '}
+                        <TemplateText color={WHITE} bold size={12}>Terms</TemplateText>
+                    </TemplateText>
+                    <TemplateText size={12} color={WHITE} bold>
+                        and Conditions of Use
+                    </TemplateText>
+                </Box>
+            </Wrapper>
+        </Box>
+
+    )
+
+
 
     return (
         <Wrapper
@@ -127,10 +283,10 @@ const SignUpScreen = ({ navigation, route }) => {
             keyboard
         >
             <TemplateBox borderRadius={20} overflow='hidden'>
-                <TemplateBox style={{position: 'absolute', paddingTop: 8, alignSelf: 'center', alignItems: 'center', zIndex: 99}} backgroundColor={DARK_OVERLAY}>
-                 <BrandLogo height={58} width={282} color={WHITE} />
+                <TemplateBox style={{ position: 'absolute', paddingTop: 8, alignSelf: 'center', alignItems: 'center', zIndex: 99 }} backgroundColor={DARK_OVERLAY}>
+                    <BrandLogo height={58} width={282} color={WHITE} />
                 </TemplateBox>
-                <ResizedImage source={image} style={{height: 345, width: WRAPPED_SCREEN_WIDTH}} />
+                <ResizedImage source={image} style={{ height: 345, width: WRAPPED_SCREEN_WIDTH }} />
             </TemplateBox>
 
 
@@ -154,9 +310,8 @@ const SignUpScreen = ({ navigation, route }) => {
                 onBlur={() => setNameTouched(true)}
             />
             <Error show={showNameError}>
-                {`Please enter a valid ${
-                    isCreator ? 'name' : 'brand name'
-                } `}
+                {`Please enter a valid ${isCreator ? 'name' : 'brand name'
+                    } `}
             </Error>
             <TemplateTextInput
                 placeholder="Your Email"
@@ -315,4 +470,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 });
-export default SignUpScreen;
+export default SignUpEmailScreen;

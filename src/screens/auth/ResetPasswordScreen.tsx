@@ -2,17 +2,10 @@ import React, { useLayoutEffect, useState } from 'react';
 import { Alert, StyleSheet, View } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import {
-    BLACK,
+    BACKGROUND,
     BLACK_10,
-    BLACK_20,
-    BLACK_SECONDARY,
-    BLUE,
-    BRAND_BLUE,
-    DARK_OVERLAY,
     GREY_30,
     ONBOARDING_BLUE,
-    WHITE,
-    WHITE_40,
 } from '../../theme/Colors';
 import TemplateText from '../../components/TemplateText';
 import { SCREEN_WIDTH, WRAPPED_SCREEN_WIDTH, WRAPPER_MARGIN } from '../../theme/Layout';
@@ -25,15 +18,24 @@ import Error from '../../components/Error';
 import HeaderIconButton from '../../components/header/HeaderButton';
 import TemplateBox from '../../components/TemplateBox';
 import ResizedImage from '../../components/ResizedImage';
+import Box from '../../components/Box';
+import { StackScreenProps } from '@react-navigation/stack';
 
 const lockImage = require('../../../assets/images/onboarding/lock.jpg');
 
+type RootStackParamList = {
+    ResetPasswordScreen: {isUpdate?: string} | undefined
+    Login: undefined
+    onboarding: undefined
+}
 
-const ResetPasswordScreen = ({ navigation, route }) => {
+type ResetPasswordScreen = StackScreenProps<RootStackParamList, 'ResetPasswordScreen'>;
+
+const ResetPasswordScreen: React.FC<ResetPasswordScreen> = ({ navigation, route }) => {
     const isUpdate = route.params?.isUpdate;
     const [email, setEmail] = useState();
 
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<null | string>(null);
 
     const [loading, setLoading] = useState(false);
 
@@ -63,30 +65,19 @@ const ResetPasswordScreen = ({ navigation, route }) => {
                 ],
             );
         } catch (error) {
-            if (error.code === 'au-email') {
+            if (error?.code === 'au-email') {
                 setError('That email address is invalid!');
             }
-            if (error.code === 'auth/user-not-found') {
+            if (error?.code === 'auth/user-not-found') {
                 setError('That user does not exist!');
             }
         }
         setLoading(false);
     };
 
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            headerLeft: () => (
-                <HeaderIconButton
-                    name="arrow-back-outline"
-                    onPress={() => navigation.goBack()}
-                    backDropColor={BLACK_20}
-                    ml={WRAPPER_MARGIN}
-                />
-            ),
-        });
-    }, [navigation]);
 
     return (
+        <Box flex backgroundColor={BACKGROUND}>
         <Wrapper
             contentContainerStyle={styles.contentContainerStyle}
             style={styles.container}
@@ -104,23 +95,23 @@ const ResetPasswordScreen = ({ navigation, route }) => {
                     size={18}
                     bold
                     caps
-                    color={BLACK}
                     style={styles.title}
                 >
                     {isUpdate ? 'Update your Password!' : 'Reset your Password!' }
                 </TemplateText>
-                <TemplateText size={16} color={BLACK_SECONDARY} medium>
+                <TemplateText size={16}  medium>
                     Enter your email to continue
                 </TemplateText>
             </TemplateBox>
-            <TemplateTextInput
-                placeholder="Email"
-                style={styles.input}
-                value={email}
-                onChangeText={(text) => setEmail(text)}
-                keyboardType="email-address"
-                autoCapitalize="none"
-            />
+            <Box width={WRAPPED_SCREEN_WIDTH} mt={16}>
+                <TemplateTextInput
+                    placeholder="Email"
+                    value={email}
+                    onChangeText={(text) => setEmail(text)}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                />
+            </Box>
             <Error show={!!error} style={styles.generalError}>
                 {error}
             </Error>
@@ -130,11 +121,11 @@ const ResetPasswordScreen = ({ navigation, route }) => {
                     onPress={handleResetPassword}
                     style={styles.button}
                     loading={loading}
-                    color={ONBOARDING_BLUE}
+                    disabled={!email}
                 />
                 {!isUpdate && (
                     <TemplateText size={16} center style={styles.signupLink} medium>
-                        New to the UGC creator app?
+                        New to the app?
                         {' '}
 
                         <TemplateText
@@ -150,6 +141,7 @@ const ResetPasswordScreen = ({ navigation, route }) => {
                 )}
             </View>
         </Wrapper>
+        </Box>
     );
 };
 

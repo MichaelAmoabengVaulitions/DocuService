@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import {
     FORGOT_PASSWORD,
-    LOGIN, ONBOARDING, ONBOARDING_EDUCATION, SIGN_UP, WEBVIEW, WELCOME,
+    LOGIN, ONBOARDING, ONBOARDING_EDUCATION, SIGN_UP, SIGN_UP_EMAIL, WEBVIEW, WELCOME,
 } from '../ScreenNames';
 import WelcomeScreen from '../../screens/onboarding/WelcomeScreen';
 import OnboardingScreen from '../../screens/onboarding/OnboardingScreen';
@@ -18,6 +18,7 @@ import ResetPasswordScreen from '../../screens/auth/ResetPasswordScreen';
 import OnboardingEducationScreen from '../../screens/onboarding/OnboardingEducationScreen';
 import WebviewScreen from '../../screens/webview/WebviewScreen';
 import { WHITE } from '../../theme/Colors';
+import SignUpEmailScreen from '../../screens/auth/SignUpEmailScreen';
 
 const Stack = createStackNavigator();
 const { Navigator, Screen } = Stack;
@@ -51,17 +52,22 @@ const AuthStack = () => (
         <Screen
             name={SIGN_UP}
             component={SignUpScreen}
-            options={TRANSPARENT_HEADER_NO_LOGO}
+            options={TRANSPARENT_HEADER}
+        />
+        <Screen
+            name={SIGN_UP_EMAIL}
+            component={SignUpEmailScreen}
+            options={TRANSPARENT_HEADER}
         />
         <Screen
             name={LOGIN}
             component={LoginScreen}
-            options={TRANSPARENT_HEADER_NO_LOGO}
+            options={TRANSPARENT_HEADER}
         />
         <Screen
             name={FORGOT_PASSWORD}
             component={ResetPasswordScreen}
-            options={TRANSPARENT_HEADER_NO_LOGO}
+            options={TRANSPARENT_HEADER}
         />
         <Screen
             name={WEBVIEW}

@@ -3,7 +3,7 @@ import { TextInput, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import Autocomplete from 'react-native-autocomplete-input';
 import {
-    BLACK, BLACK_SECONDARY, PRIMARY, WHITE,
+    BLACK, BLACK_SECONDARY, GREY_70, PRIMARY, WHITE,
 } from '../theme/Colors';
 
 const TemplateTextInput = ({
@@ -46,8 +46,8 @@ const TemplateTextInput = ({
         <Component
             {...restProps}
             ref={ref}
-            selectionColor={BLACK}
-            placeholderTextColor={placeholderTextColor || BLACK_SECONDARY}
+            selectionColor={WHITE}
+            placeholderTextColor={placeholderTextColor || WHITE}
             value={value}
             editable={!disabled}
             style={[
@@ -63,10 +63,16 @@ const TemplateTextInput = ({
 
 const styles = StyleSheet.create({
     default: {
-        backgroundColor: WHITE,
-        color: BLACK,
+        color: WHITE,
         fontSize: 15,
         paddingHorizontal: 0, // Needed for android
+        borderRadius: 24,
+        backgroundColor: "#27272A",
+        borderRadius: 24,
+        borderWidth: 1,
+        borderColor: "#3F3F46",
+        height: 54,
+        paddingHorizontal: 16
     },
 });
 
@@ -81,7 +87,7 @@ TemplateTextInput.propTypes = {
 TemplateTextInput.defaultProps = {
     children: null,
     focus: false,
-    placeholderTextColor: null,
+    placeholderTextColor: GREY_70,
     disabled: false,
     style: null,
 };
