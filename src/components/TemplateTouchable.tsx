@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
-import PropTypes from 'prop-types';
 import createHapticFeedback from '../Utils/CreateHapticFeedback';
 
-const TemplateTouchable = ({
+type TemplateTouchableProps = {
+    children?: React.ReactNode,
+    onPress?: ((...args: any[]) => void) | null,
+    activeOpacity?: number,
+    disabled?: boolean,
+}
+
+const TemplateTouchable: FC<TemplateTouchableProps> = ({
     children,
     onPress,
     activeOpacity,
     disabled,
     ...restProps
 }) => {
-    const onPressWithHaptic = (...values) => {
+    const onPressWithHaptic: (...values: any[]) => void = (...values) => {
         createHapticFeedback();
         if (onPress) {
             onPress(...values);
@@ -28,18 +34,5 @@ const TemplateTouchable = ({
     );
 };
 
-TemplateTouchable.propTypes = {
-    children: PropTypes.node.isRequired,
-    onPress: PropTypes.func,
-    activeOpacity: PropTypes.number,
-    disabled: PropTypes.bool,
-};
-
-TemplateTouchable.defaultProps = {
-    restProps: null,
-    onPress: null,
-    activeOpacity: 0.8,
-    disabled: false,
-};
 
 export default TemplateTouchable;

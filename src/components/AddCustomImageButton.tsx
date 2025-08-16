@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { FC, useState } from 'react';
 import { ActivityIndicator, Image, StyleSheet } from 'react-native';
 
 import TemplateBox from './TemplateBox';
@@ -7,10 +6,18 @@ import AddButtonSvg from '../../assets/svgs/AddButtonSvg';
 import TemplateIcon from './TemplateIcon';
 import { WHITE } from '../theme/Colors';
 
-const AddCustomImageButton = ({
-    image, onPress, index, handleClearImage, style,
+type AddCustomImageButtonProp = {
+    image?: string,
+    onPress?: () => void,
+    index: number,
+    handleClearImage: (index: number) => void,
+    style: object,
+}
+
+const AddCustomImageButton: FC<AddCustomImageButtonProp> = ({
+    image, onPress, index = 0, handleClearImage, style,
 }) => {
-    const [loading, setLoading] = useState();
+    const [loading, setLoading] = useState(false);
 
     return (
         <TemplateBox onPress={onPress} style={style}>
@@ -58,21 +65,5 @@ const styles = StyleSheet.create({
         right: 0,
     },
 });
-AddCustomImageButton.propTypes = {
-    image: PropTypes.string,
-    onPress: PropTypes.func,
-    index: PropTypes.number,
-    handleClearImage: PropTypes.func,
-    hideTrash: PropTypes.bool,
-    style: PropTypes.shape({}),
-};
 
-AddCustomImageButton.defaultProps = {
-    image: '',
-    onPress: () => {},
-    index: 0,
-    handleClearImage: () => {},
-    hideTrash: false,
-    style: {},
-};
 export default AddCustomImageButton;

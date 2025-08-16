@@ -1,11 +1,10 @@
 import React from 'react';
 import FastImage from 'react-native-fast-image';
-import PropTypes from 'prop-types';
 
 import TemplateBox from './TemplateBox';
 import { WHITE } from '../theme/Colors';
 
-const AvatarOverlaps = ({ imageUrls }) => (
+const AvatarOverlaps = ({ imageUrls = [] }: { imageUrls: string[] }) => (
     <TemplateBox
         row
         mv={10}
@@ -28,13 +27,5 @@ const AvatarOverlaps = ({ imageUrls }) => (
         ))}
     </TemplateBox>
 );
-
-AvatarOverlaps.propTypes = {
-    imageUrls: PropTypes.arrayOf(PropTypes.string),
-};
-
-AvatarOverlaps.defaultProps = {
-    imageUrls: [],
-};
 
 export default AvatarOverlaps;

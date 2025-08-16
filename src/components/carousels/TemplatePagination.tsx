@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { ViewStyle, StyleSheet } from 'react-native';
 
 import TemplateBox from '../TemplateBox';
-import { BLACK_20, BLACK_SECONDARY, ONBOARDING_BLUE } from '../../theme/Colors';
+import { BLACK_20, BLACK_SECONDARY, PRIMARY } from '../../theme/Colors';
 import { RADIUS_XSMALL, SPACE_XSMALL } from '../../theme/Layout';
 import { wp } from '../../Utils/getResponsiveSize';
 
@@ -14,6 +14,8 @@ interface Props {
     activeDotStyle?: ViewStyle | null;
     children?: any;
     dots?: boolean
+    activePaginationColor?: string
+    inactivePaginationColor?: string
 }
 
 const TemplatePagination: FC<Props> = ({
@@ -21,6 +23,8 @@ const TemplatePagination: FC<Props> = ({
     position,
     children,
     dots,
+    activePaginationColor,
+    inactivePaginationColor,
     ...restProps
 }: any) => (
     <TemplateBox row center selfCenter mt={10} {...restProps}>
@@ -31,11 +35,11 @@ const TemplatePagination: FC<Props> = ({
           return (
               <TemplateBox
                   key={`${index}`}
-                  mh={wp(SPACE_XSMALL / 2)}
+                  mh={wp(6)}
                   borderRadius={RADIUS_XSMALL}
                   vGradient={isActive}
-                  backgroundColor={index !== position && BLACK_20}
-                  style={isActive ? [styles.dot, {...styles.activeDot, backgroundColor: dots ? ONBOARDING_BLUE : BLACK_SECONDARY}] : styles.dot}
+                  backgroundColor={index !== position && inactivePaginationColor || BLACK_20}
+                  style={isActive ? [styles.dot, { ...styles.activeDot, backgroundColor: dots ? (activePaginationColor || PRIMARY) : (inactivePaginationColor || BLACK_SECONDARY) }] : styles.dot}
               />
           );
       })}
@@ -51,11 +55,11 @@ export default TemplatePagination;
 
 const styles = StyleSheet.create({
     dot: {
-        height: wp(7),
-        width: wp(7),
+        height: wp(10),
+        width: wp(10),
     },
     activeDot: {
-        height: wp(7),
-        width: wp(20),
+        height: wp(10),
+        width: wp(32),
     },
 });

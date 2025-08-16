@@ -20,11 +20,13 @@ export interface TemplateCarouselProps extends FlatListProps<any> { // Fix <any>
     activeIndex: number,
     setActiveIndex: (index: number) => void,
     dots?: boolean
+    activePaginationColor?: string,
+    inactivePaginationColor?: string
 }
 
 type RefType = LegacyRef<FlatList>;
 
-const OnboardingCarousel:React.FC<TemplateCarouselProps> = forwardRef(({
+const OnboardingCarousel = forwardRef<FlatList<any>, TemplateCarouselProps>(({
     style,
     showPagination,
     children,
@@ -36,6 +38,8 @@ const OnboardingCarousel:React.FC<TemplateCarouselProps> = forwardRef(({
     activeIndex,
     setActiveIndex,
     dots,
+    activePaginationColor,
+    inactivePaginationColor,
     ...restProps
 }, ref:RefType) =>
     // @ts-ignore
@@ -65,6 +69,8 @@ const OnboardingCarousel:React.FC<TemplateCarouselProps> = forwardRef(({
                     paginationSize={paginationSize || 0}
                     position={activeIndex}
                     dots={dots}
+                activePaginationColor={activePaginationColor}
+                inactivePaginationColor={inactivePaginationColor}
                 />
             )}
 

@@ -4,6 +4,7 @@ export const ONBOARDING = 'onboarding';
 export const ONBOARDING_EDUCATION = 'onboardingEducation';
 export const AUTH = 'Auth';
 export const SIGN_UP = 'SignUp';
+export const SIGN_UP_EMAIL = 'SignUpEmail';
 export const LOGIN = 'Login';
 export const FORGOT_PASSWORD = 'ForgotPassword';
 export const HOME = 'Home';

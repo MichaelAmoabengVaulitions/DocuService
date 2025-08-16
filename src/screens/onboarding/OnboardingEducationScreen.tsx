@@ -14,8 +14,16 @@ import OnboardingCarousel from '../../components/carousels/OnboardingCarousel';
 import { ONBOARDING } from '../../navigation/ScreenNames';
 import TemplateIcon from '../../components/TemplateIcon';
 import { hp, wp } from '../../Utils/getResponsiveSize';
+import { StackScreenProps } from '@react-navigation/stack';
 
-const OnboardingEducationScreen = ({ navigation }) => {
+type RootStackParamList = {
+    OnboardingEducationScreen: undefined
+    onboarding: undefined
+}
+
+type OnboardingEducationScreen = StackScreenProps<RootStackParamList, 'OnboardingEducationScreen'>;
+
+const OnboardingEducationScreen: React.FC<OnboardingEducationScreen> = ({ navigation }) => {
     const { onboardingEducation } = useFeatureFlags();
 
     const onboardingContent = onboardingEducation?.content || [];
@@ -27,7 +35,6 @@ const OnboardingEducationScreen = ({ navigation }) => {
         if (activeIndex === onboardingContent?.length - 1) {
             navigation.navigate(ONBOARDING);
         } else {
-            setActiveIndex(activeIndex + 1);
             carouselRef?.current?.scrollToIndex({
                 index: activeIndex + 1,
                 animated: true,
@@ -61,7 +68,6 @@ const OnboardingEducationScreen = ({ navigation }) => {
                             ph={wp(35)}
                             alignItems="center"
                             height={200}
-                            // pt={40}
                             backgroundColor={WHITE}
                             style={styles.shadow}
                         >
