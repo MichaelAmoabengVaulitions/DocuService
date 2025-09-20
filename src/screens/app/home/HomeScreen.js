@@ -3,8 +3,8 @@ import {
     ScrollView, StyleSheet, Alert,
 } from 'react-native';
 
-import { useIsFocused } from '@react-navigation/native';
-import messaging from '@react-native-firebase/messaging';
+//import { useIsFocused } from '@react-navigation/native';
+//import messaging from '@react-native-firebase/messaging';
 import {
     BLACK,
     GREY_30,
@@ -20,33 +20,32 @@ import {
     HEADER_MARGIN, IS_ANDROID, SCREEN_WIDTH, WRAPPED_SCREEN_WIDTH,
     WRAPPER_MARGIN,
 } from '../../../theme/Layout';
-import Greeting from './components /Greeting';
+//import Greeting from './components /Greeting';
 import useAuthContext from '../../../hooks/auth/useAuthContext';
-import RecommendedBrandsCarousel from './components /RecommendedBrandsCarousel';
-import HeaderIconButton from '../../../components/header/HeaderButton';
-import {
-    BRANDS_CATALOGUE, FEED_DETAILS, PROFILE_STACK, UGCAI,
-} from '../../../navigation/ScreenNames';
+// import RecommendedBrandsCarousel from './components /RecommendedBrandsCarousel';
+// import HeaderIconButton from '../../../components/header/HeaderButton';
+// import {
+//     BRANDS_CATALOGUE, FEED_DETAILS, PROFILE_STACK, UGCAI,
+// } from '../../../navigation/ScreenNames';
 import useFeatureFlags from '../../../hooks/featureFlags/useFeatureFlags';
 import TemplateBox from '../../../components/TemplateBox';
 import TemplateText from '../../../components/TemplateText';
-import CatalogueSvg from '../../../../assets/svgs/CatalogueSvg';
-import { SHADOW } from '../../../theme/Shadow';
-import useAppReview from '../../../hooks/useAppReview';
-import TemplateIcon from '../../../components/TemplateIcon';
-import { wp } from '../../../Utils/getResponsiveSize';
-import FeedsTab from '../explore/components/FeedsTab';
-import FeedCard from '../explore/components/FeedCard';
-import getIconByType from '../../../Utils/getIconByType';
-import AffiliateBrandsCarousel from './components /AffiliateBrandsCarousel';
-import BrandsCarousel from './components /BrandsCarousel';
-import EventsCarousel from './components /EventsCarousel';
-import useProfile from '../../../hooks/user/useProfile';
-import FeaturedCreatorsCarousel from '../../brands/admin/components/FeaturedCreatorsCarousel';
-import ProjectsCarousel from './components /ProjectsCarousel';
-import EmergingBrandsCarousel from './components /EmergingBrandsCarousel';
+// import CatalogueSvg from '../../../../assets/svgs/CatalogueSvg';
+// import { SHADOW } from '../../../theme/Shadow';
+// import useAppReview from '../../../hooks/useAppReview';
+// import TemplateIcon from '../../../components/TemplateIcon';
+// import { wp } from '../../../Utils/getResponsiveSize';
+// import FeedsTab from '../explore/components/FeedsTab';
+// import FeedCard from '../explore/components/FeedCard';
+// import getIconByType from '../../../Utils/getIconByType';
+// import AffiliateBrandsCarousel from './components /AffiliateBrandsCarousel';
+// import BrandsCarousel from './components /BrandsCarousel';
+// import EventsCarousel from './components /EventsCarousel';
+// import useProfile from '../../../hooks/user/useProfile';
+// import FeaturedCreatorsCarousel from '../../brands/admin/components/FeaturedCreatorsCarousel';
+// import ProjectsCarousel from './components /ProjectsCarousel';
+// import EmergingBrandsCarousel from './components /EmergingBrandsCarousel';
 import DynamicIcon from '../../../components/icons/DynamicIcon';
-import { ca, sr } from 'date-fns/locale';
 
 const HomeScreen = ({ navigation }) => {
     const { auth } = useAuthContext();
@@ -120,25 +119,18 @@ const HomeScreen = ({ navigation }) => {
             contentContainerStyle={styles.contentContainer}
             showsVerticalScrollIndicator={false}
         >
-            <TemplateBox alignItems="center" row justifyContent="space-between" mb={20}>
-                <TemplateBox
-                    ml={WRAPPER_MARGIN}
-                    height={wp(50)}
-                    width={wp(50)}
-                    borderRadius={wp(30)}
-                    alignItems="center"
-                    justifyContent="center"
-                    backgroundColor={WHITE_20}
-                >
-                    <TemplateText color={GREY_30} medium size={18}>MA</TemplateText>
-                </TemplateBox>
-                <TemplateBox ml={8}>
-                    <TemplateText color={WHITE} medium size={16}>You have 2 new tasks</TemplateText>
-                </TemplateBox>
+            <TemplateBox alignItems="center" row justifyContent="space-between" mv={40} ph={WRAPPER_MARGIN}>
+                <DynamicIcon name={'Profile'} color={WHITE} size={30} />
                 <TemplateBox flex />
-                <TemplateBox row alignItems="center" justifyContent="space-between" ph={WRAPPER_MARGIN}>
-                    <TemplateBox mr={WRAPPER_MARGIN}>
+                <TemplateBox row alignItems="center" justifyContent="space-between" >
+                    <TemplateBox mr={12}>
                         <DynamicIcon name={'Bell'} color={WHITE} />
+                    </TemplateBox>
+                     <TemplateBox mr={12}>
+                        <DynamicIcon name={'Chat'} color={WHITE} />
+                    </TemplateBox>
+                    <TemplateBox>
+                        <DynamicIcon name={'Saved'} color={WHITE} />
                     </TemplateBox>
                 </TemplateBox>
             </TemplateBox>

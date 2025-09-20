@@ -9,7 +9,7 @@ import AuthStack from './auth/AuthStack';
 
 import AppStack from './app/AppStack';
 import useAuthContext from '../hooks/auth/useAuthContext';
-import BrandsStack from './brands/BrandsStack';
+//import BrandsStack from './brands/BrandsStack';
 import { BRAND_BLUE } from '../theme/Colors';
 import BrandLogo from '../../assets/svgs/BrandLogo';
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../theme/Layout';
@@ -30,11 +30,10 @@ const MainNavigator = () => {
 
     const isCreator = auth?.profile?.type && auth?.profile?.type === 'creator';
 
-    const isBrand = !!auth?.profile?.type && auth?.profile?.type === 'brand';
 
     const isSignedIn = !loading && !!auth?.user;
 
-    const showSplash = !isCreator && !isBrand;
+    const showSplash = !isCreator ;
 
     const { hasSubscription } = useHasSubscription();
 
@@ -66,15 +65,7 @@ const MainNavigator = () => {
               && (
                   <Screen name={APP} component={AppStack} />
               )}
-            {isCreator
-              && isSignedIn
-              && !hasSubscription
-              && (
-                  <Screen name={SUBSCRIPTION_STACK} component={SubscriptionStack} />
-              )}
-            {!isCreator && isSignedIn && (
-                <Screen name={BRANDS_STACK} component={BrandsStack} />
-            )}
+        
             {!isSignedIn && <Screen name={AUTH} component={AuthStack} />}
         </Navigator>
     );
