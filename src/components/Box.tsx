@@ -246,9 +246,9 @@ const Box: React.FC<BoxProps> = ({
         (!!right || right === 0) && { right },
         !!disabled && { opacity: 0.5 },
         IS_ANDROID &&
-        (shadow || lightShadow) &&
-        !animated &&
-        SHADOW("android", backgroundColor, {}),
+          (shadow || lightShadow) &&
+          !animated &&
+          SHADOW("android", backgroundColor, {}),
         style,
       ]}
       onPress={onPress}
