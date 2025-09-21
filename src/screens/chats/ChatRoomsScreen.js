@@ -50,247 +50,247 @@ const brandId = 'ng64onQ318Q8LghDizaB2sARx7r2'; // support brand id
 const brandFCMToken = 'feIcGv7HvUWViQzFVuA_E9:APA91bEsjLxPCW0r4OkmCVRhjFJeQqzB1nlqKxiNcijXFhLfLCGRo8ptOEi-hpCt5WQuFy-IwDI1-dEZ0FazouXUPSxzg-kKsYHvY2pQ5JkXSDs31rLcMZsS45hKyKWoHcdy1aXOYJyp';
 
 const ChatRoomsScreen = ({ navigation }) => {
-    const { auth } = useAuthContext();
+    // const { auth } = useAuthContext();
 
-    const { features } = useFeatureFlags();
+    // const { features } = useFeatureFlags();
 
-    const showSupportChat = features?.showSupportChat;
+    // const showSupportChat = features?.showSupportChat;
 
-    const swipeRef = useRef(null);
+    // const swipeRef = useRef(null);
 
-    const isCreator = auth?.profile?.type === 'creator';
+    // const isCreator = auth?.profile?.type === 'creator';
 
-    const userId = auth?.profile?.id;
+    // const userId = auth?.profile?.id;
 
-    const userFCMToken = auth?.profile?.fcmToken;
+    // const userFCMToken = auth?.profile?.fcmToken;
 
-    const [chatRooms, setChatRooms] = useState([]);
+    // const [chatRooms, setChatRooms] = useState([]);
 
-    const [limit, setLimit] = useState(10);
+    // const [limit, setLimit] = useState(10);
 
-    const { createChatRoom } = useChatsContext();
+    // const { createChatRoom } = useChatsContext();
 
-    const [supportFcmToken, setSupportFcmToken] = useState({});
+    // const [supportFcmToken, setSupportFcmToken] = useState({});
 
-    const creatorRef = firestore().collection(CHAT_ROOMS)
-        .limit(limit)
-        .where('creatorId', '==', userId)
-        .orderBy('createdAt', 'desc');
+    // const creatorRef = firestore().collection(CHAT_ROOMS)
+    //     .limit(limit)
+    //     .where('creatorId', '==', userId)
+    //     .orderBy('createdAt', 'desc');
 
-    const brandRef = firestore().collection(CHAT_ROOMS)
-        .limit(limit)
-        .where('brandId', '==', userId)
-        .orderBy('createdAt', 'desc');
+    // const brandRef = firestore().collection(CHAT_ROOMS)
+    //     .limit(limit)
+    //     .where('brandId', '==', userId)
+    //     .orderBy('createdAt', 'desc');
 
-    useEffect(() => {
-        fetchSupport();
-    }, []);
+    // useEffect(() => {
+    //     fetchSupport();
+    // }, []);
 
-    const fetchSupport = async () => {
-        try {
-            const fetchedUsers = await firestore().collection('users')
-                .where('id', '==', brandId)
-                .get()
-                .then((querySnapshot) => querySnapshot?.docs
-                    ?.map((doc) => ({
-                        id: doc?.id,
-                        ...doc?.data(),
-                    })));
+    // const fetchSupport = async () => {
+    //     try {
+    //         const fetchedUsers = await firestore().collection('users')
+    //             .where('id', '==', brandId)
+    //             .get()
+    //             .then((querySnapshot) => querySnapshot?.docs
+    //                 ?.map((doc) => ({
+    //                     id: doc?.id,
+    //                     ...doc?.data(),
+    //                 })));
 
-            setSupportFcmToken(fetchedUsers?.[0]?.fcmToken);
-        } catch (e) {
-            console.error('Error fetching brands:', e);
-        }
-    };
+    //         setSupportFcmToken(fetchedUsers?.[0]?.fcmToken);
+    //     } catch (e) {
+    //         console.error('Error fetching brands:', e);
+    //     }
+    // };
 
-    // listen for chat rooms
-    useEffect(() => {
-        const unsubscribeCreator = creatorRef.onSnapshot(
-            (querySnapshot) => {
-                const creatorRooms = querySnapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    ...doc.data(),
-                }));
+    // // listen for chat rooms
+    // useEffect(() => {
+    //     const unsubscribeCreator = creatorRef.onSnapshot(
+    //         (querySnapshot) => {
+    //             const creatorRooms = querySnapshot.docs.map((doc) => ({
+    //                 id: doc.id,
+    //                 ...doc.data(),
+    //             }));
 
-                setChatRooms((prevRooms) => {
-                    const mergedRooms = [...prevRooms, ...creatorRooms];
-                    return mergedRooms.filter(
-                        (room, index, self) => index === self.findIndex((r) => r.id === room.id),
-                    );
-                });
-            },
-            (error) => {
-                console.error('Error fetching creator chat rooms:', error);
-            },
-        );
+    //             setChatRooms((prevRooms) => {
+    //                 const mergedRooms = [...prevRooms, ...creatorRooms];
+    //                 return mergedRooms.filter(
+    //                     (room, index, self) => index === self.findIndex((r) => r.id === room.id),
+    //                 );
+    //             });
+    //         },
+    //         (error) => {
+    //             console.error('Error fetching creator chat rooms:', error);
+    //         },
+    //     );
 
-        const unsubscribeBrand = brandRef.onSnapshot(
-            (querySnapshot) => {
-                const brandRooms = querySnapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    ...doc.data(),
-                }));
+    //     const unsubscribeBrand = brandRef.onSnapshot(
+    //         (querySnapshot) => {
+    //             const brandRooms = querySnapshot.docs.map((doc) => ({
+    //                 id: doc.id,
+    //                 ...doc.data(),
+    //             }));
 
-                setChatRooms((prevRooms) => {
-                    const mergedRooms = [...prevRooms, ...brandRooms];
-                    return mergedRooms.filter(
-                        (room, index, self) => index === self.findIndex((r) => r.id === room.id),
-                    );
-                });
-            },
-            (error) => {
-                console.error('Error fetching brand chat rooms:', error);
-            },
-        );
+    //             setChatRooms((prevRooms) => {
+    //                 const mergedRooms = [...prevRooms, ...brandRooms];
+    //                 return mergedRooms.filter(
+    //                     (room, index, self) => index === self.findIndex((r) => r.id === room.id),
+    //                 );
+    //             });
+    //         },
+    //         (error) => {
+    //             console.error('Error fetching brand chat rooms:', error);
+    //         },
+    //     );
 
-        return () => {
-            unsubscribeCreator();
-            unsubscribeBrand();
-        };
-    }, [isCreator, userId, limit]);
+    //     return () => {
+    //         unsubscribeCreator();
+    //         unsubscribeBrand();
+    //     };
+    // }, [isCreator, userId, limit]);
 
-    const {
-        // chatRooms,
-        fetchChatRooms,
-        fetchingChatRooms,
-        deleteChatRoom,
-    } = useChatsContext();
+    // const {
+    //     // chatRooms,
+    //     fetchChatRooms,
+    //     fetchingChatRooms,
+    //     deleteChatRoom,
+    // } = useChatsContext();
 
-    const [search, setSearch] = useState('');
+    // const [search, setSearch] = useState('');
 
-    const [searchResults, setSearchResults] = useState([]);
+    // const [searchResults, setSearchResults] = useState([]);
 
-    const fuseOptions = {
-        isCaseSensitive: false,
-        includeScore: true,
-        shouldSort: true,
-        minMatchCharLength: 1,
-        threshold: 0.4,
-        useExtendedSearch: true,
-        keys: [
-            'name',
-        ],
-    };
+    // const fuseOptions = {
+    //     isCaseSensitive: false,
+    //     includeScore: true,
+    //     shouldSort: true,
+    //     minMatchCharLength: 1,
+    //     threshold: 0.4,
+    //     useExtendedSearch: true,
+    //     keys: [
+    //         'name',
+    //     ],
+    // };
 
-    useEffect(() => {
-        if (!!search && chatRooms?.length) {
-            const fuse = new Fuse(chatRooms, fuseOptions);
-            const results = fuse.search(search).map(({ item }) => item);
-            setSearchResults(results);
-        }
-    }, [search]);
+    // useEffect(() => {
+    //     if (!!search && chatRooms?.length) {
+    //         const fuse = new Fuse(chatRooms, fuseOptions);
+    //         const results = fuse.search(search).map(({ item }) => item);
+    //         setSearchResults(results);
+    //     }
+    // }, [search]);
 
-    const searchedChatRooms = useMemo(() => {
-        if (search?.length > 0) return searchResults;
-        return chatRooms.sort((a, b) => {
-            const aTime = a?.createdAt?.seconds ?? a.lastMessageTimestamp?.seconds ?? 0;
-            const bTime = b?.createdAt?.seconds ?? b.lastMessageTimestamp?.seconds ?? 0;
-            return bTime - aTime;
-        });
-    }, [search, searchResults, chatRooms]);
+    // const searchedChatRooms = useMemo(() => {
+    //     if (search?.length > 0) return searchResults;
+    //     return chatRooms.sort((a, b) => {
+    //         const aTime = a?.createdAt?.seconds ?? a.lastMessageTimestamp?.seconds ?? 0;
+    //         const bTime = b?.createdAt?.seconds ?? b.lastMessageTimestamp?.seconds ?? 0;
+    //         return bTime - aTime;
+    //     });
+    // }, [search, searchResults, chatRooms]);
 
-    // Handle chat room deletion
-    const handleDeleteChat = (chatRoomId) => {
-        Alert.alert(
-            'Delete Chat',
-            'Are you sure you want to delete this chat?',
-            [
-                {
-                    text: 'Cancel',
-                    onPress: () => swipeRef?.current?.close(),
-                    style: 'cancel',
-                },
-                {
-                    text: 'Delete',
-                    onPress: () => {
-                        deleteChatRoom(chatRoomId);
-                        swipeRef?.current?.close();
-                        setChatRooms(chatRooms?.filter((item) => item?.id !== chatRoomId));
-                        fetchChatRooms();
-                    },
-                    style: 'destructive',
-                },
-            ],
-        );
-    };
+    // // Handle chat room deletion
+    // const handleDeleteChat = (chatRoomId) => {
+    //     Alert.alert(
+    //         'Delete Chat',
+    //         'Are you sure you want to delete this chat?',
+    //         [
+    //             {
+    //                 text: 'Cancel',
+    //                 onPress: () => swipeRef?.current?.close(),
+    //                 style: 'cancel',
+    //             },
+    //             {
+    //                 text: 'Delete',
+    //                 onPress: () => {
+    //                     deleteChatRoom(chatRoomId);
+    //                     swipeRef?.current?.close();
+    //                     setChatRooms(chatRooms?.filter((item) => item?.id !== chatRoomId));
+    //                     fetchChatRooms();
+    //                 },
+    //                 style: 'destructive',
+    //             },
+    //         ],
+    //     );
+    // };
 
-    useLayoutEffect(() => {
-        if (showSupportChat) {
-            navigation.setOptions({
-                headerRight: () => (
-                    <HeaderIconButton
-                        title="Contact US"
-                        onPress={handleOnPressSupportChat}
-                        backDropColor={LIGHT_GREEN}
-                        mr={WRAPPER_MARGIN}
-                    />
-                ),
-            });
-        }
-    }, [navigation, showSupportChat]);
+    // useLayoutEffect(() => {
+    //     if (showSupportChat) {
+    //         navigation.setOptions({
+    //             headerRight: () => (
+    //                 <HeaderIconButton
+    //                     title="Contact US"
+    //                     onPress={handleOnPressSupportChat}
+    //                     backDropColor={LIGHT_GREEN}
+    //                     mr={WRAPPER_MARGIN}
+    //                 />
+    //             ),
+    //         });
+    //     }
+    // }, [navigation, showSupportChat]);
 
-    const chatRoomName = 'SUPPORT CHAT';
-    const [supportPress, setSupportPress] = useState(false);
+    // const chatRoomName = 'SUPPORT CHAT';
+    // const [supportPress, setSupportPress] = useState(false);
 
-    const handleSupportPress = async () => {
-        try {
-            await createChatRoom(
-                chatRoomName,
-                userId,
-                brandId,
-                userFCMToken,
-                brandFCMToken,
-            );
-            setSupportPress(true);
-        } catch (e) {
-            console.log('-> e', e);
-        }
-    };
+    // const handleSupportPress = async () => {
+    //     try {
+    //         await createChatRoom(
+    //             chatRoomName,
+    //             userId,
+    //             brandId,
+    //             userFCMToken,
+    //             brandFCMToken,
+    //         );
+    //         setSupportPress(true);
+    //     } catch (e) {
+    //         console.log('-> e', e);
+    //     }
+    // };
 
-    const [showOptions, setShowOptions] = useState(false);
+    // const [showOptions, setShowOptions] = useState(false);
 
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: () => (
-                <HeaderIconButton
-                    name="add"
-                    onPress={() => setShowOptions(!showOptions)}
-                    backDropColor={WHITE}
-                    mr={WRAPPER_MARGIN}
-                />
-            ),
-            gestureEnabled: false,
-        });
-    }, [navigation, showOptions]);
+    // useLayoutEffect(() => {
+    //     navigation.setOptions({
+    //         headerRight: () => (
+    //             <HeaderIconButton
+    //                 name="add"
+    //                 onPress={() => setShowOptions(!showOptions)}
+    //                 backDropColor={WHITE}
+    //                 mr={WRAPPER_MARGIN}
+    //             />
+    //         ),
+    //         gestureEnabled: false,
+    //     });
+    // }, [navigation, showOptions]);
 
-    const options = [
-        {
-            title: 'Search Creators',
-            onPress: () => {
-                setShowOptions(false);
-                navigation.navigate(CREATORS_PROFILES_STACK);
-            },
-        },
-        {
-            title: 'Support (Features / Bugs)',
-            onPress: () => {
-                setShowOptions(false);
-                handleSupportPress();
-            },
-        },
-    ];
+    // const options = [
+    //     {
+    //         title: 'Search Creators',
+    //         onPress: () => {
+    //             setShowOptions(false);
+    //             navigation.navigate(CREATORS_PROFILES_STACK);
+    //         },
+    //     },
+    //     {
+    //         title: 'Support (Features / Bugs)',
+    //         onPress: () => {
+    //             setShowOptions(false);
+    //             handleSupportPress();
+    //         },
+    //     },
+    // ];
 
-    const supportChat = useMemo(() => searchedChatRooms?.find((chat) => chat?.brandId === brandId), [searchedChatRooms]);
-    useEffect(() => {
-        if (supportChat && supportPress) {
-            navigation.navigate(CHATS, {
-                chatRoomId: supportChat?.id,
-                name: 'Support Chat',
-                receiverFcmToken: supportFcmToken,
-            });
-            setSupportPress(false);
-        }
-    }, [supportChat, supportPress]);
+    // const supportChat = useMemo(() => searchedChatRooms?.find((chat) => chat?.brandId === brandId), [searchedChatRooms]);
+    // useEffect(() => {
+    //     if (supportChat && supportPress) {
+    //         navigation.navigate(CHATS, {
+    //             chatRoomId: supportChat?.id,
+    //             name: 'Support Chat',
+    //             receiverFcmToken: supportFcmToken,
+    //         });
+    //         setSupportPress(false);
+    //     }
+    // }, [supportChat, supportPress]);
 
     return (
         <KeyboardAvoidingView
@@ -298,7 +298,7 @@ const ChatRoomsScreen = ({ navigation }) => {
             style={styles.mainContainer}
         >
             <StatusBar barStyle="dark-content" />
-            <TouchableWithoutFeedback onPress={() => setShowOptions(false)} style={{ backgroundColor: 'red', flex: 1 }}>
+            {/* <TouchableWithoutFeedback onPress={() => setShowOptions(false)} style={{ backgroundColor: 'red', flex: 1 }}>
                 <View style={{ flex: 1 }}>
                     <FlatList
                         data={searchedChatRooms}
@@ -470,7 +470,7 @@ const ChatRoomsScreen = ({ navigation }) => {
                 </View>
             )}
                 </View>
-            </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback> */}
         </KeyboardAvoidingView>
     );
 };
@@ -481,6 +481,7 @@ const styles = StyleSheet.create({
     },
     mainContainer: {
         flex: 1,
+        backgroundColor: BLACK
     },
     contentContainer: {
         flexGrow: 1,

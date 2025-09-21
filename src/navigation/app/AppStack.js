@@ -4,7 +4,7 @@ import { APP_TABS, CREATORS_PROFILES_STACK, EVENT_DETAILS_SCREEN, EVENTS_SCREEN,
 import AppTabs from './AppTabs';
 import { SWITCH, TRANSPARENT_HEADER, TRANSPARENT_HEADER_NO_LOGO, TRANSPARENT_NO_LOGO_HEADER } from '../../components/header/ScreenOptions';
 import SubscriptionScreen from '../../screens/subscriptions/SubscriptionScreen';
-import CreatorsProfilesStack from '../brands/CreatorsProfilesStack';
+//import CreatorsProfilesStack from '../brands/CreatorsProfilesStack';
 import EventsScreen from '../../screens/app/home/EventsScreen';
 import EventDetailsScreen from '../../screens/app/home/EventDetailsScreen';
 import WebviewScreen from '../../screens/webview/WebviewScreen';
@@ -37,11 +37,11 @@ const AppStack = () => (
             component={SubscriptionScreen}
             options={TRANSPARENT_HEADER_NO_LOGO}
         />
-        <Screen
+        {/* <Screen
             name={CREATORS_PROFILES_STACK}
             component={CreatorsProfilesStack}
             options={TRANSPARENT_HEADER}
-        />
+        /> */}
         <Screen
             name={EVENTS_SCREEN}
             component={EventsScreen}

@@ -13,7 +13,7 @@ import ChatsScreen from '../../screens/chats/ChatsScreen';
 import ChatRoomsScreen from '../../screens/chats/ChatRoomsScreen';
 import SupportChatScreen from '../../screens/chats/SupportChatScreen';
 import StartSupportChatScreen from '../../screens/chats/StartSupportChatScreen';
-import CreatorsProfilesStack from '../brands/CreatorsProfilesStack';
+//import CreatorsProfilesStack from '../brands/CreatorsProfilesStack';
 
 const Stack = createStackNavigator();
 const { Navigator, Screen } = Stack;

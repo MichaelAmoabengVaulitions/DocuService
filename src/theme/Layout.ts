@@ -4,9 +4,8 @@ import { Appearance, Dimensions, Platform } from 'react-native';
 import { wp } from '../Utils/getResponsiveSize';
 
 const deviceVersion = Platform.Version;
-console.log('-> deviceVersion', deviceVersion);
 
-const IS_IOS_16 = deviceVersion >= 16 && Platform.OS === 'ios';
+const IS_IOS_16 = Number(deviceVersion) >= 16 && Platform.OS === 'ios';
 
 export const IS_DARK:boolean = (Appearance.getColorScheme() === 'dark');
 
@@ -70,4 +69,4 @@ export const OFFER_CARD_WIDTH = IS_SMALL_DEVICE
 // eslint-disable-next-line no-nested-ternary
 const HEADER_MARGIN_OFFSET = IS_ANDROID ? 2.2 : IS_IOS_16 ? 5 : 2.6;
 
-export const HEADER_MARGIN = IS_ANDROID ? 80 : wp(136);
+export const HEADER_MARGIN = IS_ANDROID ? 80 : 50

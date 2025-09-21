@@ -12,8 +12,8 @@ import {
 } from '../../../../theme/Layout';
 import TemplateIcon from '../../../../components/TemplateIcon';
 import AvatarOverlaps from '../../../../components/AvatarOverlaps';
-import useGetEnrolledCreatorsAvatars from '../../../brands/admin/hooks/useGetEnrolledCreatorsAvatars';
-import { wp } from '../../../../Utils/getResponsiveSize';
+//import useGetEnrolledCreatorsAvatars from '../../../brands/admin/hooks/useGetEnrolledCreatorsAvatars';
+//import { wp } from '../../../../Utils/getResponsiveSize';
 
 interface Props {
     title?: string;
@@ -59,7 +59,7 @@ const CurrentProjectCard: FC<Props> = ({
 }) => {
     const color = status === 'High' ? PINK : BRAND_BLUE;
 
-    const { enrolledCreatorsAvatars } = useGetEnrolledCreatorsAvatars(projectId);
+   // const { enrolledCreatorsAvatars } = useGetEnrolledCreatorsAvatars(projectId);
 
     return (
         <TemplateBox
@@ -124,7 +124,7 @@ const CurrentProjectCard: FC<Props> = ({
             )}
 
             <TemplateBox row alignItems="center">
-                {isBrand ? (
+                {/* {isBrand ? (
                     <AvatarOverlaps imageUrls={enrolledCreatorsAvatars} />
                 ) : (
                     <TemplateText size={14} color={BLACK} bold>
@@ -141,8 +141,8 @@ const CurrentProjectCard: FC<Props> = ({
                             {'  '}
                         </TemplateText>
                     </TemplateBox>
-                )}
-                {notificationCount >= 0 && (
+                )} */}
+                {/* {notificationCount >= 0 && (
                     <TemplateBox row alignItems="center">
                         <TemplateIcon color={BLACK} size={18} name="chatbubble-ellipses-outline" />
                         <TemplateText size={12} color={BLACK}>
@@ -159,7 +159,7 @@ const CurrentProjectCard: FC<Props> = ({
                             {'  '}
                         </TemplateText>
                     </TemplateBox>
-                )}
+                )} */}
             </TemplateBox>
         </TemplateBox>
     );

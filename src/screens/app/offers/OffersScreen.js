@@ -5,6 +5,7 @@ import {
 import differenceInDays from 'date-fns/differenceInDays';
 import TemplateText from '../../../components/TemplateText';
 import {
+    BLACK,
     BRAND_BLUE, GREEN, LAVENDER, PINK, TRANSPARENT, WHITE,
 } from '../../../theme/Colors';
 import TemplateBox from '../../../components/TemplateBox';
@@ -37,92 +38,92 @@ const getTagColor = (status) => {
     return BRAND_BLUE;
 };
 const OffersScreen = ({ navigation }) => {
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: () => (
-                <HeaderIconButton
-                    title="Projects"
-                    onPress={() => navigation.navigate(PROJECTS_SCREEN)}
-                    backDropColor={BRAND_BLUE}
-                    ml={WRAPPER_MARGIN}
-                    mr={WRAPPER_MARGIN}
-                />
-            ),
-        });
-    }, [navigation]);
+    // useLayoutEffect(() => {
+    //     navigation.setOptions({
+    //         headerRight: () => (
+    //             <HeaderIconButton
+    //                 title="Projects"
+    //                 onPress={() => navigation.navigate(PROJECTS_SCREEN)}
+    //                 backDropColor={BRAND_BLUE}
+    //                 ml={WRAPPER_MARGIN}
+    //                 mr={WRAPPER_MARGIN}
+    //             />
+    //         ),
+    //     });
+    // }, [navigation]);
 
-    const {
-        projectLimits,
-        setProjectLimits,
-        getEnrolledProjects,
-        enrolledProjects: projects,
-    } = useProjectsContext();
+    // const {
+    //     projectLimits,
+    //     setProjectLimits,
+    //     getEnrolledProjects,
+    //     enrolledProjects: projects,
+    // } = useProjectsContext();
 
-    // const { brands } = useGetBrands();
-    const { auth } = useAuthContext();
-    const { profile } = auth;
+    // // const { brands } = useGetBrands();
+    // const { auth } = useAuthContext();
+    // const { profile } = auth;
 
-    useEffect(() => {
-        getEnrolledProjects(profile?.id, projectLimits);
-    }, [projectLimits]);
+    // useEffect(() => {
+    //     getEnrolledProjects(profile?.id, projectLimits);
+    // }, [projectLimits]);
 
-    const enrolledProjects = useMemo(() => {
-        if (!projects) return [];
+    // const enrolledProjects = useMemo(() => {
+    //     if (!projects) return [];
 
-        if (projects?.length) {
-            return projects?.map((item) => {
-                const application = item?.applications?.length
-                    ? item?.applications?.find(({ creatorId }) => creatorId === profile?.id)
-                    : {};
-                const completedStatuses = application?.status?.filter(({ status }) => status === 'completed');
+    //     if (projects?.length) {
+    //         return projects?.map((item) => {
+    //             const application = item?.applications?.length
+    //                 ? item?.applications?.find(({ creatorId }) => creatorId === profile?.id)
+    //                 : {};
+    //             const completedStatuses = application?.status?.filter(({ status }) => status === 'completed');
 
-                const progress = completedStatuses?.length
-                    ? Math.round((completedStatuses?.length / (projectStatuses?.length - 1)) * 10) / 10
-                    : 0;
-                return {
-                    ...item,
-                    ...application,
-                    progress,
-                    id: item?.id,
-                    title: item?.title,
-                    brand: item?.brandName,
-                    price: `From ${item?.priceRange?.max} to ${item?.priceRange?.min} ${item?.currency}`,
-                    status: application?.status?.filter(({ status }) => status === 'active')[0]?.name,
-                    documentCount: application?.documents?.length,
-                    daysLeft: differenceInDays(new Date(item?.endDate), new Date()),
-                    currentStatus: application?.status?.filter(({ status }) => status === 'active')[0]?.name,
-                };
-            });
-        }
-        return [];
-    }, [projects, profile]);
+    //             const progress = completedStatuses?.length
+    //                 ? Math.round((completedStatuses?.length / (projectStatuses?.length - 1)) * 10) / 10
+    //                 : 0;
+    //             return {
+    //                 ...item,
+    //                 ...application,
+    //                 progress,
+    //                 id: item?.id,
+    //                 title: item?.title,
+    //                 brand: item?.brandName,
+    //                 price: `From ${item?.priceRange?.max} to ${item?.priceRange?.min} ${item?.currency}`,
+    //                 status: application?.status?.filter(({ status }) => status === 'active')[0]?.name,
+    //                 documentCount: application?.documents?.length,
+    //                 daysLeft: differenceInDays(new Date(item?.endDate), new Date()),
+    //                 currentStatus: application?.status?.filter(({ status }) => status === 'active')[0]?.name,
+    //             };
+    //         });
+    //     }
+    //     return [];
+    // }, [projects, profile]);
 
-    const renderItem = ({ item }, index) => (
-        <CurrentProjectCard
-            title={item?.title}
-            brand={item?.brand}
-            price={item?.price}
-            status={item?.status}
-            notificationCount={item?.notifications}
-            documentCount={item?.documents}
-            daysLeft={item?.daysLeft}
-            progress={item?.progress}
-            style={styles.card}
-            cardColor={getTagColor(item?.currentStatus?.value)}
-            width={SCREEN_WIDTH - WRAPPER_MARGIN * 2}
-            slideInDelay={(index + 1) * 100}
-            key={item?.id}
-            onPress={
-                () => navigation.navigate(CURRENT_PROJECT_DETAILS,
-                    { projectId: item?.id })
-            }
-        />
+    // const renderItem = ({ item }, index) => (
+    //     <CurrentProjectCard
+    //         title={item?.title}
+    //         brand={item?.brand}
+    //         price={item?.price}
+    //         status={item?.status}
+    //         notificationCount={item?.notifications}
+    //         documentCount={item?.documents}
+    //         daysLeft={item?.daysLeft}
+    //         progress={item?.progress}
+    //         style={styles.card}
+    //         cardColor={getTagColor(item?.currentStatus?.value)}
+    //         width={SCREEN_WIDTH - WRAPPER_MARGIN * 2}
+    //         slideInDelay={(index + 1) * 100}
+    //         key={item?.id}
+    //         onPress={
+    //             () => navigation.navigate(CURRENT_PROJECT_DETAILS,
+    //                 { projectId: item?.id })
+    //         }
+    //     />
 
-    );
+    // );
 
     return (
         <View style={styles.container}>
-            <FlatList
+            {/* <FlatList
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ paddingHorizontal: WRAPPER_MARGIN }}
                 ListHeaderComponent={(
@@ -160,7 +161,7 @@ const OffersScreen = ({ navigation }) => {
                 initialNumToRender={5}
                 onEndReachedThreshold={0.5}
                 onEndReached={() => { setProjectLimits((prevLimit) => prevLimit + 10); }}
-            />
+            /> */}
         </View>
     );
 };
@@ -168,7 +169,7 @@ const OffersScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: IS_ANDROID ? TRANSPARENT : WHITE,
+        backgroundColor: BLACK
     },
     card: {
         marginVertical: 8,

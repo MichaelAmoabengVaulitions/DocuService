@@ -1,18 +1,24 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { BRAND_BLUE, ERROR_RED } from '../../theme/Colors';
+import {
+    WHITE,
+    ERROR_RED,
+    WHITE_50,
+    IOS_BLUE,
+} from '../../theme/Colors';
 import TemplateText from '../TemplateText';
-import { IS_ANDROID } from '../../theme/Layout';
 import TemplateBox from '../TemplateBox';
 
 const TabLabel = ({ focused, children, showNotification }) => (
-    <TemplateBox row center>
+    <TemplateBox row center mb={10}>
         <TemplateText
-            opacity={focused ? 1 : 0.5}
-            black
             semiBold
-            style={[styles.label, focused && styles.activeLabel]}
+            center
+            style={[
+                styles.label,
+                focused ? styles.activeLabel : styles.inactiveLabel,
+            ]}
         >
             {children}
         </TemplateText>
@@ -23,7 +29,7 @@ const TabLabel = ({ focused, children, showNotification }) => (
                 borderRadius={4}
                 zIndex={999}
                 backgroundColor={ERROR_RED}
-                style={styles.label}
+                style={styles.dot}
             />
         )}
     </TemplateBox>
@@ -42,14 +48,19 @@ TabLabel.defaultProps = {
 
 const styles = StyleSheet.create({
     label: {
-        color: BRAND_BLUE,
-        fontSize: 10,
+        fontSize: 12,
         textAlign: 'center',
-        marginTop: 4,
-        marginBottom: IS_ANDROID ? 4 : 0,
+        marginTop: -14,
     },
     activeLabel: {
-        opacity: 1,
+        color: IOS_BLUE,
+    },
+    inactiveLabel: {
+        color: WHITE_50,
+    },
+    dot: {
+        marginLeft: 4,
+        marginTop: -10,
     },
 });
 

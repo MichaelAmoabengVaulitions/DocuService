@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import {
+    BLACK,
     lightOrange, TRANSPARENT, WHITE,
 } from '../../../theme/Colors';
 import {
@@ -106,7 +107,7 @@ const PortfolioScreen = ({ navigation, route }) => {
                 contentContainerStyle={styles.contentContainer}
                 showsVerticalScrollIndicator={false}
             >
-                {creatorId ? (
+                {/* {creatorId ? (
                     <CreatorDetailsHeader
                         userName={userName}
                         location={location}
@@ -169,12 +170,12 @@ const PortfolioScreen = ({ navigation, route }) => {
                             />
                         </TemplateBox>
                     )
-                }
+                } */}
 
             </ScrollView>
-            {loading && (
+            {/* {loading && (
                 <LoadingOverlay message="" />
-            )}
+            )} */}
         </>
 
     );
@@ -183,7 +184,7 @@ const PortfolioScreen = ({ navigation, route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: IS_ANDROID ? TRANSPARENT : WHITE,
+        backgroundColor: BLACK
     },
     contentContainer: {
         flexGrow: 1,
