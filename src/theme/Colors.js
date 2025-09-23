@@ -78,7 +78,7 @@ export const YELLOW = "#FFF27C";
 
 export const DEFAULT_GRADIENT = [
   "rgba(52, 7, 61, 0.1)",
-  "rgba(52, 7, 61, 0.3)",
+  "rgba(52, 7, 61, 0.4)",
 ];
 
 export const LIGHT_GREEN = "rgba(52, 199, 89, 0.3)";
