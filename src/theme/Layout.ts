@@ -23,10 +23,6 @@ export const IS_SHORT_DEVICE: boolean = SCREEN_HEIGHT < 700;
 
 export const STATUS_BAR_HEIGHT: number = getStatusBarHeight();
 
-console.log("-> STATUS_BAR_HEIGHT", STATUS_BAR_HEIGHT);
-console.log("-> SCREEN_HEIGHT", SCREEN_HEIGHT);
-console.log("-> SCREEN_WIDTH", SCREEN_WIDTH);
-
 export const IS_ANDROID: boolean = Platform.OS === "android";
 
 export const RADIUS_XSMALL = 5;
