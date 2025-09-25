@@ -11,12 +11,18 @@ import Immigration from "./Immigration";
 import House from "./House";
 import Work from "./Work";
 import Health from "./Health";
-import Finance from "./Finance";
+import ImportFileIcon from "./ImportFileIcon";
 import Language from "./Language";
 import Transport from "./Transport";
 import Family from "./Family";
 import Shopping from "./Shopping";
 import DoubleArrowRight from "./DoubleArrowRight";
+import Scan from "./Scan";
+import InfoIcon from "./InfoIcon";
+import Loading from "./Loading";
+import CheckIcon from "./CheckIcon";
+import Close from "./Close";
+import Add from "./Add";
 
 export type DynamicIconName =
   | "Chat"
@@ -35,6 +41,13 @@ export type DynamicIconName =
   | "Family"
   | "Shopping"
   | "DoubleArrowRight"
+  | "Scan"
+  | "Info"
+  | "ImportFile"
+  | "Loading"
+  | "Check"
+  | "Add"
+  | "Close"
   | null;
 
 export interface DynamicIconProps extends IconProps {
@@ -89,8 +102,8 @@ const IconList: IconListItem[] = [
     icon: Health,
   },
   {
-    name: "Finance",
-    icon: Finance,
+    name: "ImportFile",
+    icon: ImportFileIcon,
   },
   {
     name: "Language",
@@ -112,6 +125,27 @@ const IconList: IconListItem[] = [
     name: "DoubleArrowRight",
     icon: DoubleArrowRight,
   },
+  {
+    name: "Scan",
+    icon: Scan,
+  },
+  {
+    name: "Info",
+    icon: InfoIcon,
+  },
+  {
+    name: "Loading",
+    icon: Loading,
+  },
+  {
+    name: "Check",
+    icon: CheckIcon,
+  },
+  {
+    name: "Close",
+    icon: Close,
+  },
+  { name: "Add", icon: Add },
 ];
 
 const DynamicIcon: React.FC<DynamicIconProps> = ({

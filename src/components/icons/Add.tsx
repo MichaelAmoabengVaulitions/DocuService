@@ -3,12 +3,7 @@ import Svg, { Path } from "react-native-svg";
 import { WHITE } from "../../theme/Colors";
 import { IconProps } from "./IconProps";
 
-const Health: React.FC<IconProps> = ({
-  color = WHITE,
-  size,
-  style,
-  ...props
-}) => {
+const Add: React.FC<IconProps> = ({ color = WHITE, size, style, ...props }) => {
   const ratio = 24 / 24;
 
   return (
@@ -21,7 +16,7 @@ const Health: React.FC<IconProps> = ({
       {...props}
     >
       <Path
-        d="M14.5 7.5a5 5 0 10-10 0 5 5 0 0010 0zM2.5 19.5a7 7 0 0110-6.326M21.5 17v-2.5c-2 0-3.5-1-3.5-1s-1.5 1-3.5 1V17c0 3.5 3.5 4.5 3.5 4.5s3.5-1 3.5-4.5z"
+        d="M4 12v2.545c0 3.245 0 4.867.886 5.966a4 4 0 00.603.603C6.59 22 8.211 22 11.456 22c.705 0 1.058 0 1.381-.113.067-.024.133-.052.197-.082.31-.148.559-.398 1.058-.896l4.736-4.737c.579-.578.867-.867 1.02-1.235.152-.367.152-.776.152-1.593V10c0-3.772 0-5.657-1.172-6.829-1.059-1.06-2.701-1.16-5.793-1.17M13 21.5V21c0-2.828 0-4.242.879-5.12C14.757 15 16.172 15 19 15h.5M12 6H4m4-4v8"
         stroke={color}
         strokeWidth={1.5}
         strokeLinecap="round"
@@ -31,4 +26,4 @@ const Health: React.FC<IconProps> = ({
   );
 };
 
-export default Health;
+export default Add;

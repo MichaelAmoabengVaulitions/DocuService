@@ -1,9 +1,9 @@
 import * as React from "react";
-import Svg, { Path } from "react-native-svg";
+import Svg, { Path, Circle } from "react-native-svg";
 import { WHITE } from "../../theme/Colors";
 import { IconProps } from "./IconProps";
 
-const Health: React.FC<IconProps> = ({
+const InfoIcon: React.FC<IconProps> = ({
   color = WHITE,
   size,
   style,
@@ -20,8 +20,17 @@ const Health: React.FC<IconProps> = ({
       fill="none"
       {...props}
     >
+      <Circle
+        cx={12}
+        cy={12}
+        r={10}
+        stroke={color}
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
       <Path
-        d="M14.5 7.5a5 5 0 10-10 0 5 5 0 0010 0zM2.5 19.5a7 7 0 0110-6.326M21.5 17v-2.5c-2 0-3.5-1-3.5-1s-1.5 1-3.5 1V17c0 3.5 3.5 4.5 3.5 4.5s3.5-1 3.5-4.5z"
+        d="M12 16v-4.5M12 8.012v-.01"
         stroke={color}
         strokeWidth={1.5}
         strokeLinecap="round"
@@ -31,4 +40,4 @@ const Health: React.FC<IconProps> = ({
   );
 };
 
-export default Health;
+export default InfoIcon;

@@ -1,54 +1,34 @@
-import * as React from 'react';
-import Svg, { Path, Circle } from 'react-native-svg';
-import { WHITE } from '../../theme/Colors';
-import { IconProps } from './IconProps';
+import * as React from "react";
+import Svg, { Path, Circle } from "react-native-svg";
+import { WHITE } from "../../theme/Colors";
+import { IconProps } from "./IconProps";
 
 const Shopping: React.FC<IconProps> = ({
-    color = WHITE,
-    size,
-    style,
-    ...props
+  color = WHITE,
+  size,
+  style,
+  ...props
 }) => {
-    const ratio = 24 / 24;
+  const ratio = 24 / 24;
 
-    return (
-        <Svg
-            width={size}
-            height={size && size / ratio}
-            style={style}
-            viewBox="0 0 24 24"
-            fill="none"
-            {...props}
-        >
-             <Path
-                d="M8 16h7.263c4.488 0 5.17-2.82 5.998-6.93.239-1.187.358-1.78.071-2.175-.168-.231-.426-.327-.832-.367M6 6.5h1.5M11.015 2.387c1.073-.64 2.009-.382 2.571.028.23.169.346.253.414.253s.183-.084.414-.253c.562-.41 1.498-.668 2.571-.028 1.408.84 1.726 3.609-1.52 5.945-.62.445-.928.668-1.465.668s-.846-.223-1.464-.668c-3.247-2.336-2.929-5.106-1.521-5.945zM8 16L5.379 3.515A2 2 0 003.439 2H2.5"
-                stroke={color}
-                strokeWidth={1.5}
-                strokeLinecap="round"
-            />
-            <Path
-                d="M8.88 16h-.411C7.105 16 6 17.151 6 18.571a.42.42 0 00.411.429H17.5"
-                stroke={color}
-                strokeWidth={1.5}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-            <Circle
-                cx={10.5}
-                cy={20.5}
-                r={1.5}
-                stroke={color}
-                strokeWidth={1.5}
-            />
-            <Circle
-                cx={17.5}
-                cy={20.5}
-                r={1.5}
-                stroke={color}
-                strokeWidth={1.5}
-            />
-        </Svg>    
-    );
+  return (
+    <Svg
+      width={size}
+      height={size && size / ratio}
+      style={style}
+      viewBox="0 0 24 24"
+      fill="none"
+      {...props}
+    >
+      <Path
+        d="M19.543 2H6.5a2.5 2.5 0 00-2.496 2.635M6.5 4.5H16c.943 0 1.414 0 1.707.293C18 5.086 18 5.557 18 6.5M4.004 4.635A2.5 2.5 0 006.5 7H16c1.886 0 2.828 0 3.414.586C20 8.172 20 9.114 20 11v7c0 1.886 0 2.828-.586 3.414C18.828 22 17.886 22 16 22h-5.996c-2.829 0-4.243 0-5.122-.879-.878-.878-.878-2.293-.878-5.121V4.635zm0 0v-.134M15.5 12.5h-7m4 4h-4"
+        stroke={color}
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
 };
 
 export default Shopping;

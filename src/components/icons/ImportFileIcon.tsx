@@ -1,9 +1,9 @@
 import * as React from "react";
-import Svg, { Path } from "react-native-svg";
+import Svg, { Path, Ellipse } from "react-native-svg";
 import { WHITE } from "../../theme/Colors";
 import { IconProps } from "./IconProps";
 
-const Health: React.FC<IconProps> = ({
+const ImportFileIcon: React.FC<IconProps> = ({
   color = WHITE,
   size,
   style,
@@ -21,7 +21,7 @@ const Health: React.FC<IconProps> = ({
       {...props}
     >
       <Path
-        d="M14.5 7.5a5 5 0 10-10 0 5 5 0 0010 0zM2.5 19.5a7 7 0 0110-6.326M21.5 17v-2.5c-2 0-3.5-1-3.5-1s-1.5 1-3.5 1V17c0 3.5 3.5 4.5 3.5 4.5s3.5-1 3.5-4.5z"
+        d="M3 17c0 .93 0 1.395.102 1.776a3 3 0 002.121 2.122C5.605 21 6.07 21 7 21h10c.93 0 1.395 0 1.776-.102a3 3 0 002.122-2.122C21 18.395 21 17.93 21 17M16.5 7.5S13.186 3 12 3 7.5 7.5 7.5 7.5M12 4v12"
         stroke={color}
         strokeWidth={1.5}
         strokeLinecap="round"
@@ -31,4 +31,4 @@ const Health: React.FC<IconProps> = ({
   );
 };
 
-export default Health;
+export default ImportFileIcon;

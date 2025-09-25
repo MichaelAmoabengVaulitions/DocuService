@@ -11,7 +11,6 @@ import {
   SUBSCRIPTION,
   WEBVIEW,
 } from "../ScreenNames";
-import AppTabs from "./AppTabs";
 import {
   SWITCH,
   TRANSPARENT_HEADER,

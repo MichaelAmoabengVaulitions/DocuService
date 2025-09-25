@@ -3,7 +3,7 @@ import Svg, { Path } from "react-native-svg";
 import { WHITE } from "../../theme/Colors";
 import { IconProps } from "./IconProps";
 
-const Health: React.FC<IconProps> = ({
+const Loading: React.FC<IconProps> = ({
   color = WHITE,
   size,
   style,
@@ -21,14 +21,13 @@ const Health: React.FC<IconProps> = ({
       {...props}
     >
       <Path
-        d="M14.5 7.5a5 5 0 10-10 0 5 5 0 0010 0zM2.5 19.5a7 7 0 0110-6.326M21.5 17v-2.5c-2 0-3.5-1-3.5-1s-1.5 1-3.5 1V17c0 3.5 3.5 4.5 3.5 4.5s3.5-1 3.5-4.5z"
+        d="M18.001 20A9.956 9.956 0 0112 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10c0 .863-.11 1.701-.315 2.5-.223.867-1.17 1.27-2.015.973-.718-.253-1.048-1.073-.868-1.813A7 7 0 1015.608 18"
         stroke={color}
         strokeWidth={1.5}
         strokeLinecap="round"
-        strokeLinejoin="round"
       />
     </Svg>
   );
 };
 
-export default Health;
+export default Loading;

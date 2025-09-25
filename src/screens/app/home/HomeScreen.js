@@ -9,6 +9,7 @@ import {
   BLACK_90,
   DARK_OVERLAY,
   DEFAULT_GRADIENT,
+  FOREST_GREEN,
   GREY_30,
   IOS_BLUE,
   LIGHT_GREEN,
@@ -54,6 +55,7 @@ import TemplateText from "../../../components/TemplateText";
 // import ProjectsCarousel from './components /ProjectsCarousel';
 // import EmergingBrandsCarousel from './components /EmergingBrandsCarousel';
 import DynamicIcon from "../../../components/icons/DynamicIcon";
+import { SCAN_LETTER } from "../../../navigation/ScreenNames";
 
 const TILE_GUTTER = 12; // space between tiles (matches TK feel)
 const TILE_WIDTH = (SCREEN_WIDTH - WRAPPER_MARGIN * 2 - TILE_GUTTER) / 2;
@@ -66,14 +68,15 @@ const HomeScreen = ({ navigation }) => {
       description:
         "Take a photo of an official letter. We detect the text, extract key fields, and start the analysis.",
       category: "Letters",
-      icon: "Immigration",
+      icon: "Scan",
+      onPress: () => navigation.navigate(SCAN_LETTER),
     },
     {
       title: "Import PDF",
       description:
         "Upload a PDF you received by email. We parse the text and prepare a summary with action points.",
       category: "Letters",
-      icon: "Finance",
+      icon: "ImportFile",
     },
     {
       title: "Your Next Steps",
@@ -97,7 +100,7 @@ const HomeScreen = ({ navigation }) => {
       icon: "Shopping",
     },
     {
-      title: "Privacy and Security",
+      title: "Privacy & Security",
       description:
         "Learn how data is stored in the EU and how originals are automatically deleted after 48 hours.",
       category: "Help",
@@ -115,6 +118,9 @@ const HomeScreen = ({ navigation }) => {
         vGradient
         gradientColors={DEFAULT_GRADIENT}
         height={SCREEN_HEIGHT * 0.38}
+        pt={HEADER_MARGIN}
+        gradientEndBalance={0.9}
+        gradientStartBalance={0.2}
       >
         <TemplateBox
           alignItems="center"
@@ -158,12 +164,13 @@ const HomeScreen = ({ navigation }) => {
             <TemplateBox
               key={index}
               style={[styles.tile, { width: TILE_WIDTH }]}
+              onPress={tool.onPress}
             >
               <TemplateBox style={styles.tileIconWrap}>
-                <DynamicIcon name={tool.icon} size={28} color={WHITE} />
+                <DynamicIcon name={tool.icon} size={34} color={FOREST_GREEN} />
               </TemplateBox>
 
-              <TemplateText style={styles.tileLabel} semiBold center size={18}>
+              <TemplateText style={styles.tileLabel} semiBold center size={16}>
                 {tool.title}
               </TemplateText>
             </TemplateBox>
@@ -181,10 +188,10 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flexGrow: 1,
-    paddingTop: HEADER_MARGIN,
+    //paddingTop: HEADER_MARGIN,
   },
   heroImage: {
-    width: 290,
+    width: 340,
     height: 260,
     resizeMode: "contain",
     alignSelf: "flex-end",
@@ -200,8 +207,8 @@ const styles = StyleSheet.create({
   tile: {
     height: 150,
     marginBottom: TILE_GUTTER,
-    backgroundColor: BLACK_90, // TK-like dark tile
-    borderColor: WHITE_20, // subtle hairline
+    backgroundColor: WHITE_20,
+    borderColor: WHITE_20,
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 14,
     alignItems: "center",
