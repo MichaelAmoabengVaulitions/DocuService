@@ -15,7 +15,9 @@ import {
   LIGHT_GREEN,
   TRANSPARENT,
   WHITE,
+  WHITE_10,
   WHITE_20,
+  WHITE_30,
   WHITE_50,
   WHITE_60,
   WHITE_80,
@@ -28,7 +30,7 @@ import {
   WRAPPED_SCREEN_WIDTH,
   WRAPPER_MARGIN,
 } from "../../../theme/Layout";
-import homeHeroImage from "../../../../assets/images/home/home-hero.png";
+import homeHeroImage from "../../../../assets/images/summary-header.png";
 //import Greeting from './components /Greeting';
 import useAuthContext from "../../../hooks/auth/useAuthContext";
 // import RecommendedBrandsCarousel from './components /RecommendedBrandsCarousel';
@@ -79,7 +81,7 @@ const HomeScreen = ({ navigation }) => {
       icon: "ImportFile",
     },
     {
-      title: "Your Next Steps",
+      title: "Next Steps",
       description:
         "See tasks generated from your letters. Pay, send a draft email, or add reminders in one tap.",
       category: "Actions",
@@ -100,7 +102,7 @@ const HomeScreen = ({ navigation }) => {
       icon: "Shopping",
     },
     {
-      title: "Privacy & Security",
+      title: "Privacy Info",
       description:
         "Learn how data is stored in the EU and how originals are automatically deleted after 48 hours.",
       category: "Help",
@@ -114,14 +116,7 @@ const HomeScreen = ({ navigation }) => {
       contentContainerStyle={styles.contentContainer}
       showsVerticalScrollIndicator={false}
     >
-      <TemplateBox
-        vGradient
-        gradientColors={DEFAULT_GRADIENT}
-        height={SCREEN_HEIGHT * 0.38}
-        pt={HEADER_MARGIN}
-        gradientEndBalance={0.9}
-        gradientStartBalance={0.2}
-      >
+      <TemplateBox vGradient height={SCREEN_HEIGHT * 0.38} pt={10}>
         <TemplateBox
           alignItems="center"
           row
@@ -153,7 +148,7 @@ const HomeScreen = ({ navigation }) => {
             </TemplateText>
           </TemplateBox>
           <TemplateBox flex />
-          <TemplateBox absolute right={-40} top={-30}>
+          <TemplateBox absolute right={0} top={0} zIndex={-1}>
             <Image source={homeHeroImage} style={styles.heroImage} />
           </TemplateBox>
         </TemplateBox>
@@ -167,11 +162,15 @@ const HomeScreen = ({ navigation }) => {
               onPress={tool.onPress}
             >
               <TemplateBox style={styles.tileIconWrap}>
-                <DynamicIcon name={tool.icon} size={34} color={FOREST_GREEN} />
+                <DynamicIcon name={tool.icon} size={34} color={WHITE_60} />
               </TemplateBox>
 
-              <TemplateText style={styles.tileLabel} semiBold center size={16}>
+              <TemplateText style={styles.tileLabel} medium size={18}>
                 {tool.title}
+              </TemplateText>
+
+              <TemplateText size={14} numberOfLines={2} color={WHITE_30}>
+                {tool.description}
               </TemplateText>
             </TemplateBox>
           ))}
@@ -191,10 +190,10 @@ const styles = StyleSheet.create({
     //paddingTop: HEADER_MARGIN,
   },
   heroImage: {
-    width: 340,
-    height: 260,
+    width: "100%",
+    height: "100%",
     resizeMode: "contain",
-    alignSelf: "flex-end",
+    // alignSelf: "flex-end",
   },
   gridWrapper: {
     marginHorizontal: WRAPPER_MARGIN,
@@ -205,13 +204,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between", // ensures 2 columns with even gap
   },
   tile: {
-    height: 150,
+    height: 170,
     marginBottom: TILE_GUTTER,
-    backgroundColor: WHITE_20,
+    backgroundColor: WHITE_10,
     borderColor: WHITE_20,
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 14,
-    alignItems: "center",
+    padding: 16,
+    // alignItems: "center",
     justifyContent: "center",
   },
   tileIconWrap: {
@@ -224,6 +224,7 @@ const styles = StyleSheet.create({
   tileLabel: {
     fontSize: 16,
     fontWeight: "700",
+    marginBottom: 6,
   },
 });
 export default HomeScreen;

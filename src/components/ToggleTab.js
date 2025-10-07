@@ -1,127 +1,115 @@
-import React, { useState, useEffect } from 'react';
-import {
-    View, StyleSheet, Animated,
-} from 'react-native';
-import PropTypes from 'prop-types';
-import { WRAPPED_SCREEN_WIDTH, WRAPPER_MARGIN } from '../theme/Layout';
-import TemplateTouchable from './TemplateTouchable';
-import TemplateText from './TemplateText';
-import { BRAND_BLUE, WHITE } from '../theme/Colors';
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, Animated, ScrollView } from "react-native";
+import PropTypes, { shape } from "prop-types";
+import { WRAPPED_SCREEN_WIDTH, WRAPPER_MARGIN } from "../theme/Layout";
+import TemplateTouchable from "./TemplateTouchable";
+import TemplateText from "./TemplateText";
+import { BRAND_BLUE, FOREST_GREEN, WHITE, WHITE_10 } from "../theme/Colors";
 
 const ToggleTab = ({
-    tabs,
-    activeTab,
-    onPress,
-    backgroundColor,
-    activeBackgroundColor,
-    style,
-    titleStyle,
-    disabledTabs,
-    activeTextColor,
+  tabs,
+  activeTab,
+  onPress,
+  backgroundColor,
+  activeBackgroundColor,
+  style,
+  titleStyle,
+  disabledTabs,
+  activeTextColor,
 }) => {
-    const [translateValue] = useState(new Animated.Value(0));
-    const tabWidth = WRAPPED_SCREEN_WIDTH / tabs.length;
-    const activeIndex = tabs?.indexOf(activeTab);
+  const tabWidth = 130;
 
-    const animateSlider = (index) => {
-        Animated.spring(translateValue, {
-            toValue: index * tabWidth,
-            velocity: 10,
-            useNativeDriver: true,
-        }).start();
-    };
+  return (
+    <ScrollView
+      contentContainerStyle={[styles.container, style]}
+      horizontal
+      snapToInterval={tabWidth * 2}
+      decelerationRate="fast"
+      snapToAlignment="start"
+      showsHorizontalScrollIndicator={false}
+    >
+      {!!tabs?.length &&
+        tabs.map(({ label, value }, id) => (
+          <TemplateTouchable
+            key={value}
+            style={[
+              styles.tab,
 
-    useEffect(() => {
-        animateSlider(activeIndex);
-    }, [activeIndex, tabs]);
-
-    return (
-
-        <View style={[styles.container, { backgroundColor }, style]}>
-            <Animated.View
-                style={[
-                    styles.slider,
-                    {
-                        transform: [{ translateX: translateValue }],
-                        width: tabWidth,
-                        backgroundColor: activeBackgroundColor,
-                    },
-                ]}
-            />
-            {!!tabs?.length && tabs.map((tab, id) => (
-                <TemplateTouchable
-                    key={id.toString()}
-                    style={[
-                        styles.tab,
-                        disabledTabs && disabledTabs?.includes(tab) && { opacity: 0.5 },
-                        { width: tabWidth },
-                    ]}
-                    onPress={() => onPress(tab)}
-                    disabled={disabledTabs && disabledTabs?.includes(tab)}
-                >
-                    <TemplateText
-                        color={activeTab === tab ? activeTextColor : WHITE}
-                        semibold
-                        bold={activeTab === tab}
-                        numberOfLines={1}
-                        style={[styles.title, titleStyle]}
-                    >
-                        {tab}
-                    </TemplateText>
-                </TemplateTouchable>
-            ))}
-
-        </View>
-    );
+              disabledTabs && disabledTabs?.includes(value) && { opacity: 0.5 },
+              {
+                width: tabWidth,
+                marginRight: id !== tabs.length - 1 ? 10 : 0,
+                backgroundColor:
+                  activeTab !== value ? activeBackgroundColor : backgroundColor,
+                borderColor:
+                  activeTab !== value ? activeBackgroundColor : FOREST_GREEN,
+              },
+            ]}
+            onPress={() => onPress(value)}
+            disabled={disabledTabs && disabledTabs?.includes(value)}
+          >
+            <TemplateText
+              color={activeTab === value ? activeTextColor : WHITE}
+              semibold
+              bold={activeTab === value}
+              numberOfLines={1}
+              style={[styles.title, titleStyle]}
+            >
+              {label}
+            </TemplateText>
+          </TemplateTouchable>
+        ))}
+    </ScrollView>
+  );
 };
 
 export default ToggleTab;
 
 ToggleTab.propTypes = {
-    tabs: PropTypes.arrayOf(PropTypes.string).isRequired,
-    activeTab: PropTypes.string.isRequired,
-    onPress: PropTypes.func,
-    backgroundColor: PropTypes.string,
-    activeBackgroundColor: PropTypes.string,
-    titleStyle: PropTypes.shape({}),
-    disabledTabs: PropTypes.arrayOf(PropTypes.string),
-    activeTextColor: PropTypes.string,
-    style: PropTypes.shape({}),
+  tabs: PropTypes.arrayOf(
+    shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  activeTab: PropTypes.string.isRequired,
+  onPress: PropTypes.func,
+  backgroundColor: PropTypes.string,
+  activeBackgroundColor: PropTypes.string,
+  titleStyle: PropTypes.shape({}),
+  disabledTabs: PropTypes.arrayOf(PropTypes.string),
+  activeTextColor: PropTypes.string,
+  style: PropTypes.shape({}),
 };
 
 ToggleTab.defaultProps = {
-    onPress: null,
-    backgroundColor: BRAND_BLUE,
-    activeBackgroundColor: BRAND_BLUE,
-    titleStyle: null,
-    disabledTabs: [],
-    activeTextColor: WHITE,
-    style: null,
+  onPress: null,
+  backgroundColor: WHITE_10,
+  activeBackgroundColor: FOREST_GREEN,
+  titleStyle: null,
+  disabledTabs: [],
+  activeTextColor: WHITE,
+  style: null,
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        width: WRAPPED_SCREEN_WIDTH,
-        alignSelf: 'center',
-        height: 36,
-        borderRadius: 18,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginTop: WRAPPER_MARGIN * 1.5,
-    },
-    tab: {
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    slider: {
-        position: 'absolute',
-        height: '100%',
-        top: 0,
-        left: 0,
-        borderRadius: 18,
-    },
-    title: {
-        fontSize: 12,
-    },
+  container: {
+    alignSelf: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: WRAPPER_MARGIN * 1.5,
+    paddingLeft: WRAPPER_MARGIN,
+  },
+  tab: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    borderRadius: 20,
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+
+  title: {
+    fontSize: 12,
+  },
 });

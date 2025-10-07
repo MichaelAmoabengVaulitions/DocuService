@@ -38,6 +38,7 @@ import ModalBase from "../../../components/modals/ModalBase";
 //@ts-ignore
 import fileImageIcon from "../../../../assets/images/file.png";
 import { set } from "date-fns";
+import { SUMMARY } from "../../../navigation/ScreenNames";
 
 const TICK_MS = 80;
 const STEP_PER_TICK = 1;
@@ -206,7 +207,7 @@ const ScanLetterScreen = ({ navigation }: ScanLetterScreenProps) => {
             backgroundColor={WHITE_10}
             onPress={addDummyScan}
           >
-            <DynamicIcon name="Scan" size={88} color={FOREST_GREEN} />
+            <DynamicIcon name="Scan" size={60} color={FOREST_GREEN} />
           </TemplateBox>
           <TemplateText size={14}>Open scanner</TemplateText>
         </TemplateBox>
@@ -259,7 +260,8 @@ const ScanLetterScreen = ({ navigation }: ScanLetterScreenProps) => {
         <Button
           title="Generate summary"
           onPress={() => {
-            setIsScanCompletedModalVisible(true);
+            // setIsScanCompletedModalVisible(true);
+            navigation.navigate(SUMMARY);
           }}
           loading={false}
           disabled={false}
@@ -275,7 +277,12 @@ const ScanLetterScreen = ({ navigation }: ScanLetterScreenProps) => {
           }}
           loading={false}
           disabled={false}
-          style={{ marginTop: 30, width: "80%" }}
+          style={{
+            marginTop: 30,
+            width: "80%",
+            position: "absolute",
+            bottom: 60,
+          }}
           iconName="ImportFile"
           icon
         />
@@ -346,6 +353,7 @@ const ScanLetterScreen = ({ navigation }: ScanLetterScreenProps) => {
               title="View summary"
               onPress={() => {
                 setIsScanCompletedModalVisible(false);
+                navigation.navigate(SUMMARY);
               }}
               style={{ width: "90%", alignSelf: "center" }}
             />

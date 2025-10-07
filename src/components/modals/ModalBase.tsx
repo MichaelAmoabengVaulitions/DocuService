@@ -1,7 +1,6 @@
 import React from "react";
-import { StyleSheet, ViewStyle } from "react-native";
+import { StyleSheet, ViewStyle, Modal } from "react-native";
 
-import Modal from "react-native-modal";
 import {
   BLACK,
   BLACK_30,
@@ -10,10 +9,12 @@ import {
   DARK_FOREST_GREEN_20,
   DARK_FOREST_GREEN_30,
   DARK_FOREST_GREEN_50,
+  PRIMARY,
   WHITE,
   WHITE_10,
   WHITE_20,
 } from "../../theme/Colors";
+import TemplateBox from "../TemplateBox";
 
 export interface ModalBaseProps {
   onClose: () => void;
@@ -30,16 +31,12 @@ const ModalBase: React.FC<ModalBaseProps> = ({
   ...restProps
 }) => (
   <Modal
-    isVisible={isVisible}
-    onSwipeComplete={onClose}
-    onBackdropPress={onClose}
+    visible={isVisible}
     style={[styles.modal, style]}
-    animationIn="slideInUp"
-    animationOut="slideOutDown"
-    animationInTiming={500}
-    animationOutTiming={500}
-    backdropTransitionInTiming={500}
+    onRequestClose={onClose}
+    presentationStyle="pageSheet"
     {...restProps}
+    animationType="slide"
   >
     {children}
   </Modal>

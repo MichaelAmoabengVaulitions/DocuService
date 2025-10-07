@@ -26,6 +26,7 @@ export const EXPLORE = "Explore";
 export const BRAND_DETAILS = "BrandDetails";
 
 export const SCAN_LETTER = "ScanLetter";
+export const SUMMARY = "Summary";
 export const EXPLORE_STACK = "ExploreStack";
 
 export const OFFERS = "Offers";

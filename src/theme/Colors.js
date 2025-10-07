@@ -30,6 +30,7 @@ export const lightOrange = "rgba(255, 45, 85, 0.4)";
 export const PAYWALL_PRIMARY_BACKGROUND = "rgba(235, 235, 245, 0.05)";
 
 export const WHITE = "#FFFFFF";
+export const WHITE_5 = "rgba(255, 255, 255, 0.05)";
 export const WHITE_10 = "rgba(255, 255, 255, 0.1)";
 export const WHITE_20 = "rgba(255, 255, 255, 0.2)";
 export const WHITE_30 = "rgba(255, 255, 255, 0.3)";
@@ -42,7 +43,7 @@ export const WHITE_96 = "rgba(255, 255, 255, 0.96)";
 
 export const WHITE_70 = "rgba(255, 255, 255, 0.7)";
 
-export const PRIMARY = "#1B1A1D";
+export const PRIMARY = "#1A1A1A";
 export const SECONDARY = "#FFF";
 export const SECONDARY_DARK = "#524548";
 export const GRAY_SCALE_80 = "#66707A";

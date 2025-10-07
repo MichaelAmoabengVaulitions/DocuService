@@ -23,6 +23,13 @@ import Loading from "./Loading";
 import CheckIcon from "./CheckIcon";
 import Close from "./Close";
 import Add from "./Add";
+import Share from "./Share";
+import PdfIcon from "./PdfIcon";
+import Calendar from "./Calendar";
+import ExportFile from "./ExportFile";
+import TextToSpeech from "./TextToSpeech";
+import ArrowRight from "./ArrowRight";
+import Tick from "./Tick";
 
 export type DynamicIconName =
   | "Chat"
@@ -48,6 +55,13 @@ export type DynamicIconName =
   | "Check"
   | "Add"
   | "Close"
+  | "Share"
+  | "Pdf"
+  | "Calendar"
+  | "ExportFile"
+  | "TextToSpeech"
+  | "ArrowRight"
+  | "Tick"
   | null;
 
 export interface DynamicIconProps extends IconProps {
@@ -146,6 +160,13 @@ const IconList: IconListItem[] = [
     icon: Close,
   },
   { name: "Add", icon: Add },
+  { name: "Share", icon: Share },
+  { name: "Pdf", icon: PdfIcon },
+  { name: "Calendar", icon: Calendar },
+  { name: "ExportFile", icon: ExportFile },
+  { name: "TextToSpeech", icon: TextToSpeech },
+  { name: "ArrowRight", icon: ArrowRight },
+  { name: "Tick", icon: Tick },
 ];
 
 const DynamicIcon: React.FC<DynamicIconProps> = ({

@@ -14,7 +14,7 @@ export const IS_DARK: boolean = Appearance.getColorScheme() === "dark";
 export const SCREEN_HEIGHT: number = Dimensions.get("screen").height;
 export const SCREEN_WIDTH: number = Dimensions.get("screen").width;
 
-export const WRAPPER_MARGIN = 20;
+export const WRAPPER_MARGIN = wp(16);
 export const WRAPPED_SCREEN_WIDTH: number =
   SCREEN_WIDTH - wp(WRAPPER_MARGIN * 2);
 

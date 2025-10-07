@@ -20,12 +20,14 @@ import {
   RESULTS_HISTORY,
   SCAN_LETTER,
   SCRIPTS_GENERATOR,
+  SUMMARY,
   UGCAI,
   UPDATE_PORTFOLIO,
   WEBVIEW,
 } from "../ScreenNames";
 import HomeScreen from "../../screens/app/home/HomeScreen";
 import ScanLetterScreen from "../../screens/app/home/ScanLetterScreen";
+import SummaryScreen from "../../screens/app/home/SummaryScreen";
 // import BrandDetailsScreen from '../../screens/app/explore/BrandDetailsScreen';
 // import ProjectDetailsScreen from '../../screens/app/explore/ProjectDetailsScreen';
 // import CurrentProjectDetailsScreen from '../../screens/app/offers/CurrentProjectDetailsScreen';
@@ -65,6 +67,16 @@ const HomeStack = () => (
       options={TRANSPARENT_HEADER}
       component={ScanLetterScreen}
     />
+    <Screen
+      name={SUMMARY}
+      options={TRANSPARENT_HEADER}
+      component={SummaryScreen}
+    />
+    {/* <Screen
+      name={SCAN_LETTER}
+      options={TRANSPARENT_HEADER}
+      component={ScanLetterScreen}
+    /> */}
     {/* <Screen
             name={BRAND_DETAILS}
             options={TRANSPARENT_HEADER}

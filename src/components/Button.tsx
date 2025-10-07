@@ -30,9 +30,9 @@ type ButtonProps = {
 };
 
 const Button: FC<ButtonProps> = ({
-  height = 44,
+  height = 48,
   width = SCREEN_WIDTH - 32,
-  color = DARK_FOREST_GREEN,
+  color = FOREST_GREEN,
   onPress,
   title = "Button",
   loading = false,
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 56,
+    borderRadius: 16,
     borderWidth: 1,
     borderColor: "#3F3F46",
     flexDirection: "row",
