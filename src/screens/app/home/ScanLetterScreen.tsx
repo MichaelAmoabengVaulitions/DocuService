@@ -21,6 +21,7 @@ import {
   WHITE_20,
   WHITE_30,
   WHITE_40,
+  WHITE_5,
 } from "../../../theme/Colors";
 import {
   HEADER_MARGIN,
@@ -45,7 +46,7 @@ const STEP_PER_TICK = 1;
 
 const GRID_GUTTER = 14;
 const TILE_WIDTH = (SCREEN_WIDTH - WRAPPER_MARGIN * 2 - GRID_GUTTER) / 2;
-const TILE_HEIGHT = 96;
+const TILE_HEIGHT = 100;
 
 type ScanLetterScreenProps = {
   navigation: any;
@@ -218,7 +219,6 @@ const ScanLetterScreen = ({ navigation }: ScanLetterScreenProps) => {
               key={document.id}
               style={styles.tile}
               pAll={10}
-              backgroundColor={WHITE_20}
               borderRadius={16}
               borderColor={WHITE_30}
               borderWidth={StyleSheet.hairlineWidth}
@@ -252,7 +252,7 @@ const ScanLetterScreen = ({ navigation }: ScanLetterScreenProps) => {
             style={[styles.tile, styles.addTile]}
             onPress={addDummyScan}
           >
-            <DynamicIcon name="Add" size={36} color={WHITE} />
+            <DynamicIcon name="Add" size={24} color={WHITE} />
           </TemplateBox>
         </TemplateBox>
       )}
@@ -395,7 +395,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: WHITE_30,
-    backgroundColor: WHITE_20,
+    backgroundColor: WHITE_10,
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 10,
@@ -416,8 +416,10 @@ const styles = StyleSheet.create({
   },
   addTile: {
     borderStyle: "dashed",
-    backgroundColor: TRANSPARENT,
+    backgroundColor: WHITE_10,
     marginLeft: 8,
+    width: 60,
+    height: 60,
   },
 });
 export default ScanLetterScreen;

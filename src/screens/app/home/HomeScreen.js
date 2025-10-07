@@ -162,7 +162,7 @@ const HomeScreen = ({ navigation }) => {
               onPress={tool.onPress}
             >
               <TemplateBox style={styles.tileIconWrap}>
-                <DynamicIcon name={tool.icon} size={34} color={WHITE_60} />
+                <DynamicIcon name={tool.icon} size={34} color={FOREST_GREEN} />
               </TemplateBox>
 
               <TemplateText style={styles.tileLabel} medium size={18}>

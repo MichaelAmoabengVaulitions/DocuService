@@ -11,13 +11,12 @@ import { AuthProvider } from "./src/context/AuthProvider";
 import { FeatureFlagProvider } from "./src/context/FeatureFlagsContext";
 import defaultFeatures from "./config/defaultFeatures";
 import { PAYWALL_PRIMARY_BACKGROUND } from "./src/theme/Colors";
-import { ProjectsProvider } from "./src/context/ProjectsProvider";
-import { ProjectApplicationProvider } from "./src/context/ProjectApplicationProvider";
+
 import config from "./config";
 import { CoreProvider } from "./src/context/core";
 import useSubscriptionConfig from "./src/hooks/subscription/useSubscriptionConfig";
 import { SubscriptionProvider } from "./src/screens/subscriptions/context/context";
-import { ChatsProvider } from "./src/context/ChatsProvider";
+
 import { isAndroid } from "./src/Utils/Platform";
 
 enableScreens();

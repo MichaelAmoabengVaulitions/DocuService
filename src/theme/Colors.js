@@ -12,7 +12,7 @@ export const BLACK_80 = `${BLACK}80`;
 export const BLACK_90 = `${BLACK}90`;
 export const BLACK_0_5 = `${BLACK}0.5`;
 
-export const lightGreen = "#34C759";
+export const lightGreen = "##B4E162";
 export const FOREST_GREEN = "#588157";
 export const DARK_FOREST_GREEN = "#1b4332";
 export const DARK_FOREST_GREEN_10 = "rgba(27, 67, 50, 0.1)";
