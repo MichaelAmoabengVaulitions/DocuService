@@ -74,9 +74,8 @@ const HomeScreen = ({ navigation }) => {
       onPress: () => navigation.navigate(SCAN_LETTER),
     },
     {
-      title: "Import PDF",
-      description:
-        "Upload a PDF you received by email. We parse the text and prepare a summary with action points.",
+      title: "Compare Versions",
+      description: "Compare different versions of documents side by side.",
       category: "Letters",
       icon: "ImportFile",
     },
@@ -94,20 +93,6 @@ const HomeScreen = ({ navigation }) => {
       category: "History",
       icon: "Family",
     },
-    {
-      title: "Explain Terms",
-      description:
-        "Plain-language meanings for common fields in German letters.",
-      category: "Help",
-      icon: "Shopping",
-    },
-    {
-      title: "Privacy Info",
-      description:
-        "Learn how data is stored in the EU and how originals are automatically deleted after 48 hours.",
-      category: "Help",
-      icon: "Health",
-    },
   ];
 
   return (
@@ -116,7 +101,7 @@ const HomeScreen = ({ navigation }) => {
       contentContainerStyle={styles.contentContainer}
       showsVerticalScrollIndicator={false}
     >
-      <TemplateBox vGradient height={SCREEN_HEIGHT * 0.38} pt={10}>
+      <TemplateBox height={SCREEN_HEIGHT * 0.38} pt={10}>
         <TemplateBox
           alignItems="center"
           row
