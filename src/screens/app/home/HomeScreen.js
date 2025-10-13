@@ -21,6 +21,8 @@ import TemplateText from "../../../components/TemplateText";
 import DynamicIcon from "../../../components/icons/DynamicIcon";
 import {
   ALL_DOCUMENT_SUMMARIES,
+  NOTIFICATIONS,
+  PROFILE_SETTINGS,
   SCAN_DOCUMENT,
   SUMMARY,
 } from "../../../navigation/ScreenNames";
@@ -211,10 +213,13 @@ const HomeScreen = ({ navigation }) => {
           </TemplateBox>
           <TemplateBox flex />
           <TemplateBox row alignItems="center" justifyContent="space-between">
-            <TemplateBox mr={12}>
+            <TemplateBox
+              mr={12}
+              onPress={() => navigation.navigate(NOTIFICATIONS)}
+            >
               <DynamicIcon name={"Bell"} color={WHITE_70} size={24} />
             </TemplateBox>
-            <TemplateBox>
+            <TemplateBox onPress={() => navigation.navigate(PROFILE_SETTINGS)}>
               <DynamicIcon name={"Profile"} color={WHITE_70} size={30} />
             </TemplateBox>
           </TemplateBox>

@@ -8,6 +8,8 @@ import {
 import {
   ALL_DOCUMENT_SUMMARIES,
   HOME,
+  NOTIFICATIONS,
+  PROFILE_SETTINGS,
   SCAN_DOCUMENT,
   SUMMARY,
 } from "../ScreenNames";
@@ -15,6 +17,8 @@ import HomeScreen from "../../screens/app/home/HomeScreen";
 import ScanDocument from "../../screens/app/home/ScanDocumentScreen";
 import SummaryScreen from "../../screens/app/home/SummaryScreen";
 import AllDocumentsScreen from "../../screens/app/home/AllDocumentsScreen";
+import ProfileScreen from "../../screens/app/home/ProfileScreen";
+import NotificationsScreen from "../../screens/app/home/NotificationsScreen";
 
 const Stack = createStackNavigator();
 const { Navigator, Screen } = Stack;
@@ -48,6 +52,16 @@ const HomeStack = () => (
       name={ALL_DOCUMENT_SUMMARIES}
       options={TRANSPARENT_HEADER}
       component={AllDocumentsScreen}
+    />
+    <Screen
+      name={PROFILE_SETTINGS}
+      options={TRANSPARENT_HEADER}
+      component={ProfileScreen}
+    />
+    <Screen
+      name={NOTIFICATIONS}
+      options={TRANSPARENT_HEADER}
+      component={NotificationsScreen}
     />
   </Navigator>
 );

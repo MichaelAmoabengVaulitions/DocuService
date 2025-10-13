@@ -118,3 +118,5 @@ export const BRAND_EVENT_DETAILS_SCREEN = "BrandEventDetailsScreen";
 export const SCAN_DOCUMENT = "ScanDocument";
 export const SUMMARY = "Summary";
 export const ALL_DOCUMENT_SUMMARIES = "AllDocumentSummaries";
+export const PROFILE_SETTINGS = "ProfileSettings";
+export const NOTIFICATIONS = "Notifications";
