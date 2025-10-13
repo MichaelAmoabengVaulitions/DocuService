@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, ScrollView, Image } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
 import { WRAPPED_SCREEN_WIDTH, WRAPPER_MARGIN } from "../../../theme/Layout";
 import {
   BLACK,
@@ -21,7 +21,6 @@ import Button from "../../../components/Button";
 import dummyRecentLetters from "../../../consts/dummyRecentLetters.json";
 import { SUMMARY } from "../../../navigation/ScreenNames";
 //@ts-ignore
-import documentsImage from "../../../../assets/images/documents.png";
 
 const FilterModal = ({
   visible,
@@ -140,7 +139,7 @@ const AllDocumentsScreen = ({ navigation }: AllDocumentsScreenProps) => {
               navigation.navigate(SUMMARY, { letterId: letter.id })
             }
           >
-            <Image source={documentsImage} style={{ height: 80, width: 80 }} />
+            <DynamicIcon name={"File"} color={WHITE} size={30} />
             <TemplateBox flex ml={12} justifyContent="center">
               <TemplateText size={16} bold color={WHITE_60}>
                 {letter.title}

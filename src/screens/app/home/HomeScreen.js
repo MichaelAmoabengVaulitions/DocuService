@@ -345,7 +345,7 @@ const HomeScreen = ({ navigation }) => {
           borderColor={WHITE_20}
           onPress={() => navigation.navigate(SUMMARY, { letterId: letter.id })}
         >
-          <DynamicIcon name={"File"} color={WHITE} size={26} />
+          <DynamicIcon name={"File"} color={WHITE} size={30} />
           <TemplateBox flex ml={12} justifyContent="center">
             <TemplateText size={16} semiBold color={WHITE_60}>
               {letter.title}

@@ -1,32 +1,17 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  Alert,
-  ScrollView,
-  Image,
-} from "react-native";
+import { StyleSheet, Alert, ScrollView } from "react-native";
 import * as Progress from "react-native-progress";
 import {
   BLACK,
-  BLACK_80,
-  BLACK_SECONDARY,
   DARK_FOREST_GREEN,
   FOREST_GREEN,
-  GRAY_SCALE_80,
-  TRANSPARENT,
   WHITE,
   WHITE_10,
   WHITE_20,
   WHITE_30,
   WHITE_40,
-  WHITE_5,
 } from "../../../theme/Colors";
 import {
-  HEADER_MARGIN,
-  IS_ANDROID,
-  SCREEN_HEIGHT,
   SCREEN_WIDTH,
   WRAPPED_SCREEN_WIDTH,
   WRAPPER_MARGIN,
@@ -37,8 +22,6 @@ import TemplateText from "../../../components/TemplateText";
 import Button from "../../../components/Button";
 import ModalBase from "../../../components/modals/ModalBase";
 //@ts-ignore
-import fileImageIcon from "../../../../assets/images/file.png";
-import { set } from "date-fns";
 import { SUMMARY } from "../../../navigation/ScreenNames";
 
 const TICK_MS = 80;
@@ -225,7 +208,7 @@ const ScanDocumentScreen = ({ navigation }: ScanLetterScreenProps) => {
               alignItems="center"
               justifyContent="center"
             >
-              <Image source={fileImageIcon} style={styles.fileIcon} />
+              <DynamicIcon name={"File"} color={WHITE} size={26} />
 
               <TemplateText
                 size={14}
@@ -246,14 +229,21 @@ const ScanDocumentScreen = ({ navigation }: ScanLetterScreenProps) => {
               </TemplateBox>
             </TemplateBox>
           ))}
-
-          {/* Add tile keeps the grid even when the count is odd */}
-          <TemplateBox
-            style={[styles.tile, styles.addTile]}
-            onPress={addDummyScan}
-          >
-            <DynamicIcon name="Add" size={24} color={WHITE} />
-          </TemplateBox>
+        </TemplateBox>
+      )}
+      {scannedDocuments?.length > 0 && (
+        <TemplateBox
+          onPress={addDummyScan}
+          ph={16}
+          pv={10}
+          borderRadius={30}
+          borderWidth={1}
+          borderColor={WHITE_30}
+          mb={20}
+        >
+          <TemplateText color={WHITE} size={16} medium>
+            + Add another document
+          </TemplateText>
         </TemplateBox>
       )}
       {scannedDocuments?.length > 0 && (
