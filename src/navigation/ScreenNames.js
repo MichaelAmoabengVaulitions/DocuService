@@ -12,21 +12,12 @@ export const HOME = "Home";
 export const HOME_STACK = "HomeStack";
 export const FEEDS = "Feeds";
 export const PROFILE = "Portfolio";
-
 export const SETTINGS = "Settings";
-
 export const UPDATE_PORTFOLIO = "UpdatePortfolio";
-
 export const FEEDS_STACK = "FeedsStack";
-
 export const PROFILE_STACK = "ProfileStack";
-
 export const EXPLORE = "Explore";
-
 export const BRAND_DETAILS = "BrandDetails";
-
-export const SCAN_LETTER = "ScanLetter";
-export const SUMMARY = "Summary";
 export const EXPLORE_STACK = "ExploreStack";
 
 export const OFFERS = "Offers";
@@ -123,3 +114,7 @@ export const BRAND_EVENTS_SCREEN = "BrandEventsScreen";
 export const BRAND_EVENTS_COMPLETED_SCREEN = "BrandEventsCompletedScreen";
 
 export const BRAND_EVENT_DETAILS_SCREEN = "BrandEventDetailsScreen";
+
+export const SCAN_DOCUMENT = "ScanDocument";
+export const SUMMARY = "Summary";
+export const ALL_DOCUMENT_SUMMARIES = "AllDocumentSummaries";

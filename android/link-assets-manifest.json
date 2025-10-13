@@ -2,6 +2,22 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "assets/fonts/NotoSerif-Bold.ttf",
+      "sha1": "aebe3595f50e4a74b35ae0356b29eec989014455"
+    },
+    {
+      "path": "assets/fonts/NotoSerif-Medium.ttf",
+      "sha1": "7e2a2aee376652d50db141435285e2173e71374d"
+    },
+    {
+      "path": "assets/fonts/NotoSerif-Regular.ttf",
+      "sha1": "c8fe04e5bb2d530b93b46b60ec50a6c1ed2da150"
+    },
+    {
+      "path": "assets/fonts/NotoSerif-SemiBold.ttf",
+      "sha1": "4396db2cedb7e75162497d9bf5b7588d43a29aa0"
+    },
+    {
       "path": "assets/fonts/Poppins-Light.ttf",
       "sha1": "e247a92158e112f8bf7b638c8d95381d66b00dbb"
     },

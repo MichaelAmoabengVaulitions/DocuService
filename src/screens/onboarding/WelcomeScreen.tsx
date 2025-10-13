@@ -1,31 +1,26 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet } from "react-native";
 import { FlatList } from "react-native";
 import {
   BLACK,
   DEFAULT_GRADIENT,
   GRAY_SCALE_80,
-  PRIMARY,
-  SECONDARY,
   WHITE,
   WHITE_10,
 } from "../../theme/Colors";
 import TemplateText from "../../components/TemplateText";
 import {
-  HEADER_MARGIN,
+  SCREEN_HEIGHT,
   SCREEN_WIDTH,
   WRAPPED_SCREEN_WIDTH,
 } from "../../theme/Layout";
-import BrandLogo from "../../../assets/svgs/BrandLogo";
 import TemplateBox from "../../components/TemplateBox";
-import useFeatureFlags from "../../hooks/featureFlags/useFeatureFlags";
 import OnboardingCarousel from "../../components/carousels/OnboardingCarousel";
 import { ONBOARDING } from "../../navigation/ScreenNames";
 import { wp } from "../../Utils/getResponsiveSize";
 import Box from "../../components/Box";
 import { StackScreenProps } from "@react-navigation/stack";
 //@ts-ignore
-import welcomeBackground from "../../../assets/images/onboarding/WelcomeBg.png";
 type RootStackParamList = {
   WelcomeScreen: undefined;
   onboarding: undefined;
@@ -81,17 +76,17 @@ const WelcomeScreen: React.FC<WelcomeScreen> = ({ navigation }) => {
       >
         <TemplateText size={14}>Skip</TemplateText>
       </Box>
-      <Box height={504} width={SCREEN_WIDTH} mt={HEADER_MARGIN}>
+      {/* <Box height={504} width={SCREEN_WIDTH} mt={HEADER_MARGIN}>
         <Image
           source={welcomeBackground}
           style={{ width: "100%", height: "100%" }}
           resizeMode="contain"
         />
-      </Box>
+      </Box> */}
       <Box
         pb={40}
         absolute
-        bottom={40}
+        bottom={SCREEN_HEIGHT * 0.3}
         justifyContent="center"
         alignItems="center"
         width={SCREEN_WIDTH}

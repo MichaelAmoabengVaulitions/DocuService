@@ -120,7 +120,7 @@ const getStepFromProgress = (progress: number): Step => {
   };
 };
 
-const ScanLetterScreen = ({ navigation }: ScanLetterScreenProps) => {
+const ScanDocumentScreen = ({ navigation }: ScanLetterScreenProps) => {
   const [scannedDocuments, setScannedDocuments] = useState<Array<any>>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -422,4 +422,4 @@ const styles = StyleSheet.create({
     height: 60,
   },
 });
-export default ScanLetterScreen;
+export default ScanDocumentScreen;

@@ -30,6 +30,9 @@ import ExportFile from "./ExportFile";
 import TextToSpeech from "./TextToSpeech";
 import ArrowRight from "./ArrowRight";
 import Tick from "./Tick";
+import Filter from "./Filter";
+import CircleIcon from "./CircleIcon";
+import FileIcon from "./FileIcon";
 
 export type DynamicIconName =
   | "Chat"
@@ -62,6 +65,9 @@ export type DynamicIconName =
   | "TextToSpeech"
   | "ArrowRight"
   | "Tick"
+  | "Filter"
+  | "Circle"
+  | "File"
   | null;
 
 export interface DynamicIconProps extends IconProps {
@@ -167,6 +173,9 @@ const IconList: IconListItem[] = [
   { name: "TextToSpeech", icon: TextToSpeech },
   { name: "ArrowRight", icon: ArrowRight },
   { name: "Tick", icon: Tick },
+  { name: "Filter", icon: Filter },
+  { name: "Circle", icon: CircleIcon },
+  { name: "File", icon: FileIcon },
 ];
 
 const DynamicIcon: React.FC<DynamicIconProps> = ({

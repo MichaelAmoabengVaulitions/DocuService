@@ -1,46 +1,27 @@
-import React, { useState, useEffect, useMemo, useLayoutEffect } from "react";
-import { StyleSheet, ScrollView, Alert, Image, Switch } from "react-native";
-
-import {
-  IS_ANDROID,
-  WRAPPED_SCREEN_WIDTH,
-  WRAPPER_MARGIN,
-} from "../../../theme/Layout";
+import React, { useState, useMemo, useLayoutEffect } from "react";
+import { StyleSheet, ScrollView, Alert, Switch } from "react-native";
+import { WRAPPED_SCREEN_WIDTH, WRAPPER_MARGIN } from "../../../theme/Layout";
 import {
   BLACK,
-  BLACK_0_5,
-  BLACK_40,
   BLACK_90,
-  DARK_FOREST_GREEN,
-  DARK_FOREST_GREEN_20,
   DARK_FOREST_GREEN_30,
-  DARK_FOREST_GREEN_40,
-  DARK_FOREST_GREEN_50,
-  DARK_OVERLAY,
   FOREST_GREEN,
   PRIMARY,
-  TRANSPARENT,
   WHITE,
   WHITE_10,
   WHITE_20,
-  WHITE_30,
-  WHITE_40,
   WHITE_5,
   WHITE_50,
   WHITE_60,
   WHITE_70,
 } from "../../../theme/Colors";
-
-import { wp } from "../../../Utils/getResponsiveSize";
 import TemplateText from "../../../components/TemplateText";
 import TemplateBox from "../../../components/TemplateBox";
 import DynamicIcon from "../../../components/icons/DynamicIcon";
 //@ts-ignore
-import documentImage from "../../../../assets/images/summary-header.png";
 import dummySummary from "../../../consts/dummyLetterSummary.json";
 import ToggleTab from "../../../components/ToggleTab";
 import ModalBase from "../../../components/modals/ModalBase";
-import { is } from "date-fns/locale";
 
 const ActionPlanItemModal = ({
   visible,
@@ -214,7 +195,7 @@ const ReminderModal = ({
 
           <TemplateBox>
             {DAYS_OF_WEEK.map((notificationDay, index) => (
-              <TemplateBox>
+              <TemplateBox key={index.toString()}>
                 <TemplateBox
                   row
                   alignItems="center"
@@ -405,7 +386,13 @@ const SummaryScreen = ({ navigation }: SummaryScreenProps) => {
         {(activeTab === toggleTabs[0].value ||
           activeTab === toggleTabs[1].value) && (
           <TemplateBox ph={WRAPPER_MARGIN} mb={24}>
-            <TemplateText color={WHITE_60} size={16} lineHeight={30} mb={16}>
+            <TemplateText
+              color={WHITE_60}
+              size={16}
+              lineHeight={30}
+              mb={16}
+              secondary
+            >
               {filteredContent}
             </TemplateText>
           </TemplateBox>
@@ -463,7 +450,7 @@ const SummaryScreen = ({ navigation }: SummaryScreenProps) => {
             selfCenter
           >
             {filteredContent?.map((item: any, index: number) => (
-              <TemplateBox>
+              <TemplateBox key={`checklist-item-${index}`}>
                 <TemplateBox
                   row
                   alignItems="center"
@@ -490,20 +477,13 @@ const SummaryScreen = ({ navigation }: SummaryScreenProps) => {
                   <TemplateBox flex />
 
                   <TemplateBox>
-                    {index < filteredContent.length - 3 ? (
-                      <DynamicIcon name={"Tick"} size={20} color={WHITE_60} />
-                    ) : (
-                      <TemplateBox
-                        pv={8}
-                        ph={12}
-                        borderRadius={12}
-                        backgroundColor={WHITE_10}
-                      >
-                        <TemplateText color={WHITE_60} size={14}>
-                          Pending
-                        </TemplateText>
-                      </TemplateBox>
-                    )}
+                    <DynamicIcon
+                      name={
+                        index < filteredContent.length - 3 ? "Tick" : "Circle"
+                      }
+                      size={20}
+                      color={WHITE_60}
+                    />
                   </TemplateBox>
                 </TemplateBox>
 

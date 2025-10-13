@@ -1,0 +1,271 @@
+{
+  "docs": [
+    {
+      "id": "ltr_gasag_700022055286",
+      "title": "GASAG Sperrrechnung",
+      "subtitle": "Urgent: €312.40 payable by 2025-10-15",
+      "sender": { "name": "GASAG AG", "icon": "Gas" },
+      "category": "utilities",
+      "type": "disconnection invoice (Sperrrechnung)",
+      "country": "DE",
+      "language": "de",
+      "issuedDate": "2025-09-03",
+      "receivedDate": "2025-09-28",
+      "dueDate": "2025-09-19",
+      "amount": { "value": 864.53, "currency": "EUR", "label": "amount due" },
+      "status": "urgent",
+      "riskLevel": 5,
+      "unread": false,
+      "summaryShort": "Pay to restore gas; reconnection requires installer check with NBB.",
+      "badges": [
+        { "label": "Payment", "tone": "danger" },
+        { "label": "Reconnection", "tone": "warning" }
+      ],
+      "highlights": [
+        { "label": "Account", "value": "200101719866" },
+        { "label": "Usage", "value": "17,705 kWh" }
+      ],
+      "nextStep": {
+        "label": "Pay now",
+        "deeplink": "app://letters/ltr_gasag_700022055286"
+      },
+      "checklistProgress": { "done": 1, "total": 4 },
+      "storage": {
+        "docId": "doc_gasag_sep_2025",
+        "pageCount": 12,
+        "thumbnailUrl": null
+      }
+    },
+    {
+      "id": "ltr_finanzamt_bescheid_2025",
+      "title": "Finanzamt Tax assessment",
+      "subtitle": "Urgent: €312.40 payable by 2025-10-15",
+      "sender": { "name": "Finanzamt Berlin", "icon": "Tax" },
+      "category": "tax",
+      "type": "Steuerbescheid (income tax)",
+      "country": "DE",
+      "language": "de",
+      "issuedDate": "2025-09-20",
+      "receivedDate": "2025-09-23",
+      "dueDate": "2025-10-15",
+      "amount": { "value": 312.4, "currency": "EUR", "label": "Nachzahlung" },
+      "status": "due_soon",
+      "riskLevel": 4,
+      "unread": true,
+      "summaryShort": "Tax underpayment; pay or file objection within the appeal window.",
+      "badges": [{ "label": "Payment", "tone": "warning" }],
+      "highlights": [
+        { "label": "Tax year", "value": "2024" },
+        { "label": "Kassenzeichen", "value": "1102-45-X7" }
+      ],
+      "nextStep": {
+        "label": "View payment options",
+        "deeplink": "app://letters/ltr_finanzamt_bescheid_2025"
+      },
+      "checklistProgress": { "done": 0, "total": 3 },
+      "storage": {
+        "docId": "doc_tax_2025_bescheid",
+        "pageCount": 6,
+        "thumbnailUrl": null
+      }
+    },
+    {
+      "id": "ltr_aok_missing_docs",
+      "title": "AOK. Missing documents for insurance registration",
+      "subtitle": "Send proof of residence and employment contract.",
+      "sender": { "name": "AOK Nordost", "icon": "Health" },
+      "category": "healthcare",
+      "type": "request for missing documents",
+      "country": "DE",
+      "language": "de",
+      "issuedDate": "2025-09-18",
+      "receivedDate": "2025-09-20",
+      "dueDate": "2025-10-05",
+      "amount": { "value": 0, "currency": "EUR", "label": null },
+      "status": "due_soon",
+      "riskLevel": 3,
+      "unread": false,
+      "summaryShort": "Send proof of residence and employment contract to complete enrollment.",
+      "badges": [{ "label": "Docs needed", "tone": "warning" }],
+      "highlights": [
+        { "label": "Customer ID", "value": "AOK-27451" },
+        { "label": "Requested", "value": "Meldebescheinigung; Arbeitsvertrag" }
+      ],
+      "nextStep": {
+        "label": "Upload documents",
+        "deeplink": "app://letters/ltr_aok_missing_docs"
+      },
+      "checklistProgress": { "done": 1, "total": 2 },
+      "storage": {
+        "docId": "doc_aok_sep_2025",
+        "pageCount": 2,
+        "thumbnailUrl": null
+      }
+    },
+    {
+      "id": "ltr_auslaenderbehoerde_extension",
+      "title": "Ausländerbehörde. Missing documents",
+      "subtitle": "Urgent: Submit required documents",
+      "sender": { "name": "LABO Berlin", "icon": "Immigration" },
+      "category": "immigration",
+      "type": "document request before appointment",
+      "country": "DE",
+      "language": "de",
+      "issuedDate": "2025-09-22",
+      "receivedDate": "2025-09-24",
+      "dueDate": "2025-10-20",
+      "amount": { "value": 0, "currency": "EUR", "label": null },
+      "status": "waiting",
+      "riskLevel": 4,
+      "unread": true,
+      "summaryShort": "Submit passport copy, biometric photo, proof of income before your extension slot.",
+      "badges": [{ "label": "Permit", "tone": "info" }],
+      "highlights": [
+        { "label": "Case ID", "value": "VISA-BE-90312" },
+        { "label": "Appointment", "value": "2025-10-28 09:30" }
+      ],
+      "nextStep": {
+        "label": "See required docs",
+        "deeplink": "app://letters/ltr_auslaenderbehoerde_extension"
+      },
+      "checklistProgress": { "done": 0, "total": 5 },
+      "storage": {
+        "docId": "doc_labo_oct_appointment",
+        "pageCount": 3,
+        "thumbnailUrl": null
+      }
+    },
+    {
+      "id": "ltr_landlord_nebenkosten_2024",
+      "title": "Landlord. Utilities settlement",
+      "subtitle": "Urgent: €145.80 payable by 2025-11-01",
+      "sender": { "name": "Hausverwaltung Müller", "icon": "Housing" },
+      "category": "housing",
+      "type": "Nebenkostenabrechnung",
+      "country": "DE",
+      "language": "de",
+      "issuedDate": "2025-09-25",
+      "receivedDate": "2025-09-27",
+      "dueDate": "2025-11-01",
+      "amount": { "value": 145.8, "currency": "EUR", "label": "Nachzahlung" },
+      "status": "info",
+      "riskLevel": 2,
+      "unread": false,
+      "summaryShort": "Annual service charge reconciliation shows a small balance due.",
+      "badges": [{ "label": "Housing", "tone": "info" }],
+      "highlights": [
+        { "label": "Period", "value": "2024" },
+        { "label": "Reference", "value": "EIN-52-10315" }
+      ],
+      "nextStep": {
+        "label": "Review & pay",
+        "deeplink": "app://letters/ltr_landlord_nebenkosten_2024"
+      },
+      "checklistProgress": { "done": 0, "total": 2 },
+      "storage": {
+        "docId": "doc_nebenkosten_2024",
+        "pageCount": 4,
+        "thumbnailUrl": null
+      }
+    },
+    {
+      "id": "ltr_bvg_fare_penalty",
+      "title": "BVG. Fare penalty",
+      "subtitle": "Pay  €145.80 by 2025-11-01.",
+      "sender": { "name": "BVG", "icon": "Transport" },
+      "category": "transport",
+      "type": "erhöhtes Beförderungsentgelt",
+      "country": "DE",
+      "language": "de",
+      "issuedDate": "2025-09-30",
+      "receivedDate": "2025-10-01",
+      "dueDate": "2025-10-07",
+      "amount": { "value": 60, "currency": "EUR", "label": "penalty" },
+      "status": "due_soon",
+      "riskLevel": 4,
+      "unread": true,
+      "summaryShort": "Pay within 7 days to avoid collection fees.",
+      "badges": [{ "label": "Penalty", "tone": "warning" }],
+      "highlights": [
+        { "label": "Control no.", "value": "EF-238715" },
+        { "label": "Journey", "value": "U5 Lichtenberg" }
+      ],
+      "nextStep": {
+        "label": "Pay penalty",
+        "deeplink": "app://letters/ltr_bvg_fare_penalty"
+      },
+      "checklistProgress": { "done": 0, "total": 1 },
+      "storage": {
+        "docId": "doc_bvg_oct",
+        "pageCount": 1,
+        "thumbnailUrl": null
+      }
+    },
+    {
+      "id": "ltr_bank_id_verification",
+      "title": "N26. Please verify your ID to keep account active",
+      "subtitle": "Upload passport to avoid account restrictions.",
+      "sender": { "name": "N26 Bank", "icon": "Bank" },
+      "category": "finance",
+      "type": "KYC reminder",
+      "country": "DE",
+      "language": "en",
+      "issuedDate": "2025-09-26",
+      "receivedDate": "2025-09-26",
+      "dueDate": "2025-10-10",
+      "amount": { "value": 0, "currency": "EUR", "label": null },
+      "status": "waiting",
+      "riskLevel": 3,
+      "unread": false,
+      "summaryShort": "Upload passport to avoid account restrictions.",
+      "badges": [{ "label": "KYC", "tone": "info" }],
+      "highlights": [
+        { "label": "Customer", "value": "MA-4821" },
+        { "label": "Channel", "value": "In-app video ID" }
+      ],
+      "nextStep": {
+        "label": "Start verification",
+        "deeplink": "app://letters/ltr_bank_id_verification"
+      },
+      "checklistProgress": { "done": 0, "total": 2 },
+      "storage": {
+        "docId": "doc_n26_kyc",
+        "pageCount": 1,
+        "thumbnailUrl": null
+      }
+    },
+    {
+      "id": "ltr_kita_coupon",
+      "title": "Jugendamt. Kita-Gutschein approval (info)",
+      "subtitle": "Bring the letter when registering with a Kita.",
+      "sender": { "name": "Bezirksamt Lichtenberg", "icon": "Other" },
+      "category": "other",
+      "type": "benefit approval",
+      "country": "DE",
+      "language": "de",
+      "issuedDate": "2025-09-14",
+      "receivedDate": "2025-09-16",
+      "dueDate": null,
+      "amount": { "value": 0, "currency": "EUR", "label": null },
+      "status": "resolved",
+      "riskLevel": 1,
+      "unread": false,
+      "summaryShort": "Childcare voucher granted; bring the letter when registering with a Kita.",
+      "badges": [{ "label": "Approved", "tone": "success" }],
+      "highlights": [
+        { "label": "Valid", "value": "2025-10-01 → 2026-09-30" },
+        { "label": "Child", "value": "A. Amoabeng" }
+      ],
+      "nextStep": {
+        "label": "Find a Kita",
+        "deeplink": "app://letters/ltr_kita_coupon"
+      },
+      "checklistProgress": { "done": 2, "total": 2 },
+      "storage": {
+        "docId": "doc_kita_ok",
+        "pageCount": 2,
+        "thumbnailUrl": null
+      }
+    }
+  ]
+}

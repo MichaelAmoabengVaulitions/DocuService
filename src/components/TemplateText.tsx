@@ -44,6 +44,7 @@ interface Props {
   mb?: number;
   fontFamily?: string;
   maxWidth?: number | string;
+  secondary?: boolean;
 }
 const TemplateText: FC<Props> = ({
   light,
@@ -77,9 +78,14 @@ const TemplateText: FC<Props> = ({
   mb,
   fontFamily,
   maxWidth,
+  secondary = false,
   ...restProps
 }) => {
   const textStyle = {} as any;
+
+  if (secondary) {
+    textStyle.fontFamily = "NotoSerif-Regular";
+  }
 
   if (light) {
     textStyle.fontWeight = "400";

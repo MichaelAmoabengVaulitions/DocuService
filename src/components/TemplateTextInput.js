@@ -2,13 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { TextInput, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 import Autocomplete from "react-native-autocomplete-input";
-import {
-  BLACK,
-  BLACK_SECONDARY,
-  GREY_70,
-  PRIMARY,
-  WHITE,
-} from "../theme/Colors";
+import { BLACK, GREY_70, WHITE, WHITE_20 } from "../theme/Colors";
 
 const TemplateTextInput = ({
   focus,
@@ -73,8 +67,8 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: BLACK,
     borderRadius: 30,
-    borderWidth: 1,
-    borderColor: "#3F3F46",
+    borderWidth: 0.6,
+    borderColor: WHITE_20,
     height: 54,
     paddingHorizontal: 16,
   },
