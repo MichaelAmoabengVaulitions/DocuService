@@ -12,13 +12,26 @@ export const BLACK_80 = `${BLACK}80`;
 export const BLACK_90 = `${BLACK}90`;
 export const BLACK_0_5 = `${BLACK}0.5`;
 
-export const lightGreen = "#34C759";
+export const lightGreen = "##B4E162";
+// TODO: rename this color
+export const FOREST_GREEN = "#007AFF";
+export const DARK_FOREST_GREEN = "#1b4332";
+export const DARK_FOREST_GREEN_10 = "rgba(27, 67, 50, 0.1)";
+export const DARK_FOREST_GREEN_20 = "rgba(27, 67, 50, 0.2)";
+export const DARK_FOREST_GREEN_30 = "rgba(27, 67, 50, 0.3)";
+export const DARK_FOREST_GREEN_40 = "rgba(27, 67, 50, 0.4)";
+export const DARK_FOREST_GREEN_50 = "rgba(27, 67, 50, 0.5)";
+export const DARK_FOREST_GREEN_60 = "rgba(27, 67, 50, 0.6)";
+export const DARK_FOREST_GREEN_70 = "rgba(27, 67, 50, 0.7)";
+export const DARK_FOREST_GREEN_80 = "rgba(27, 67, 50, 0.8)";
+export const DARK_FOREST_GREEN_90 = "rgba(27, 67, 50, 0.9)";
 
 export const lightOrange = "rgba(255, 45, 85, 0.4)";
 
 export const PAYWALL_PRIMARY_BACKGROUND = "rgba(235, 235, 245, 0.05)";
 
-export const WHITE = "white";
+export const WHITE = "#FFFFFF";
+export const WHITE_5 = "rgba(255, 255, 255, 0.05)";
 export const WHITE_10 = "rgba(255, 255, 255, 0.1)";
 export const WHITE_20 = "rgba(255, 255, 255, 0.2)";
 export const WHITE_30 = "rgba(255, 255, 255, 0.3)";
@@ -31,7 +44,7 @@ export const WHITE_96 = "rgba(255, 255, 255, 0.96)";
 
 export const WHITE_70 = "rgba(255, 255, 255, 0.7)";
 
-export const PRIMARY = "#1B1A1D";
+export const PRIMARY = "#1A1A1A";
 export const SECONDARY = "#FFF";
 export const SECONDARY_DARK = "#524548";
 export const GRAY_SCALE_80 = "#66707A";
@@ -41,6 +54,15 @@ export const GREEN = "rgba(0, 197, 102, 1)";
 export const BLUE = "#2D9CDB";
 
 export const IOS_BLUE = "#007AFF";
+export const IOS_BLUE_10 = "rgba(0, 122, 255, 0.1)";
+export const IOS_BLUE_20 = "rgba(0, 122, 255, 0.2)";
+export const IOS_BLUE_30 = "rgba(0, 122, 255, 0.3)";
+export const IOS_BLUE_40 = "rgba(0, 122, 255, 0.4)";
+export const IOS_BLUE_50 = "rgba(0, 122, 255, 0.5)";
+export const IOS_BLUE_60 = "rgba(0, 122, 255, 0.6)";
+export const IOS_BLUE_70 = "rgba(0, 122, 255, 0.7)";
+export const IOS_BLUE_80 = "rgba(0, 122, 255, 0.8)";
+export const IOS_BLUE_90 = "rgba(0, 122, 255, 0.9)";
 
 export const BLUE_SECONDARY = "#56CCF2";
 
@@ -76,10 +98,7 @@ export const SECONDARY_GRADIENT = [BLACK_20, BLACK_30, BLACK_60];
 
 export const YELLOW = "#FFF27C";
 
-export const DEFAULT_GRADIENT = [
-  "rgba(52, 7, 61, 0.1)",
-  "rgba(52, 7, 61, 0.3)",
-];
+export const DEFAULT_GRADIENT = [IOS_BLUE_30, IOS_BLUE_10];
 
 export const LIGHT_GREEN = "rgba(52, 199, 89, 0.3)";
 

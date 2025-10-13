@@ -1,47 +1,53 @@
-import React from 'react';
-import {
-    StyleSheet, ViewStyle
-} from 'react-native';
+import React from "react";
+import { StyleSheet, ViewStyle, Modal } from "react-native";
 
-import Modal from 'react-native-modal';
-import { BLACK_30 } from '../../theme/Colors';
+import {
+  BLACK,
+  BLACK_30,
+  BLACK_70,
+  BLACK_90,
+  DARK_FOREST_GREEN_20,
+  DARK_FOREST_GREEN_30,
+  DARK_FOREST_GREEN_50,
+  PRIMARY,
+  WHITE,
+  WHITE_10,
+  WHITE_20,
+} from "../../theme/Colors";
+import TemplateBox from "../TemplateBox";
 
 export interface ModalBaseProps {
-    closeOnPress:()=>void;
-    visible:boolean;
-    style?:ViewStyle | ViewStyle[] | null;
-    children?:any;
+  onClose: () => void;
+  isVisible: boolean;
+  style?: ViewStyle | ViewStyle[] | null;
+  children?: any;
 }
 
-const ModalBase:React.FC<ModalBaseProps> = ({
-    visible,
-    closeOnPress,
-    style,
-    children,
-    ...restProps
+const ModalBase: React.FC<ModalBaseProps> = ({
+  isVisible,
+  onClose,
+  style,
+  children,
+  ...restProps
 }) => (
-    <Modal
-        isVisible={visible}
-        onSwipeComplete={closeOnPress}
-        onBackdropPress={closeOnPress}
-        style={[styles.modal, style]}
-        animationIn="slideInUp"
-        animationOut="slideOutDown"
-        animationInTiming={500}
-        animationOutTiming={500}
-        backdropTransitionInTiming={500}
-        {...restProps}
-    >
-        {children}
-    </Modal>
+  <Modal
+    visible={isVisible}
+    style={[styles.modal, style]}
+    onRequestClose={onClose}
+    presentationStyle="pageSheet"
+    {...restProps}
+    animationType="slide"
+  >
+    {children}
+  </Modal>
 );
 
 const styles = StyleSheet.create({
-    modal: {
-        flex: 1,
-        margin: 0,
-        backgroundColor: BLACK_30,
-    },
+  modal: {
+    flex: 1,
+    margin: 0,
+    backgroundColor: BLACK,
+  },
 });
 
 export default ModalBase;

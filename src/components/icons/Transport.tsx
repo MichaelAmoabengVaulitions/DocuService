@@ -1,40 +1,40 @@
-import * as React from 'react';
-import Svg, { Path } from 'react-native-svg';
-import { WHITE } from '../../theme/Colors';
-import { IconProps } from './IconProps';
+import * as React from "react";
+import Svg, { Path } from "react-native-svg";
+import { WHITE } from "../../theme/Colors";
+import { IconProps } from "./IconProps";
 
 const Transport: React.FC<IconProps> = ({
-    color = WHITE,
-    size,
-    style,
-    ...props
+  color = WHITE,
+  size,
+  style,
+  ...props
 }) => {
-    const ratio = 24 / 24;
+  const ratio = 24 / 24;
 
-    return (
-        <Svg
-            width={size}
-            height={size && size / ratio}
-            style={style}
-            viewBox="0 0 24 24"
-            fill="none"
-            {...props}
-        >
-            <Path
-                d="M6 19l-2 2m14-2l2 2M9 15h.009m5.982 0H15"
-                stroke={color}
-                strokeWidth={1.5}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-            <Path
-                d="M5 9c4 4 10.5 4 14 0M5.273 7.894C6.094 3.716 7.23 3 11.454 3h1.091c4.225 0 5.36.716 6.182 4.894l.553 2.816c.755 3.84 1.132 5.76.032 7.025C18.212 19 16.142 19 12 19c-4.141 0-6.212 0-7.312-1.265-1.1-1.264-.723-3.185.032-7.025l.553-2.816z"
-                stroke={color}
-                strokeWidth={1.5}
-                strokeLinejoin="round"
-            />
-        </Svg>    
-    );
+  return (
+    <Svg
+      width={size}
+      height={size && size / ratio}
+      style={style}
+      viewBox="0 0 24 24"
+      fill="none"
+      {...props}
+    >
+      <Path
+        d="M7 11H6c-3.31 0-4 .69-4 4v3c0 3.31.69 4 4 4h12c3.31 0 4-.69 4-4v-3c0-2.211-.308-3.253-1.5-3.701M12 18h6"
+        stroke={color}
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M17.244 3.133c.447-.485.67-.728.908-.87a1.861 1.861 0 011.862-.027c.242.134.472.37.933.841.46.472.691.707.823.954a1.981 1.981 0 01-.028 1.905c-.138.243-.375.472-.85.93l-5.642 5.441c-1.494 1.442-2.42 1.741-4.49 1.687-.377-.01-.565-.015-.674-.139-.11-.124-.094-.316-.064-.7.137-1.767.449-2.673 1.652-3.978l5.57-6.044z"
+        stroke={color}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
 };
 
 export default Transport;

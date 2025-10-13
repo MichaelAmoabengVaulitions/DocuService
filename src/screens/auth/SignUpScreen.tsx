@@ -34,6 +34,7 @@ type RootStackParamList = {
 type SignUpScreen = StackScreenProps<RootStackParamList, "SignUpScreen">;
 
 const SignUpScreen: React.FC<SignUpScreen> = ({ navigation, route }) => {
+  //@ts-ignore
   const { mainDomain } = useConfig();
   const [email, setEmail] = useState("");
   const [emailTouched, setEmailTouched] = useState(false);

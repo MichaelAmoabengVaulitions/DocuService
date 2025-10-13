@@ -1,0 +1,445 @@
+{
+  "id": "1.0",
+  "title": "Gas disconnection bill (Sperrrechnung) — GASAG AG",
+  "classification": {
+    "type": "gas disconnection bill (Sperrrechnung)",
+    "domain": "utilities",
+    "intent": "collection of outstanding balance and reconnection conditions",
+    "confidenceScore": 0.96
+  },
+  "keyFactsSummary": {
+    "documentType": "Sperrechnung (Gas)",
+    "note": "Action needed: €864.53 due 2025-09-19 (ref 200101719866). Service resumes after full payment and installer check. Optional: send meter reading within 14 days.",
+    "legalReferences": [
+      "EnWG §40 Abs. 2 Nr. 13",
+      "EnWG §40a Abs. 2",
+      "EnergieStV §107",
+      "NDAV §18",
+      "CO2KostAufG §§6(2), 8(2)"
+    ],
+    "riskSummary": "Non-payment → debt collection; supply remains blocked until payment and functional check are completed."
+  },
+  "parties": {
+    "sender": {
+      "name": "GASAG AG",
+      "department": "Service",
+      "contacts": {
+        "phone": "030 7072 0000-0",
+        "email": "vertrag@gasag.de",
+        "address": "EUREF-Campus 23-24, 10829 Berlin; Postfach 97 02 13, 12702 Berlin",
+        "url": "gasag.de; gasag.de/kontakt"
+      },
+      "evidence": {
+        "quote": "Service Internet gasag.de Telefon 030 7072 0000-0 (Mo-Fr 8-18 Uhr) ... GASAG AG EUREF-Campus 23-24 10829 Berlin",
+        "page": 1
+      }
+    },
+    "recipient": {
+      "name": "Michael Amoabeng",
+      "identifiers": [
+        { "type": "Vertragskontonummer", "value": "200101719866" },
+        {
+          "type": "Verbrauchsstelle",
+          "value": "Einbecker Str. 52, V 1 L, 10315 Berlin"
+        }
+      ]
+    }
+  },
+  "keyInformation": {
+    "references": [
+      {
+        "label": "Rechnungsnummer",
+        "value": "700022055286",
+        "evidence": { "quote": "Rechnungsnummer: 700022055286", "page": 2 },
+        "confidenceScore": 0.98
+      },
+      {
+        "label": "Marktlokations-ID",
+        "value": "50055327389",
+        "evidence": { "quote": "Marktlokations-ID: 50055327389", "page": 2 },
+        "confidenceScore": 0.98
+      },
+      {
+        "label": "Messlokations-ID",
+        "value": "DE7000821031500000000004000217243",
+        "evidence": {
+          "quote": "Messlokations-ID: DE7000821031500000000004000217243",
+          "page": 2
+        },
+        "confidenceScore": 0.98
+      },
+      {
+        "label": "Zählernummer",
+        "value": "7AMX2103772341",
+        "evidence": { "quote": "Gas-Zählernummer: 7AMX2103772341", "page": 1 },
+        "confidenceScore": 0.98
+      }
+    ],
+    "amounts": [
+      {
+        "label": "amount_due",
+        "value": 864.53,
+        "currency": "EUR",
+        "purpose": "Sperrrechnung fällig",
+        "evidence": {
+          "quote": "Ihr zu zahlender Betrag 864,53 Euro ... fällig am 19.09.2025",
+          "page": 2
+        },
+        "confidenceScore": 0.99
+      },
+      {
+        "label": "total_charges_gross",
+        "value": 2141.63,
+        "currency": "EUR",
+        "purpose": "Gesamtentgelt Gaslieferung brutto",
+        "evidence": {
+          "quote": "Gesamtentgelt für Ihre Gaslieferung = 2.141,63",
+          "page": 2
+        },
+        "confidenceScore": 0.95
+      },
+      {
+        "label": "advance_payments_total",
+        "value": -1218.0,
+        "currency": "EUR",
+        "purpose": "Geleistete Abschlagszahlungen bis 29.08.25",
+        "evidence": {
+          "quote": "Ihre geleisteten Abschlagszahlungen ... = -1.218,00",
+          "page": 2
+        },
+        "confidenceScore": 0.95
+      },
+      {
+        "label": "other_payment",
+        "value": -59.1,
+        "currency": "EUR",
+        "purpose": "Sonstige Zahlung",
+        "evidence": {
+          "quote": "Buchungsrelevante sonstige Positionen ... Sonstige Zahlung -59,10",
+          "page": 3
+        },
+        "confidenceScore": 0.95
+      },
+      {
+        "label": "co2_costs_gross",
+        "value": 210.2,
+        "currency": "EUR",
+        "purpose": "Brutto-CO2-Kosten BEHG",
+        "evidence": { "quote": "Brutto-CO2-Kosten 210,20 €", "page": 8 },
+        "confidenceScore": 0.9
+      }
+    ],
+    "dates": [
+      {
+        "label": "invoice_date",
+        "value": "2025-09-03",
+        "kind": "issued",
+        "evidence": { "quote": "Rechnungsdatum: 03.09.2025", "page": 2 },
+        "confidenceScore": 0.99
+      },
+      {
+        "label": "supply_period_start",
+        "value": "2025-02-05",
+        "kind": "effective",
+        "evidence": {
+          "quote": "für den Zeitraum vom 05.02.2025 bis 29.08.2025",
+          "page": 1
+        },
+        "confidenceScore": 0.98
+      },
+      {
+        "label": "supply_period_end",
+        "value": "2025-08-29",
+        "kind": "effective",
+        "evidence": {
+          "quote": "für den Zeitraum vom 05.02.2025 bis 29.08.2025",
+          "page": 1
+        },
+        "confidenceScore": 0.98
+      }
+    ],
+    "deadlines": [
+      {
+        "label": "payment_due",
+        "value": "2025-09-19",
+        "derivedFrom": "explicit date in payment instructions",
+        "assumptions": null,
+        "evidence": {
+          "quote": "Bitte überweisen Sie den zu zahlenden Betrag bis zum 19.09.2025",
+          "page": 1
+        },
+        "confidenceScore": 0.99
+      },
+      {
+        "label": "optional_meter_reading_window_end",
+        "value": "2025-09-17",
+        "derivedFrom": "“in den nächsten 14 Tagen” from invoice date 03.09.2025",
+        "assumptions": "Window counted from invoice date.",
+        "evidence": {
+          "quote": "Dann teilen Sie uns bitte in den nächsten 14 Tagen Ihren aktuellen Zählerstand mit.",
+          "page": 6
+        },
+        "confidenceScore": 0.7
+      }
+    ],
+    "requiredDocuments": [
+      {
+        "name": "Aktueller Zählerstand (Foto optional)",
+        "format": "unknown",
+        "evidence": {
+          "quote": "teilen Sie uns ... Ihren aktuellen Zählerstand mit. Wir senden Ihnen dann gerne eine neue Abrechnung zu.",
+          "page": 6
+        },
+        "confidenceScore": 0.7
+      },
+      {
+        "name": "Schriftliche Bestätigung der Funktionsprüfung der Gasverbrauchsanlage",
+        "format": "original",
+        "evidence": {
+          "quote": "technisch einwandfreie Zustand ... nachgewiesen und schriftlich bestätigt",
+          "page": 11
+        },
+        "confidenceScore": 0.8
+      }
+    ],
+    "submissionChannels": [
+      {
+        "type": "portal",
+        "value": "gasag.de/kontakt; App (OneLink)",
+        "hours": null,
+        "evidence": {
+          "quote": "Kontakt gasag.de/kontakt ... https://onelink.to/meinegasag",
+          "page": 1
+        }
+      },
+      {
+        "type": "email",
+        "value": "vertrag@gasag.de",
+        "hours": null,
+        "evidence": { "quote": "per E-Mail vertrag@gasag.de", "page": 5 }
+      },
+      {
+        "type": "post",
+        "value": "GASAG-Abrechnung, Postfach 97 02 13, 12702 Berlin",
+        "hours": null,
+        "evidence": {
+          "quote": "per Post GASAG-Abrechnung, Postfach 97 02 13, 12702 Berlin",
+          "page": 5
+        }
+      },
+      {
+        "type": "phone",
+        "value": "030 7072 0000-0",
+        "hours": "Mo–Fr 08:00–18:00",
+        "evidence": {
+          "quote": "Telefon 030 7072 0000-0 (Mo-Fr 8-18 Uhr)",
+          "page": 1
+        }
+      },
+      {
+        "type": "in_person",
+        "value": "Kundenzentrum, EUREF-Campus 23-24, 10829 Berlin",
+        "hours": "see gasag.de",
+        "evidence": {
+          "quote": "in unserem Kundenzentrum (EUREF-Campus 23-24, 10829 Berlin) ... Öffnungszeiten finden Sie unter gasag.de.",
+          "page": 5
+        }
+      }
+    ],
+    "legalBasis": [
+      {
+        "citation": "§ 40a Abs. 2 EnWG (Hinweise zur Ablesung)",
+        "evidence": {
+          "quote": "Hinweise zur Ablesung gemäß § 40a Abs. 2 EnWG",
+          "page": 6
+        }
+      },
+      {
+        "citation": "§ 36 Abs. 2 EnWG (Grundversorgung)",
+        "evidence": {
+          "quote": "Ihr Grundversorger nach § 36 Abs. 2 Energiewirtschaftsgesetz",
+          "page": 6
+        }
+      },
+      {
+        "citation": "§ 18 NDAV (Versorgungsstörungen)",
+        "evidence": {
+          "quote": "Ansprüche wegen Versorgungsstörungen im Sinne von § 18 NDAV",
+          "page": 7
+        }
+      },
+      {
+        "citation": "§ 3 CO2KostAufG (Ausweispflichten)",
+        "evidence": {
+          "quote": "Ausweispflichten gem. § 3 Kohlendioxidkostenaufteilungsgesetz (CO2KostAufG)",
+          "page": 8
+        }
+      },
+      {
+        "citation": "EBeV / BEHG (CO2-Kosten)",
+        "evidence": { "quote": "Entgelte ... BEHG ... EBeV", "page": 6 }
+      },
+      {
+        "citation": "EnergieStV § 107 (Hinweispflichten)",
+        "evidence": {
+          "quote": "§ 107 Hinweispflichten bei Abgabe von Energieerzeugnissen (EnergieStV)",
+          "page": 6
+        }
+      }
+    ]
+  },
+  "actions": [
+    {
+      "id": "pay-balance",
+      "title": "Pay outstanding amount €864.53",
+      "description": "Transfer €864.53 using the stated IBAN/BIC and contractual account number as reference.",
+      "owner": "user",
+      "dueDate": "2025-09-19",
+      "leadTimeDays": 0,
+      "priority": 1,
+      "risk": 5,
+      "effort": 2,
+      "dependencies": [],
+      "documentsToPrepare": ["Transfer reference: 200101719866"],
+      "channel": ["portal"],
+      "evidence": {
+        "quote": "Bitte überweisen Sie ... bis zum 19.09.2025 ... IBAN: DE19 1002 0890 0002 6211 42 ... Verwendungszweck: 200101719866",
+        "page": 1
+      },
+      "confidenceScore": 0.99
+    },
+    {
+      "id": "book-functional-check",
+      "title": "Arrange functional check by a Vertragsinstallationsunternehmen",
+      "description": "Book a certified installer to verify the gas installation; obtain written confirmation on-site in presence of NBB representative if required.",
+      "owner": "third_party",
+      "dueDate": null,
+      "leadTimeDays": 3,
+      "priority": 2,
+      "risk": 4,
+      "effort": 3,
+      "dependencies": ["pay-balance"],
+      "documentsToPrepare": ["Written confirmation of functional test"],
+      "channel": ["phone", "in_person"],
+      "evidence": {
+        "quote": "Aufhebung der Schuldsperrung ... wenn der technisch einwandfreie Zustand ... vor Ort ... nachgewiesen und schriftlich bestätigt wird.",
+        "page": 11
+      },
+      "confidenceScore": 0.9
+    },
+    {
+      "id": "coordinate-reconnection",
+      "title": "Coordinate reconnection with NBB",
+      "description": "After payment and functional check, coordinate with NBB for reconnection and pay any reconnection fees.",
+      "owner": "office",
+      "dueDate": null,
+      "leadTimeDays": 1,
+      "priority": 2,
+      "risk": 3,
+      "effort": 2,
+      "dependencies": ["pay-balance", "book-functional-check"],
+      "documentsToPrepare": ["Payment receipt", "Installer confirmation"],
+      "channel": ["phone"],
+      "evidence": {
+        "quote": "Die Höhe der Wiederinbetriebnahmekosten ... NBB Netzgesellschaft ... Tel.: 030 7872-72 (Entstörungsdienst).",
+        "page": 7
+      },
+      "confidenceScore": 0.75
+    },
+    {
+      "id": "send-meter-reading",
+      "title": "Optionally submit current meter reading",
+      "description": "If you want billing based on actual usage, send the current meter reading within 14 days for a corrected invoice.",
+      "owner": "user",
+      "dueDate": "2025-09-17",
+      "leadTimeDays": 0,
+      "priority": 3,
+      "risk": 2,
+      "effort": 1,
+      "dependencies": [],
+      "documentsToPrepare": ["Current meter reading (photo)"],
+      "channel": ["portal", "email"],
+      "evidence": {
+        "quote": "Wünschen Sie dagegen eine Abrechnung nach tatsächlichem Verbrauch? Dann teilen Sie uns bitte in den nächsten 14 Tagen Ihren aktuellen Zählerstand mit.",
+        "page": 6
+      },
+      "confidenceScore": 0.7
+    },
+    {
+      "id": "seek-mediation-if-dispute",
+      "title": "Use complaint and mediation channels if needed",
+      "description": "If disputes remain after contacting GASAG, file with Schlichtungsstelle Energie.",
+      "owner": "user",
+      "dueDate": null,
+      "leadTimeDays": 0,
+      "priority": 4,
+      "risk": 2,
+      "effort": 2,
+      "dependencies": [],
+      "documentsToPrepare": ["Copies of correspondence", "Invoice"],
+      "channel": ["portal", "email", "post", "phone"],
+      "evidence": {
+        "quote": "Zur Beilegung von Streitigkeiten kann ... ein Schlichtungsverfahren bei der Schlichtungsstelle Energie beantragt werden ... GASAG ist zur Teilnahme ... verpflichtet.",
+        "page": 5
+      },
+      "confidenceScore": 0.85
+    }
+  ],
+  "checklist": [
+    {
+      "label": "Transfer €864.53 with reference 200101719866",
+      "relatedActionId": "pay-balance",
+      "status": "pending",
+      "confidenceScore": 0.99
+    },
+    {
+      "label": "Keep payment receipt",
+      "relatedActionId": "pay-balance",
+      "status": "pending",
+      "confidenceScore": 0.95
+    },
+    {
+      "label": "Book certified installer for functional check",
+      "relatedActionId": "book-functional-check",
+      "status": "pending",
+      "confidenceScore": 0.9
+    },
+    {
+      "label": "Obtain written confirmation of functional test",
+      "relatedActionId": "book-functional-check",
+      "status": "pending",
+      "confidenceScore": 0.85
+    },
+    {
+      "label": "Call NBB/GASAG to schedule reconnection",
+      "relatedActionId": "coordinate-reconnection",
+      "status": "pending",
+      "confidenceScore": 0.8
+    },
+    {
+      "label": "Option: submit current meter reading by 2025-09-17",
+      "relatedActionId": "send-meter-reading",
+      "status": "pending",
+      "confidenceScore": 0.7
+    }
+  ],
+  "summaryLong": "GASAG AG issued a gas disconnection bill (Sperrrechnung) to Michael Amoabeng for the supply point at Einbecker Str. 52, V 1 L, 10315 Berlin, covering 05.02.2025–29.08.2025. The invoice (no. 700022055286) is dated 03.09.2025 and shows total gross charges of €2,141.63 for 17,705 kWh over 206 days under tariff ERDGAS Komfort, less €1,218.00 in advance payments and a separate payment of €59.10, leaving €864.53 due. Payment must be made by 19.09.2025 via bank transfer to GASAG’s HypoVereinsbank account using Vertragskontonummer 200101719866 as the reference. This is a disconnection-related invoice; non-payment leads to the claim being handed to a debt collection agency. Reconnection is conditional on full settlement of all outstanding amounts plus network/operator reconnection fees and a successful functional check of the customer installation by a certified contractor (Vertragsinstallationsunternehmen), with written confirmation and, where required, the presence of an NBB representative. GASAG lists service and complaint channels (phone, portal, email, post) and provides information about your rights, including escalation to the Schlichtungsstelle Energie if issues remain unresolved after contacting GASAG. The invoice explains meter reading and estimation rules under EnWG §40a(2) and offers an option to submit a current meter reading within 14 days for a revised bill. The document includes identifiers (Marktlokations-ID 50055327389, Messlokations-ID DE7000…217243) and device data (Balgengaszähler G4, Zählernummer 7AMX2103772341). It also discloses CO2 cost components per BEHG/EBeV and provides addresses and working hours for service.",
+  "explanationDetailed": "Document type and purpose: This is a GASAG gas disconnection bill for a past consumption period. It settles charges and sets conditions for reconnection. Amounts and consumption: The total gross charges are €2,141.63 for 17,705 kWh. After subtracting advance and other payments, €864.53 remains due. Payment method and reference: Pay by bank transfer to the stated IBAN/BIC and include the contractual account number 200101719866 as reference so the payment posts correctly. Due date: 19.09.2025. Disconnection and reconnection: Supply remains blocked until you pay all amounts and pass a functional check of your installation. A certified installer must confirm the installation is technically sound; additional reconnection costs apply per NBB’s conditions. Optional meter reading: If you want billing based on an actual reading instead of estimated values, you can submit a current reading within 14 days of the invoice date; GASAG will issue a corrected bill. Support and complaints: Contact GASAG via phone, portal, email, post, or the customer center. If no satisfactory solution is reached, you can apply to the Schlichtungsstelle Energie for mediation. Legal references: The document cites EnWG §§36 and 40a, NDAV §18, CO2KostAufG §3, and BEHG/EBeV rules for CO2 costs.",
+  "risksAndConsequences": "If you miss the 19.09.2025 payment deadline, GASAG will transfer the claim to a debt collection agency. Gas supply remains blocked until you pay all amounts and complete the required functional check; reconnection and inspection costs apply and are payable by you to the installer and/or network operator.",
+  "openQuestions": [
+    "Exact amount of reconnection and inspection fees from NBB and the installer.",
+    "Preferred scheduling process and lead times for reconnection after payment.",
+    "Whether any installment plan is available for the outstanding balance."
+  ],
+  "assumptions": [
+    "The 14-day window for meter reading is counted from the invoice date 03.09.2025.",
+    "User prefers English output; proper names and German technical terms are kept as in the source."
+  ],
+  "provenance": {
+    "documentLanguage": "de",
+    "detectedLanguage": "de",
+    "translationConfidence": 0.98,
+    "receivedDate": null,
+    "processedAt": "2025-09-27"
+  }
+}

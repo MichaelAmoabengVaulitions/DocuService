@@ -1,21 +1,14 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import {
   BLACK,
   DEFAULT_GRADIENT,
   GRAY_SCALE_80,
-  PRIMARY,
-  SECONDARY,
-  SECONDARY_DARK,
   WHITE,
   WHITE_10,
 } from "../../theme/Colors";
 import TemplateText from "../../components/TemplateText";
-import {
-  HEADER_MARGIN,
-  SCREEN_WIDTH,
-  WRAPPED_SCREEN_WIDTH,
-} from "../../theme/Layout";
+import { SCREEN_WIDTH, WRAPPED_SCREEN_WIDTH } from "../../theme/Layout";
 
 import TemplateBox from "../../components/TemplateBox";
 import OnboardingCarousel from "../../components/carousels/OnboardingCarousel";
@@ -106,13 +99,13 @@ const OnboardingScreen: React.FC<OnboardingScreen> = ({ navigation }) => {
       >
         <TemplateText size={14}>Skip</TemplateText>
       </Box>
-      <Box height={404} width={SCREEN_WIDTH} mt={HEADER_MARGIN * 2}>
+      {/* <Box height={404} width={SCREEN_WIDTH} mt={HEADER_MARGIN * 2}>
         <Image
           source={onboardingContent[activeIndex]?.image}
           style={{ width: "100%", height: "100%" }}
           resizeMode="contain"
         />
-      </Box>
+      </Box> */}
       <Box pb={40} borderRadius={32} absolute bottom={40}>
         <TemplateBox width={SCREEN_WIDTH}>
           <OnboardingCarousel

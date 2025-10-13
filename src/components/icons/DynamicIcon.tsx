@@ -11,12 +11,28 @@ import Immigration from "./Immigration";
 import House from "./House";
 import Work from "./Work";
 import Health from "./Health";
-import Finance from "./Finance";
+import ImportFileIcon from "./ImportFileIcon";
 import Language from "./Language";
 import Transport from "./Transport";
 import Family from "./Family";
 import Shopping from "./Shopping";
 import DoubleArrowRight from "./DoubleArrowRight";
+import Scan from "./Scan";
+import InfoIcon from "./InfoIcon";
+import Loading from "./Loading";
+import CheckIcon from "./CheckIcon";
+import Close from "./Close";
+import Add from "./Add";
+import Share from "./Share";
+import PdfIcon from "./PdfIcon";
+import Calendar from "./Calendar";
+import ExportFile from "./ExportFile";
+import TextToSpeech from "./TextToSpeech";
+import ArrowRight from "./ArrowRight";
+import Tick from "./Tick";
+import Filter from "./Filter";
+import CircleIcon from "./CircleIcon";
+import FileIcon from "./FileIcon";
 
 export type DynamicIconName =
   | "Chat"
@@ -35,6 +51,23 @@ export type DynamicIconName =
   | "Family"
   | "Shopping"
   | "DoubleArrowRight"
+  | "Scan"
+  | "Info"
+  | "ImportFile"
+  | "Loading"
+  | "Check"
+  | "Add"
+  | "Close"
+  | "Share"
+  | "Pdf"
+  | "Calendar"
+  | "ExportFile"
+  | "TextToSpeech"
+  | "ArrowRight"
+  | "Tick"
+  | "Filter"
+  | "Circle"
+  | "File"
   | null;
 
 export interface DynamicIconProps extends IconProps {
@@ -89,8 +122,8 @@ const IconList: IconListItem[] = [
     icon: Health,
   },
   {
-    name: "Finance",
-    icon: Finance,
+    name: "ImportFile",
+    icon: ImportFileIcon,
   },
   {
     name: "Language",
@@ -112,6 +145,37 @@ const IconList: IconListItem[] = [
     name: "DoubleArrowRight",
     icon: DoubleArrowRight,
   },
+  {
+    name: "Scan",
+    icon: Scan,
+  },
+  {
+    name: "Info",
+    icon: InfoIcon,
+  },
+  {
+    name: "Loading",
+    icon: Loading,
+  },
+  {
+    name: "Check",
+    icon: CheckIcon,
+  },
+  {
+    name: "Close",
+    icon: Close,
+  },
+  { name: "Add", icon: Add },
+  { name: "Share", icon: Share },
+  { name: "Pdf", icon: PdfIcon },
+  { name: "Calendar", icon: Calendar },
+  { name: "ExportFile", icon: ExportFile },
+  { name: "TextToSpeech", icon: TextToSpeech },
+  { name: "ArrowRight", icon: ArrowRight },
+  { name: "Tick", icon: Tick },
+  { name: "Filter", icon: Filter },
+  { name: "Circle", icon: CircleIcon },
+  { name: "File", icon: FileIcon },
 ];
 
 const DynamicIcon: React.FC<DynamicIconProps> = ({
