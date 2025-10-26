@@ -18,10 +18,10 @@
       ]
     ],
     "android": {
-      "package": "com.anonymous.docuservice"
+      "package": "com.docuservice"
     },
     "ios": {
-      "bundleIdentifier": "com.anonymous.docuservice"
+      "bundleIdentifier": "com.docuservice"
     }
   }
 }

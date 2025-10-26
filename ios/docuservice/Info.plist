@@ -27,7 +27,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>com.anonymous.docuservice</string>
+          <string>com.docuservice</string>
         </array>
       </dict>
     </array>

@@ -1,4 +1,4 @@
-package com.anonymous.docuservice
+package com.docuservice
 import com.facebook.react.common.assets.ReactFontManager
 
 import android.app.Application
