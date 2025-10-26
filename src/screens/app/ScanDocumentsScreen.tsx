@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { StyleSheet, Alert, ScrollView } from "react-native";
 import * as Progress from "react-native-progress";
 import { SUMMARY } from "@/navigation/screenNames";
@@ -14,6 +14,14 @@ import TemplateText from "@/components/TemplateText";
 import Button from "@/components/Button";
 import ModalBase from "@/components/modals/ModalBase";
 
+import * as DocumentPicker from "expo-document-picker";
+import { Directory, File, Paths } from "expo-file-system";
+type ScannedDoc = {
+  id: string;
+  title: string;
+  fileName: string;
+  filePath: string; // persistent uri in app's document dir
+};
 const TICK_MS = 80;
 const STEP_PER_TICK = 1;
 
@@ -44,13 +52,6 @@ type Step = {
   title: string;
   description: string;
   durationMs: number; // simulation duration
-};
-
-type ScannedDoc = {
-  id: string;
-  title: string;
-  fileName: string;
-  filePath: string;
 };
 
 const STEPS: Step[] = [
@@ -100,7 +101,68 @@ const ScanDocumentScreen = ({ navigation }: ScanLetterScreenProps) => {
   const [scanCount, setScanCount] = useState(0);
   const [isScanCompletedModalVisible, setIsScanCompletedModalVisible] =
     useState(false);
+  const toTitle = (name: string) =>
+    name
+      .replace(/\.[^.]+$/, "")
+      .replace(/[_-]+/g, " ")
+      .replace(/\b\w/g, (m) => m.toUpperCase());
 
+  const handleImportFromFiles = async () => {
+    try {
+      const result = await DocumentPicker.getDocumentAsync({
+        multiple: true,
+        copyToCacheDirectory: true, // ensures immediate FS read access
+        type: [
+          "application/pdf",
+          "application/msword",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "text/plain",
+          "image/*",
+          "*/*",
+        ],
+      }); // returns { canceled, assets: [...] } on native
+      if (result.canceled || !result.assets?.length) return;
+
+      // Ensure persistent folder: <app>/Documents/Letters
+      const lettersDir = new Directory(Paths.document, "Letters");
+      try {
+        lettersDir.create(); // creates if missing
+      } catch {
+        /* no-op if it already exists */
+      }
+
+      const imported: ScannedDoc[] = result.assets.map((asset) => {
+        // Build persistent destination path: <Documents>/Letters/<original-name>
+        const src = new File(asset?.uri); // File can be constructed from DocumentPickerAsset
+        const dest = new File(lettersDir, asset.name || `file-${Date.now()}`);
+        try {
+          src.copy(dest); // copy from cache/provider into our app's documents dir
+        } catch (e) {
+          // Fallback: keep the original file if copy fails for any reason
+          return {
+            id: String(Date.now() + Math.random()),
+            title: toTitle(asset.name || "Document"),
+            fileName: asset.name || "document",
+            filePath: src.uri,
+          };
+        }
+        return {
+          id: String(Date.now() + Math.random()),
+          title: toTitle(dest.name),
+          fileName: dest.name,
+          filePath: dest.uri,
+        };
+      });
+
+      setScannedDocuments((prev) => [...imported, ...prev]);
+    } catch (err) {
+      Alert.alert(
+        "Import failed",
+        "Could not import document(s). Please try again."
+      );
+      console.warn("Import error", err);
+    }
+  };
   const addDummyScan = () => {
     const fileName = `finanzamt_letter_${scanCount}.pdf`;
     const filePath = `/Documents/Letters/${fileName}`;
@@ -222,18 +284,44 @@ const ScanDocumentScreen = ({ navigation }: ScanLetterScreenProps) => {
         </Box>
       )}
       {scannedDocuments?.length > 0 && (
-        <Box
-          onPress={addDummyScan}
-          ph={16}
-          pv={10}
-          borderRadius={30}
-          borderWidth={1}
-          borderColor={Colors.WHITE_30}
-          mb={20}
-        >
-          <TemplateText color={Colors.WHITE} size={16} medium>
-            + Add another document
+        <Box>
+          <Box
+            onPress={addDummyScan}
+            ph={24}
+            pv={14}
+            borderRadius={16}
+            borderWidth={1}
+            borderColor={Colors.WHITE_30}
+            mb={10}
+            justifyContent="center"
+            alignItems="center"
+            row
+          >
+            <DynamicIcon name="Scan" size={24} color={Colors.WHITE} />
+            <TemplateText color={Colors.WHITE} size={16} medium ml={10}>
+              Scan Another Document
+            </TemplateText>
+          </Box>
+          <TemplateText size={14} semiBold center mb={10}>
+            OR
           </TemplateText>
+          <Box
+            ph={24}
+            pv={14}
+            borderRadius={16}
+            borderWidth={1}
+            borderColor={Colors.WHITE_30}
+            mb={20}
+            justifyContent="center"
+            alignItems="center"
+            row
+            onPress={handleImportFromFiles}
+          >
+            <DynamicIcon name="ImportFile" size={24} color={Colors.WHITE} />
+            <TemplateText color={Colors.WHITE} size={16} medium ml={10}>
+              Upload from Device
+            </TemplateText>
+          </Box>
         </Box>
       )}
       {scannedDocuments?.length > 0 && (
@@ -252,9 +340,7 @@ const ScanDocumentScreen = ({ navigation }: ScanLetterScreenProps) => {
       {scannedDocuments?.length < 1 && (
         <Button
           title="Import from files"
-          onPress={() => {
-            // Handle open scanner action
-          }}
+          onPress={handleImportFromFiles}
           loading={false}
           disabled={false}
           style={{

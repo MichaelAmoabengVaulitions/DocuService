@@ -14,6 +14,7 @@
 		65BA9A3D333EA903A4198661 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B5E54E7C53B7726BEA2EA79A /* PrivacyInfo.xcprivacy */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
+		BEEC2DA5A9534528AB448321 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF923900F006481A8456FCB8 /* Poppins-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = docservice/AppDelegate.swift; sourceTree = "<group>"; };
 		F11748442D0722820044C1D9 /* docservice-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "docservice-Bridging-Header.h"; path = "docservice/docservice-Bridging-Header.h"; sourceTree = "<group>"; };
+		BF923900F006481A8456FCB8 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; name = "Poppins-Regular.ttf"; path = "../assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				5BE606D9BC1B0C3FD2AEAEB5 /* Pods */,
 				EC2D015C7C23A3F684C799A1 /* ExpoModulesProviders */,
+				FC4FE78D459F4C4B9E555F09 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -131,6 +134,15 @@
 			);
 			name = ExpoModulesProviders;
 			sourceTree = "<group>";
+		};
+		FC4FE78D459F4C4B9E555F09 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				BF923900F006481A8456FCB8 /* Poppins-Regular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -197,6 +209,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
 				65BA9A3D333EA903A4198661 /* PrivacyInfo.xcprivacy in Resources */,
+				BEEC2DA5A9534528AB448321 /* Poppins-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,12 +368,14 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = org.name.docservice;
-				PRODUCT_NAME = docservice;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.anonymous.docservice";
+				PRODUCT_NAME = "docservice";
 				SWIFT_OBJC_BRIDGING_HEADER = "docservice/docservice-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				TARGETED_DEVICE_FAMILY = "1";
+				CODE_SIGN_ENTITLEMENTS = docservice/docservice.entitlements;
 			};
 			name = Debug;
 		};
@@ -384,11 +399,13 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = org.name.docservice;
-				PRODUCT_NAME = docservice;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.anonymous.docservice";
+				PRODUCT_NAME = "docservice";
 				SWIFT_OBJC_BRIDGING_HEADER = "docservice/docservice-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				TARGETED_DEVICE_FAMILY = "1";
+				CODE_SIGN_ENTITLEMENTS = docservice/docservice.entitlements;
 			};
 			name = Release;
 		};

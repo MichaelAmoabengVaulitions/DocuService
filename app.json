@@ -7,9 +7,23 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/fonts/Poppins-Regular.ttf"]
+          "fonts": [
+            "./assets/fonts/Poppins-Regular.ttf"
+          ]
+        }
+      ],
+      [
+        "react-native-document-scanner-plugin",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to use your camera to scan documents."
         }
       ]
-    ]
+    ],
+    "android": {
+      "package": "com.anonymous.docservice"
+    },
+    "ios": {
+      "bundleIdentifier": "com.anonymous.docservice"
+    }
   }
 }
