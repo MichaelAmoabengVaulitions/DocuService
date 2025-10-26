@@ -1,4 +1,26 @@
 PODS:
+  - DocumentScanner (2.0.2):
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-Core-prebuilt
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
   - EXConstants (18.0.9):
     - ExpoModulesCore
   - Expo (54.0.16):
@@ -28,6 +50,10 @@ PODS:
     - Yoga
   - ExpoAsset (12.0.9):
     - ExpoModulesCore
+  - ExpoCamera (17.0.8):
+    - ExpoModulesCore
+    - ZXingObjC/OneD
+    - ZXingObjC/PDF417
   - ExpoDocumentPicker (14.0.7):
     - ExpoModulesCore
   - ExpoFileSystem (19.0.17):
@@ -2072,11 +2098,18 @@ PODS:
     - ReactNativeDependencies
     - Yoga
   - Yoga (0.0.0)
+  - ZXingObjC/Core (3.6.9)
+  - ZXingObjC/OneD (3.6.9):
+    - ZXingObjC/Core
+  - ZXingObjC/PDF417 (3.6.9):
+    - ZXingObjC/Core
 
 DEPENDENCIES:
+  - DocumentScanner (from `../node_modules/react-native-document-scanner-plugin`)
   - EXConstants (from `../node_modules/expo/node_modules/expo-constants/ios`)
   - Expo (from `../node_modules/expo`)
   - ExpoAsset (from `../node_modules/expo/node_modules/expo-asset/ios`)
+  - ExpoCamera (from `../node_modules/expo-camera/ios`)
   - ExpoDocumentPicker (from `../node_modules/expo-document-picker/ios`)
   - ExpoFileSystem (from `../node_modules/expo-file-system/ios`)
   - ExpoFont (from `../node_modules/expo-font/ios`)
@@ -2161,13 +2194,21 @@ DEPENDENCIES:
   - RNWorklets (from `../node_modules/react-native-worklets`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
+SPEC REPOS:
+  trunk:
+    - ZXingObjC
+
 EXTERNAL SOURCES:
+  DocumentScanner:
+    :path: "../node_modules/react-native-document-scanner-plugin"
   EXConstants:
     :path: "../node_modules/expo/node_modules/expo-constants/ios"
   Expo:
     :path: "../node_modules/expo"
   ExpoAsset:
     :path: "../node_modules/expo/node_modules/expo-asset/ios"
+  ExpoCamera:
+    :path: "../node_modules/expo-camera/ios"
   ExpoDocumentPicker:
     :path: "../node_modules/expo-document-picker/ios"
   ExpoFileSystem:
@@ -2335,9 +2376,11 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  DocumentScanner: 9f6e723ea4dad72dcf3a0e30b31ba1bbb201036f
   EXConstants: 59d46d25b89f88cc38291a56dbce4d550758f72d
   Expo: aff65fccaaaa157714e5f267ae551f6c16cda933
   ExpoAsset: 3c3b7dd9b1318846a02ef05ce420e63d542aeb9f
+  ExpoCamera: 6d0c5bc68bc8de669f1ecd4242284de0827c4431
   ExpoDocumentPicker: dbe4eeeb771891209fee044a6b0bafbd1fdcc4fa
   ExpoFileSystem: 56f081328f5b48a6dcc8302eee51d4f2d9d0049b
   ExpoFont: b881d43057dceb7b31ff767b24f612609e80f60f
@@ -2420,6 +2463,7 @@ SPEC CHECKSUMS:
   RNSVG: 2825ee146e0f6a16221e852299943e4cceef4528
   RNWorklets: 83609071441ac7d623f1e0e63b9043f4f345e2a2
   Yoga: c8f1aad5bc3522a8fdab409b5843965abff35aa6
+  ZXingObjC: 8898711ab495761b2dbbdec76d90164a6d7e14c5
 
 PODFILE CHECKSUM: b8e3b923779d381ad15efcbc6f8fc9e6c0319d2f
 

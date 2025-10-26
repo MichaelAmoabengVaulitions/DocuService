@@ -13,25 +13,25 @@
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
 		65BA9A3D333EA903A4198661 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B5E54E7C53B7726BEA2EA79A /* PrivacyInfo.xcprivacy */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
 		BEEC2DA5A9534528AB448321 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF923900F006481A8456FCB8 /* Poppins-Regular.ttf */; };
+		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		13B07F961A680F5B00A75B9A /* docservice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = docservice.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* docuservice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = docuservice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = docservice/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = docservice/Info.plist; sourceTree = "<group>"; };
 		19998D07EE2CEAD49A1BF3FA /* Pods-docservice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-docservice.debug.xcconfig"; path = "Target Support Files/Pods-docservice/Pods-docservice.debug.xcconfig"; sourceTree = "<group>"; };
 		68B247581F8633D099E521F8 /* Pods-docservice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-docservice.release.xcconfig"; path = "Target Support Files/Pods-docservice/Pods-docservice.release.xcconfig"; sourceTree = "<group>"; };
 		961ADFA39B3713FBE1C119E5 /* libPods-docservice.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-docservice.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = docservice/SplashScreen.storyboard; sourceTree = "<group>"; };
-		B5E54E7C53B7726BEA2EA79A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = docservice/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		B5E54E7C53B7726BEA2EA79A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = docservice/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
+		BF923900F006481A8456FCB8 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		C42CB3F16AA052FEF28152A1 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-docservice/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = docservice/AppDelegate.swift; sourceTree = "<group>"; };
 		F11748442D0722820044C1D9 /* docservice-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "docservice-Bridging-Header.h"; path = "docservice/docservice-Bridging-Header.h"; sourceTree = "<group>"; };
-		BF923900F006481A8456FCB8 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; name = "Poppins-Regular.ttf"; path = "../assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +83,6 @@
 				19998D07EE2CEAD49A1BF3FA /* Pods-docservice.debug.xcconfig */,
 				68B247581F8633D099E521F8 /* Pods-docservice.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -113,7 +112,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* docservice.app */,
+				13B07F961A680F5B00A75B9A /* docuservice.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -136,13 +135,12 @@
 			sourceTree = "<group>";
 		};
 		FC4FE78D459F4C4B9E555F09 /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				BF923900F006481A8456FCB8 /* Poppins-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -166,7 +164,7 @@
 			);
 			name = docservice;
 			productName = docservice;
-			productReference = 13B07F961A680F5B00A75B9A /* docservice.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* docuservice.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -266,6 +264,7 @@
 			inputPaths = (
 				"$(SRCROOT)/.xcode.env",
 				"$(SRCROOT)/.xcode.env.local",
+				"$(SRCROOT)/docservice/docservice.entitlements",
 				"$(SRCROOT)/Pods/Target Support Files/Pods-docservice/expo-configure-project.sh",
 			);
 			name = "[Expo] Configure project";
@@ -349,7 +348,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = docservice/docservice.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XW576HXDLG;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -368,14 +371,14 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.anonymous.docservice";
-				PRODUCT_NAME = "docservice";
+				PRODUCT_BUNDLE_IDENTIFIER = com.anonymous.docuservice;
+				PRODUCT_NAME = docuservice;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "docservice/docservice-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
-				TARGETED_DEVICE_FAMILY = "1";
-				CODE_SIGN_ENTITLEMENTS = docservice/docservice.entitlements;
 			};
 			name = Debug;
 		};
@@ -385,7 +388,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = docservice/docservice.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XW576HXDLG;
 				INFOPLIST_FILE = docservice/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -399,13 +406,13 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.anonymous.docservice";
-				PRODUCT_NAME = "docservice";
+				PRODUCT_BUNDLE_IDENTIFIER = com.anonymous.docuservice;
+				PRODUCT_NAME = docuservice;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "docservice/docservice-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
-				TARGETED_DEVICE_FAMILY = "1";
-				CODE_SIGN_ENTITLEMENTS = docservice/docservice.entitlements;
 			};
 			name = Release;
 		};

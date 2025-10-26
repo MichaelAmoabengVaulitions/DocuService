@@ -13,14 +13,16 @@ import { Colors } from "@/constants/Colors";
 import TemplateText from "@/components/TemplateText";
 import Button from "@/components/Button";
 import ModalBase from "@/components/modals/ModalBase";
-
 import * as DocumentPicker from "expo-document-picker";
 import { Directory, File, Paths } from "expo-file-system";
+import { Camera } from "expo-camera";
+import DocumentScanner from "react-native-document-scanner-plugin";
+
 type ScannedDoc = {
   id: string;
   title: string;
   fileName: string;
-  filePath: string; // persistent uri in app's document dir
+  filePath: string;
 };
 const TICK_MS = 80;
 const STEP_PER_TICK = 1;
@@ -101,6 +103,7 @@ const ScanDocumentScreen = ({ navigation }: ScanLetterScreenProps) => {
   const [scanCount, setScanCount] = useState(0);
   const [isScanCompletedModalVisible, setIsScanCompletedModalVisible] =
     useState(false);
+
   const toTitle = (name: string) =>
     name
       .replace(/\.[^.]+$/, "")
@@ -124,9 +127,9 @@ const ScanDocumentScreen = ({ navigation }: ScanLetterScreenProps) => {
       if (result.canceled || !result.assets?.length) return;
 
       // Ensure persistent folder: <app>/Documents/Letters
-      const lettersDir = new Directory(Paths.document, "Letters");
+      const docsDir = new Directory(Paths.document, "Letters");
       try {
-        lettersDir.create(); // creates if missing
+        docsDir.create(); // creates if missing
       } catch {
         /* no-op if it already exists */
       }
@@ -134,7 +137,7 @@ const ScanDocumentScreen = ({ navigation }: ScanLetterScreenProps) => {
       const imported: ScannedDoc[] = result.assets.map((asset) => {
         // Build persistent destination path: <Documents>/Letters/<original-name>
         const src = new File(asset?.uri); // File can be constructed from DocumentPickerAsset
-        const dest = new File(lettersDir, asset.name || `file-${Date.now()}`);
+        const dest = new File(docsDir, asset.name || `file-${Date.now()}`);
         try {
           src.copy(dest); // copy from cache/provider into our app's documents dir
         } catch (e) {
@@ -163,6 +166,67 @@ const ScanDocumentScreen = ({ navigation }: ScanLetterScreenProps) => {
       console.warn("Import error", err);
     }
   };
+
+  const handleScanDocument = async () => {
+    // 1) Ask for camera permission (good hygiene; iOS will prompt on first access)
+    const { granted } = await Camera.requestCameraPermissionsAsync(); // Expo camera permissions
+    if (!granted) {
+      Alert.alert(
+        "Camera permission required",
+        "Enable camera permission to scan documents."
+      );
+      return;
+    }
+
+    try {
+      // 2) Launch native scanner UI
+      const { scannedImages } = await DocumentScanner.scanDocument(); // returns string[] paths
+
+      if (!scannedImages || scannedImages.length === 0) return; // user canceled
+
+      // 3) Ensure persistent folder: <app>/Documents/Letters
+      const lettersDir = new Directory(Paths.document, "Letters");
+      try {
+        lettersDir.create(); // no-op if exists
+      } catch {}
+
+      // 4) Copy scans into our app docs and add to UI list
+      const imported = scannedImages.map((srcPath, idx) => {
+        const src = new File(srcPath);
+        const fileName = `scan_${Date.now()}_${idx + 1}.jpg`;
+        const dest = new File(lettersDir, fileName);
+
+        try {
+          src.copy(dest);
+          return {
+            id: String(Date.now() + Math.random()),
+            title: toTitle(fileName),
+            fileName,
+            filePath: dest.uri,
+          };
+        } catch {
+          // Fallback: keep original path if copy fails
+          const base = srcPath.split("/").pop() ?? fileName;
+          return {
+            id: String(Date.now() + Math.random()),
+            title: toTitle(base),
+            fileName: base,
+            filePath: srcPath,
+          };
+        }
+      });
+
+      setScannedDocuments((prev) => [...imported, ...prev]);
+    } catch (e) {
+      // The plugin throws on errors; user cancel usually returns empty array above
+      console.warn("scanDocument error", e);
+      Alert.alert(
+        "Scan failed",
+        "Could not complete the scan. Please try again."
+      );
+    }
+  };
+
   const addDummyScan = () => {
     const fileName = `finanzamt_letter_${scanCount}.pdf`;
     const filePath = `/Documents/Letters/${fileName}`;
@@ -241,7 +305,7 @@ const ScanDocumentScreen = ({ navigation }: ScanLetterScreenProps) => {
             mb={24}
             borderColor={Colors.WHITE_20}
             backgroundColor={Colors.WHITE_10}
-            onPress={addDummyScan}
+            onPress={handleScanDocument}
           >
             <DynamicIcon name="Scan" size={60} color={Colors.WHITE_60} />
           </Box>
@@ -286,7 +350,7 @@ const ScanDocumentScreen = ({ navigation }: ScanLetterScreenProps) => {
       {scannedDocuments?.length > 0 && (
         <Box>
           <Box
-            onPress={addDummyScan}
+            onPress={handleScanDocument}
             ph={24}
             pv={14}
             borderRadius={16}

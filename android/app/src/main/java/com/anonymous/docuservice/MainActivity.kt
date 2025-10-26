@@ -1,4 +1,4 @@
-package com.anonymous.docservice
+package com.anonymous.docuservice
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build
