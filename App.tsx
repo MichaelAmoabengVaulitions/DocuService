@@ -1,76 +1,36 @@
-import "react-native-gesture-handler";
-import React, { useEffect } from "react";
-import codePush from "react-native-code-push";
-import { StatusBar, View, StyleSheet } from "react-native";
-import { AppEventsLogger, Settings } from "react-native-fbsdk-next";
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
-import { ActionSheetProvider } from "@expo/react-native-action-sheet";
-import { enableFreeze, enableScreens } from "react-native-screens";
-import MainNavigator from "./src/navigation/MainNavigator";
-import { AuthProvider } from "./src/context/AuthProvider";
-import { FeatureFlagProvider } from "./src/context/FeatureFlagsContext";
-import defaultFeatures from "./config/defaultFeatures";
-import { PAYWALL_PRIMARY_BACKGROUND } from "./src/theme/Colors";
+// App.js (or App.tsx)
+import { useEffect } from "react";
+import { StyleSheet } from "react-native";
+import * as SplashScreen from "expo-splash-screen";
+import { useFonts } from "expo-font";
+import MainNavigator from "@/navigation/MainNavigator";
 
-import config from "./config";
-import { CoreProvider } from "./src/context/core";
-import useSubscriptionConfig from "./src/hooks/subscription/useSubscriptionConfig";
-import { SubscriptionProvider } from "./src/screens/subscriptions/context/context";
+// Keep the splash visible while we load
+SplashScreen.preventAutoHideAsync();
 
-import { isAndroid } from "./src/Utils/Platform";
-
-enableScreens();
-enableFreeze(true);
-
-const NAVIGATION_THEME = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    background: PAYWALL_PRIMARY_BACKGROUND,
-  },
-};
-const MainApp = () => {
-  const purchase = useSubscriptionConfig(true);
+export default function App() {
+  const [fontsLoaded] = useFonts({
+    "NotoSerif-Regular": require("./assets/fonts/NotoSerif-Regular.ttf"),
+    "Poppins-Regular": require("./assets/fonts/Poppins-Regular.ttf"),
+    "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
+  });
 
   useEffect(() => {
-    Settings.initializeSDK();
-    Settings.setAdvertiserTrackingEnabled(true);
-    AppEventsLogger.logEvent(`OPENED-APP-${isAndroid ? "ANDROID" : "IOS"}`);
-  }, []);
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
 
-  return (
-    <View style={styles.container}>
-      <CoreProvider config={config}>
-        <SubscriptionProvider purchase={purchase}>
-          <ActionSheetProvider>
-            <NavigationContainer theme={NAVIGATION_THEME}>
-              <StatusBar barStyle="light-content" />
-              <MainNavigator />
-            </NavigationContainer>
-          </ActionSheetProvider>
-        </SubscriptionProvider>
-      </CoreProvider>
-    </View>
-  );
-};
+  if (!fontsLoaded) return null;
+
+  return <MainNavigator />;
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: PAYWALL_PRIMARY_BACKGROUND,
+    backgroundColor: "#000",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
-
-const App = () => (
-  <AuthProvider>
-    <FeatureFlagProvider defaultFeatures={defaultFeatures}>
-      <MainApp />
-    </FeatureFlagProvider>
-  </AuthProvider>
-);
-
-// export default App;
-// TODO: uncomment this when we are ready to use codepush
-export default codePush({
-  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
-})(App);

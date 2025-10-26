@@ -1,10 +1,10 @@
 import * as React from "react";
-import Svg, { Path } from "react-native-svg";
-import { WHITE } from "../../theme/Colors";
+import { Colors } from "@/constants/Colors";
 import { IconProps } from "./IconProps";
+import Svg, { Path } from "react-native-svg";
 
 const ExportFile: React.FC<IconProps> = ({
-  color = WHITE,
+  color = Colors.WHITE,
   size,
   style,
   ...props

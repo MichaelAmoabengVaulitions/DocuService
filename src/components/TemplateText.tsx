@@ -1,11 +1,10 @@
 /* eslint-disable max-len */
 /* eslint-disable react-native/no-inline-styles */
 /* @ts-ignore */
+import { Colors } from "@/constants/Colors";
+import { IS_SHORT_DEVICE } from "@/constants/Layout";
 import React, { FC } from "react";
 import { Text, StyleSheet } from "react-native";
-
-import { BLACK, PRIMARY, WHITE } from "../theme/Colors";
-import { IS_SHORT_DEVICE } from "../theme/Layout";
 
 interface Props {
   light?: boolean;
@@ -20,6 +19,7 @@ interface Props {
   small?: boolean;
   green?: boolean;
   semiBold?: boolean;
+  onPress?: () => void;
   center?: boolean;
   left?: boolean;
   right?: boolean;
@@ -72,6 +72,7 @@ const TemplateText: FC<Props> = ({
   lineHeight,
   adjustsFontSizeToFit,
   allowFontScaling,
+  onPress,
   ml,
   mr,
   mt,
@@ -103,11 +104,11 @@ const TemplateText: FC<Props> = ({
   }
 
   if (black) {
-    textStyle.color = BLACK;
+    textStyle.color = Colors.BLACK;
   }
 
   if (white) {
-    textStyle.color = WHITE;
+    textStyle.color = Colors.WHITE;
   }
 
   if (title) {
@@ -126,10 +127,6 @@ const TemplateText: FC<Props> = ({
 
   if (small) {
     textStyle.fontSize = 14;
-  }
-
-  if (green) {
-    textStyle.color = PRIMARY;
   }
 
   if (left) {
@@ -198,6 +195,7 @@ const TemplateText: FC<Props> = ({
         // @ts-ignore
         numberOfLines === 1 ? true : restProps?.adjustsFontSizeToFit
       }
+      onPress={onPress}
     >
       {content}
     </Text>
@@ -208,33 +206,8 @@ const styles = StyleSheet.create({
   default: {
     fontFamily: "Poppins-Regular",
     fontSize: IS_SHORT_DEVICE ? 15 : 18,
-    color: WHITE,
+    color: Colors.WHITE,
   },
 });
-
-TemplateText.defaultProps = {
-  light: true,
-  medium: false,
-  bold: false,
-  black: false,
-  white: false,
-  title: false,
-  caps: false,
-  subTitle: false,
-  underLine: false,
-  small: false,
-  green: false,
-  semiBold: false,
-  center: false,
-  left: false,
-  right: false,
-  color: null,
-  size: null,
-  lineThrough: false,
-  children: null,
-  numberOfLines: 0,
-  startCase: false,
-  italic: false,
-};
 
 export default TemplateText;

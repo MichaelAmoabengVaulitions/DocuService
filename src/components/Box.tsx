@@ -1,24 +1,21 @@
-/* eslint-disable max-len */
-/* eslint-disable react-native/no-inline-styles */
-import React, { useEffect, useRef } from "react";
-import {
-  TouchableOpacity,
-  View,
-  StyleSheet,
-  ViewStyle,
-  ColorValue,
-  Animated,
-} from "react-native";
-import LinearGradient from "react-native-linear-gradient";
-import { PRIMARY_GRADIENT } from "../theme/Colors";
-import { SHADOW } from "../theme/Shadow";
-import { wp } from "../Utils/getResponsiveSize";
-import { IS_ANDROID } from "../theme/Layout";
+import { wp } from "@/utils/getResponsiveSize";
+import React, { FC, useEffect, useRef } from "react";
+import { MeshGradientView } from "expo-mesh-gradient";
+import { View, StyleSheet, Animated, TouchableOpacity } from "react-native";
 
-export interface BoxProps extends Animated.AnimatedProps<object> {
+const BLUE_MESH = [
+  "#0B1F3A", // deep navy
+  "#0E3A68",
+  "#115E9B",
+  "#0E3A68",
+  "#1677C5",
+  "#2A9DF4",
+  "#0B1F3A",
+  "#1677C5",
+  "#7CC3FF",
+];
+export interface Props {
   animated?: boolean;
-  shadow?: boolean;
-  lightShadow?: boolean;
   children?: React.ReactNode;
   center?: boolean;
   vCenter?: boolean;
@@ -46,6 +43,7 @@ export interface BoxProps extends Animated.AnimatedProps<object> {
   width?: number | string | false;
   minWidth?: number | string | false;
   height?: number | string | false;
+  minHeight?: number | string | false;
   borderRadius?: number;
   borderBottomLeftRadius?: number;
   borderBottomRightRadius?: number;
@@ -53,7 +51,8 @@ export interface BoxProps extends Animated.AnimatedProps<object> {
   borderTopRightRadius?: number | false;
   justifyContent?: string | false;
   alignItems?: string | false;
-  backgroundColor?: string | ColorValue | false;
+  alignSelf?: string | false;
+  backgroundColor?: string | false;
   aspectRatio?: number;
   borderWidth?: number | false;
   borderColor?: string | false;
@@ -64,11 +63,10 @@ export interface BoxProps extends Animated.AnimatedProps<object> {
   right?: number | string;
   opacity?: number;
   zIndex?: number;
-  style?: ViewStyle | (ViewStyle | null | undefined)[] | null;
+  style?: object;
   onPress?: (() => void) | null;
   activeOpacity?: number;
-  hGradient?: boolean;
-  vGradient?: boolean;
+  meshGradient?: boolean;
   gradientColors?: string[];
   gradientStartBalance?: number;
   gradientEndBalance?: number;
@@ -81,13 +79,12 @@ export interface BoxProps extends Animated.AnimatedProps<object> {
   slideIn?: boolean;
   slideInTime?: number;
   slideInDelay?: number;
-  minHeight?: number | string | false;
+  slideInDirection?: "left" | "right" | "top" | "bottom";
+  animationType?: "spring" | "timing";
+  slideInX?: number;
 }
-
-const Box: React.FC<BoxProps> = ({
+const Box: FC<Props> = ({
   animated,
-  shadow,
-  lightShadow,
   children,
   center,
   vCenter,
@@ -114,8 +111,8 @@ const Box: React.FC<BoxProps> = ({
   pb,
   width,
   minWidth,
-  minHeight,
   height,
+  minHeight,
   borderRadius,
   borderBottomLeftRadius,
   borderBottomRightRadius,
@@ -123,6 +120,7 @@ const Box: React.FC<BoxProps> = ({
   borderTopRightRadius,
   justifyContent,
   alignItems,
+  alignSelf,
   backgroundColor,
   aspectRatio,
   borderWidth,
@@ -137,8 +135,7 @@ const Box: React.FC<BoxProps> = ({
   style,
   onPress,
   activeOpacity,
-  hGradient,
-  vGradient,
+  meshGradient,
   gradientColors,
   gradientStartBalance,
   gradientEndBalance,
@@ -150,9 +147,11 @@ const Box: React.FC<BoxProps> = ({
   slideIn,
   slideInTime,
   slideInDelay,
+  slideInDirection = "right",
+  animationType = "timing",
+  slideInX = 0,
   ...restProps
 }) => {
-  // eslint-disable-next-line no-nested-ternary
   const Component = onPress
     ? animated || fadeIn
       ? Animated.createAnimatedComponent(TouchableOpacity)
@@ -161,7 +160,7 @@ const Box: React.FC<BoxProps> = ({
 
   const fadeOpacity = useRef(new Animated.Value(0)).current;
   const slideValue = useRef(
-    new Animated.ValueXY({ x: slideIn ? wp(20) : 0, y: 0 })
+    new Animated.ValueXY({ x: slideIn ? wp(slideInX) : 0, y: 0 })
   ).current;
 
   useEffect(() => {
@@ -174,10 +173,10 @@ const Box: React.FC<BoxProps> = ({
         }).start();
       }, fadeInDelay || 0);
     }
-  }, [opacity, fadeIn, fadeInTime, fadeInDelay, fadeOpacity]);
+  }, [opacity]);
 
   useEffect(() => {
-    if (slideIn) {
+    if (slideIn && !!slideInX) {
       setTimeout(() => {
         Animated.timing(slideValue, {
           toValue: { x: 0, y: 0 },
@@ -186,13 +185,19 @@ const Box: React.FC<BoxProps> = ({
         }).start();
       }, slideInDelay || 0);
     }
-  }, [slideIn, slideValue, slideInTime, slideInDelay]);
+  }, []);
 
   return (
     <Component
       style={[
         !!flex && { flex: flex === true ? 1 : flex },
         !!flexGrow && { flexGrow: flexGrow === true ? 1 : flexGrow },
+        !!slideIn && {
+          transform: [
+            { translateX: slideValue.x },
+            { translateY: slideValue.y },
+          ],
+        },
         !!flexWrap && { flexWrap },
         center && styles.center,
         hCenter && styles.hCenter,
@@ -205,18 +210,12 @@ const Box: React.FC<BoxProps> = ({
         !!mb && { marginBottom: mb },
         !!ml && { marginLeft: ml },
         !!mr && { marginRight: mr },
-        !!slideIn && {
-          transform: [
-            { translateX: slideValue.x },
-            { translateY: slideValue.y },
-          ],
-        },
         !!mh && { marginHorizontal: mh },
         !!mv && { marginVertical: mv },
         !!width && { width },
         !!minWidth && { minWidth },
-        !!minHeight && { minHeight },
         !!height && { height },
+        !!minHeight && { minHeight },
         !!pAll && { padding: pAll },
         !!ph && { paddingHorizontal: ph },
         !!pv && { paddingVertical: pv },
@@ -226,6 +225,7 @@ const Box: React.FC<BoxProps> = ({
         !!pb && { paddingBottom: pb },
         !!justifyContent && { justifyContent },
         !!alignItems && { alignItems },
+        !!alignSelf && { alignSelf },
         !!backgroundColor && { backgroundColor },
         !!aspectRatio && { aspectRatio },
         !!overflow && { overflow },
@@ -245,61 +245,20 @@ const Box: React.FC<BoxProps> = ({
         (!!left || left === 0) && { left },
         (!!right || right === 0) && { right },
         !!disabled && { opacity: 0.5 },
-        IS_ANDROID &&
-          (shadow || lightShadow) &&
-          !animated &&
-          SHADOW("android", backgroundColor, {}),
         style,
       ]}
       onPress={onPress}
       activeOpacity={activeOpacity || 1}
       disabled={disabled}
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...restProps}
     >
-      {!IS_ANDROID && shadow && (
-        <View
-          style={[
-            styles.overlay,
-            SHADOW("card", backgroundColor, {}),
-            !!borderRadius && { borderRadius },
-            !!borderBottomLeftRadius && { borderBottomLeftRadius },
-            !!borderBottomRightRadius && { borderBottomRightRadius },
-            !!borderTopLeftRadius && { borderTopLeftRadius },
-            !!borderTopRightRadius && { borderTopRightRadius },
-          ]}
-        />
-      )}
-      {!IS_ANDROID && shadow && (
-        <View
-          style={[
-            styles.overlay,
-            SHADOW("lightCard", backgroundColor, {}),
-            !!borderRadius && { borderRadius },
-            !!borderBottomLeftRadius && { borderBottomLeftRadius },
-            !!borderBottomRightRadius && { borderBottomRightRadius },
-            !!borderTopLeftRadius && { borderTopLeftRadius },
-            !!borderTopRightRadius && { borderTopRightRadius },
-          ]}
-        />
-      )}
-      {(hGradient || vGradient) && (
-        <LinearGradient
-          start={{ x: gradientStartBalance || 0, y: gradientStartBalance || 0 }}
-          end={
-            hGradient
-              ? { x: gradientEndBalance || 1, y: 0 }
-              : { x: 0, y: gradientEndBalance || 1 }
-          }
-          style={[
-            styles.overlay,
-            !!borderRadius && { borderRadius },
-            !!borderBottomLeftRadius && { borderBottomLeftRadius },
-            !!borderBottomRightRadius && { borderBottomRightRadius },
-            !!borderTopLeftRadius && { borderTopLeftRadius },
-            !!borderTopRightRadius && { borderTopRightRadius },
-          ]}
-          colors={gradientColors || PRIMARY_GRADIENT}
+      {meshGradient && (
+        <MeshGradientView
+          pointerEvents="none"
+          style={[StyleSheet.absoluteFillObject, { opacity: 0.32 }]}
+          columns={3}
+          rows={3}
+          colors={BLUE_MESH}
         />
       )}
       {children}

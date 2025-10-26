@@ -1,20 +1,6 @@
+import { Colors } from "@/constants/Colors";
 import React from "react";
 import { StyleSheet, ViewStyle, Modal } from "react-native";
-
-import {
-  BLACK,
-  BLACK_30,
-  BLACK_70,
-  BLACK_90,
-  DARK_FOREST_GREEN_20,
-  DARK_FOREST_GREEN_30,
-  DARK_FOREST_GREEN_50,
-  PRIMARY,
-  WHITE,
-  WHITE_10,
-  WHITE_20,
-} from "../../theme/Colors";
-import TemplateBox from "../TemplateBox";
 
 export interface ModalBaseProps {
   onClose: () => void;
@@ -46,7 +32,7 @@ const styles = StyleSheet.create({
   modal: {
     flex: 1,
     margin: 0,
-    backgroundColor: BLACK,
+    backgroundColor: Colors.BLACK,
   },
 });
 

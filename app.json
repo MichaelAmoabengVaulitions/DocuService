@@ -1,4 +1,15 @@
 {
-  "name": "UGCCreatorApp",
-  "displayName": "UGCCreatorApp"
+  "expo": {
+    "name": "doc-service",
+    "slug": "doc-service",
+    "version": "1.0.0",
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/Poppins-Regular.ttf"]
+        }
+      ]
+    ]
+  }
 }

@@ -1,0 +1,68 @@
+{
+  "actions": [
+    {
+      "id": "pay-balance",
+      "title": "Pay outstanding amount €864.53",
+      "description": "Transfer €864.53 using the stated IBAN/BIC and contractual account number as reference.",
+      "owner": "user",
+      "dueDate": "2025-09-19",
+      "leadTimeDays": 0,
+      "priority": 1,
+      "risk": 5,
+      "effort": 2,
+      "dependencies": [],
+      "documentsToPrepare": ["Transfer reference: 200101719866"],
+      "channel": ["portal"],
+      "evidence": {
+        "quote": "Bitte überweisen Sie ... bis zum 19.09.2025 ... IBAN: DE19 1002 0890 0002 6211 42 ... Verwendungszweck: 200101719866",
+        "page": 1
+      },
+      "confidenceScore": 0.99
+    },
+    {
+      "id": "book-functional-check",
+      "title": "Arrange functional check by a Vertragsinstallationsunternehmen",
+      "description": "Book a certified installer to verify the gas installation; obtain written confirmation on-site in presence of NBB representative if required.",
+      "owner": "third_party",
+      "dueDate": null,
+      "leadTimeDays": 3,
+      "priority": 2,
+      "risk": 4,
+      "effort": 3,
+      "dependencies": ["pay-balance"],
+      "documentsToPrepare": ["Written confirmation of functional test"],
+      "channel": ["phone", "in_person"],
+      "evidence": {
+        "quote": "Aufhebung der Schuldsperrung ... wenn der technisch einwandfreie Zustand ... vor Ort ... nachgewiesen und schriftlich bestätigt wird.",
+        "page": 11
+      },
+      "confidenceScore": 0.9
+    },
+
+    {
+      "id": "send-meter-reading",
+      "title": "Optionally submit current meter reading",
+      "description": "If you want billing based on actual usage, send the current meter reading within 14 days for a corrected invoice.",
+      "owner": "user",
+      "dueDate": "2025-09-17",
+      "leadTimeDays": 0,
+      "priority": 3,
+      "risk": 2,
+      "effort": 1,
+      "dependencies": [],
+      "documentsToPrepare": ["Current meter reading (photo)"],
+      "channel": ["portal", "email"],
+      "evidence": {
+        "quote": "Wünschen Sie dagegen eine Abrechnung nach tatsächlichem Verbrauch? Dann teilen Sie uns bitte in den nächsten 14 Tagen Ihren aktuellen Zählerstand mit.",
+        "page": 6
+      },
+      "confidenceScore": 0.7
+    }
+  ]
+}
+
+
+
+
+
+

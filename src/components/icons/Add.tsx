@@ -1,9 +1,14 @@
 import * as React from "react";
 import Svg, { Path } from "react-native-svg";
-import { WHITE } from "../../theme/Colors";
 import { IconProps } from "./IconProps";
+import { Colors } from "@/constants/Colors";
 
-const Add: React.FC<IconProps> = ({ color = WHITE, size, style, ...props }) => {
+const Add: React.FC<IconProps> = ({
+  color = Colors.WHITE,
+  size,
+  style,
+  ...props
+}) => {
   const ratio = 24 / 24;
 
   return (

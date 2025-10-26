@@ -1,44 +1,19 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { StyleSheet, View } from "react-native";
-import auth from "@react-native-firebase/auth";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {
-  BACKGROUND,
-  BLACK,
-  BLACK_10,
-  DARK_OVERLAY,
-  DEFAULT_GRADIENT,
-  ERROR_RED,
-  GREY_30,
-  GREY_70,
-  ONBOARDING_BLUE,
-  SECONDARY,
-  WHITE,
-} from "../../theme/Colors";
-import TemplateText from "../../components/TemplateText";
-import {
-  SCREEN_WIDTH,
-  WRAPPED_SCREEN_WIDTH,
-  WRAPPER_MARGIN,
-} from "../../theme/Layout";
-import Button from "../../components/Button";
-import { LOGIN, WEBVIEW } from "../../navigation/ScreenNames";
-import TemplateTextInput from "../../components/TemplateTextInput";
-import Wrapper from "../../components/Wrapper";
-import Error from "../../components/Error";
-import { emailValid, passwordValid, isEmpty } from "../../Utils/validation";
-import useProfile from "../../hooks/user/useProfile";
-import BrandLogo from "../../../assets/svgs/BrandLogo";
-import { useConfig } from "../../context/core";
-import TemplateTouchable from "../../components/TemplateTouchable";
-import TemplateIcon from "../../components/TemplateIcon";
-import TemplateBox from "../../components/TemplateBox";
-import ResizedImage from "../../components/ResizedImage";
-import Box from "../../components/Box";
+import { StyleSheet } from "react-native";
+//@ts-ignore
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { StackScreenProps } from "@react-navigation/stack";
-
-const creatorAuthImage = require("../../../assets/images/onboarding/login.jpg");
-const brandAuthImage = require("../../../assets/images/onboarding/brand-auth.jpg");
+import { Colors } from "@/constants/Colors";
+import Wrapper from "@/components/Wrapper";
+import Button from "@/components/Button";
+import { emailValid, isEmpty, passwordValid } from "@/utils/validation";
+import Box from "@/components/Box";
+import TemplateText from "@/components/TemplateText";
+import Error from "@/components/Error";
+import TemplateTextInput from "@/components/TemplateTextInput";
+import { LOGIN } from "@/navigation/screenNames";
+import { SCREEN_WIDTH, WRAPPER_MARGIN } from "@/constants/Layout";
+import { AuthStackParamList } from "@/navigation/auth/AuthStack";
 
 const CREATOR_PLACEHOLDER = "Your Name";
 const BRAND_PLACEHOLDER = "Your Brand Name";
@@ -54,7 +29,7 @@ type RootStackParamList = {
 };
 
 type SignUpEmailScreen = StackScreenProps<
-  RootStackParamList,
+  AuthStackParamList,
   "SignUpEmailScreen"
 >;
 
@@ -62,8 +37,6 @@ const SignUpEmailScreen: React.FC<SignUpEmailScreen> = ({
   navigation,
   route,
 }) => {
-  const { mainDomain } = useConfig();
-
   const type = route.params?.type;
   const userEmail = route.params?.email;
 
@@ -131,63 +104,55 @@ const SignUpEmailScreen: React.FC<SignUpEmailScreen> = ({
     setError(null);
   }, []);
 
-  const { createCreatorProfile, createBrandProfile } = useProfile();
-
   const handleSignUp = async () => {
     setLoading(true);
-    try {
-      await AsyncStorage.setItem("@userType", namePlaceholder);
-      const response = await auth().createUserWithEmailAndPassword(
-        email,
-        password
-      );
+    // try {
+    //   await AsyncStorage.setItem("@userType", namePlaceholder);
+    //   const response = await auth().createUserWithEmailAndPassword(
+    //     email,
+    //     password
+    //   );
 
-      if (response?.user) {
-        if (isCreator) {
-          await createCreatorProfile(name, response?.user);
-        } else {
-          await createBrandProfile(name, response?.user);
-        }
-      }
-    } catch (e) {
-      if (e.code === "auth/email-already-in-use") {
-        setError("That email address is already in use!");
-      }
+    //   if (response?.user) {
+    //     if (isCreator) {
+    //       await createCreatorProfile(name, response?.user);
+    //     } else {
+    //       await createBrandProfile(name, response?.user);
+    //     }
+    //   }
+    // } catch (e) {
+    //   if (e.code === "auth/email-already-in-use") {
+    //     setError("That email address is already in use!");
+    //   }
 
-      if (e.code === "auth/invalid-email") {
-        setPassword("That email address is invalid!");
-      }
-      setLoading(false);
-    }
+    //   if (e.code === "auth/invalid-email") {
+    //     setPassword("That email address is invalid!");
+    //   }
+    //   setLoading(false);
+    // }
+    setLoading(false);
   };
 
-  const image = isCreator ? creatorAuthImage : brandAuthImage;
-
   return (
-    <Box
-      flex
-      backgroundColor={BLACK}
-      vGradient
-      gradientColors={DEFAULT_GRADIENT}
-    >
+    <Box flex backgroundColor={Colors.BLACK}>
       <Wrapper
         contentContainerStyle={styles.contentContainerStyle}
         style={styles.container}
         showsVerticalScrollIndicator={false}
         keyboard
       >
-        <Box flex pt={56}>
+        <Box flex mt={100}>
           <Box mb={24} center>
-            <TemplateText size={24} semiBold color={WHITE} mb={8}>
+            <TemplateText size={24} semiBold color={Colors.WHITE} mb={8}>
               Complete your account
             </TemplateText>
-            <TemplateText size={14} color={GREY_70}>
+            <TemplateText size={14} color={Colors.WHITE_60}>
               Sign up to finish creating your profile.
             </TemplateText>
           </Box>
 
           <Box mb={24}>
-            <TemplateText color={WHITE} mb={8} medium size={14}>
+            <TemplateText color={Colors.WHITE} mb={8} medium size={14}>
               Email
             </TemplateText>
 
@@ -203,7 +168,7 @@ const SignUpEmailScreen: React.FC<SignUpEmailScreen> = ({
             <Error show={showEmailError}>Please enter a valid email</Error>
           </Box>
           <Box mb={24}>
-            <TemplateText color={WHITE} mb={8} medium size={14}>
+            <TemplateText color={Colors.WHITE} mb={8} medium size={14}>
               First Name
             </TemplateText>
             <TemplateTextInput
@@ -216,9 +181,8 @@ const SignUpEmailScreen: React.FC<SignUpEmailScreen> = ({
             <Error show={showFirstNameError}>Please enter a valid name</Error>
           </Box>
 
-          {/* Last Name */}
           <Box mb={24}>
-            <TemplateText color={WHITE} mb={8} medium size={14}>
+            <TemplateText color={Colors.WHITE} mb={8} medium size={14}>
               Last Name
             </TemplateText>
 
@@ -233,7 +197,7 @@ const SignUpEmailScreen: React.FC<SignUpEmailScreen> = ({
           </Box>
 
           <Box mb={24}>
-            <TemplateText color={WHITE} mb={8} medium size={14}>
+            <TemplateText color={Colors.WHITE} mb={8} medium size={14}>
               Password
             </TemplateText>
             <Box>
@@ -255,10 +219,10 @@ const SignUpEmailScreen: React.FC<SignUpEmailScreen> = ({
                 center
                 onPress={() => setPasswordVisible((prevState) => !prevState)}
               >
-                <TemplateIcon
+                <Ionicons
                   name={passwordVisible ? "eye-off-outline" : "eye-outline"}
                   size={20}
-                  color={WHITE}
+                  color={Colors.WHITE}
                   family="Ionicons"
                 />
               </Box>
@@ -272,12 +236,11 @@ const SignUpEmailScreen: React.FC<SignUpEmailScreen> = ({
           </Error>
 
           <Button
-            mt={40}
-            mb={24}
             title="Continue with Email"
             onPress={handleSignUp}
             loading={loading}
             disabled={disabled}
+            style={{ marginTop: 40, marginBottom: 24, alignSelf: "center" }}
           />
 
           <Box
@@ -286,34 +249,32 @@ const SignUpEmailScreen: React.FC<SignUpEmailScreen> = ({
             mv={24}
             onPress={() => navigation.navigate(LOGIN)}
           >
-            <TemplateText color={GREY_70} size={14}>
+            <TemplateText color={Colors.WHITE_60} size={14}>
               Already have an account?{" "}
             </TemplateText>
-            <TemplateText color={SECONDARY} size={14}>
+            <TemplateText color={Colors.WHITE} size={14}>
               Login
             </TemplateText>
           </Box>
         </Box>
         <Box
           alignItems="center"
-          absolute
           selfCenter
-          bottom={20}
           onPress={() => {
-            if (mainDomain) {
-              navigation.navigate(WEBVIEW, {
-                url: mainDomain,
-              });
-            }
+            // if (mainDomain) {
+            //   navigation.navigate(WEBVIEW, {
+            //     url: mainDomain,
+            //   });
+            // }
           }}
         >
           <TemplateText size={12} color="#71717A">
             By signing up you agree to our{" "}
-            <TemplateText color={WHITE} bold size={12}>
+            <TemplateText color={Colors.WHITE} bold size={12}>
               Terms
             </TemplateText>
           </TemplateText>
-          <TemplateText size={12} color={WHITE} bold>
+          <TemplateText size={12} color={Colors.WHITE} bold>
             and Conditions of Use
           </TemplateText>
         </Box>
@@ -350,11 +311,11 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingLeft: 16,
     marginTop: 16,
-    borderColor: BLACK_10,
-    backgroundColor: GREY_30,
+    borderColor: Colors.BLACK_10,
+    backgroundColor: Colors.WHITE_60,
   },
   error: {
-    borderColor: ERROR_RED,
+    borderColor: Colors.ERROR_RED,
   },
   generalError: {
     marginVertical: 10,

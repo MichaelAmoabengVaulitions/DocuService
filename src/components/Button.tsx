@@ -1,19 +1,11 @@
 import React, { FC } from "react";
 import { ActivityIndicator, StyleSheet } from "react-native";
-import TemplateTouchable from "./TemplateTouchable";
-import {
-  BLACK,
-  BLUE_SECONDARY,
-  DARK_FOREST_GREEN,
-  FOREST_GREEN,
-  IOS_BLUE,
-  PRIMARY,
-  SECONDARY,
-  WHITE,
-} from "../theme/Colors";
-import { SCREEN_WIDTH } from "../theme/Layout";
+
 import TemplateText from "./TemplateText";
 import DynamicIcon, { DynamicIconName } from "./icons/DynamicIcon";
+import Box from "./Box";
+import { SCREEN_WIDTH } from "@/constants/Layout";
+import { Colors } from "@/constants/Colors";
 
 type ButtonProps = {
   height?: number;
@@ -32,13 +24,13 @@ type ButtonProps = {
 const Button: FC<ButtonProps> = ({
   height = 48,
   width = SCREEN_WIDTH - 32,
-  color = FOREST_GREEN,
+  color = Colors.IOS_BLUE,
   onPress,
   title = "Button",
   loading = false,
   disabled = false,
   style,
-  titleColor = WHITE,
+  titleColor = Colors.WHITE,
   icon = false,
   iconName,
 }) => {
@@ -55,7 +47,7 @@ const Button: FC<ButtonProps> = ({
   };
 
   return (
-    <TemplateTouchable
+    <Box
       onPress={handleOnPress}
       style={[
         styles.container,
@@ -69,7 +61,7 @@ const Button: FC<ButtonProps> = ({
       ]}
     >
       {loading ? (
-        <ActivityIndicator size="small" color={WHITE} />
+        <ActivityIndicator size="small" color={Colors.WHITE} />
       ) : (
         <TemplateText size={14} semiBold center color={titleColor}>
           {title}
@@ -83,7 +75,7 @@ const Button: FC<ButtonProps> = ({
           style={{ marginLeft: 8 }}
         />
       )}
-    </TemplateTouchable>
+    </Box>
   );
 };
 

@@ -1,5 +1,4 @@
 import React from "react";
-import { BLACK } from "../../theme/Colors";
 import { IconProps } from "./IconProps";
 import Chat from "./Chat";
 import Home from "./Home";
@@ -7,14 +6,12 @@ import Saved from "./Saved";
 import Profile from "./Profile";
 import Bell from "./Bell";
 import Social from "./Social";
-import Immigration from "./Immigration";
 import House from "./House";
 import Work from "./Work";
 import Health from "./Health";
 import ImportFileIcon from "./ImportFileIcon";
 import Language from "./Language";
 import Transport from "./Transport";
-import Family from "./Family";
 import Shopping from "./Shopping";
 import DoubleArrowRight from "./DoubleArrowRight";
 import Scan from "./Scan";
@@ -33,6 +30,7 @@ import Tick from "./Tick";
 import Filter from "./Filter";
 import CircleIcon from "./CircleIcon";
 import FileIcon from "./FileIcon";
+import { Colors } from "@/constants/Colors";
 
 export type DynamicIconName =
   | "Chat"
@@ -106,10 +104,6 @@ const IconList: IconListItem[] = [
     icon: Social,
   },
   {
-    name: "Immigration",
-    icon: Immigration,
-  },
-  {
     name: "House",
     icon: House,
   },
@@ -132,10 +126,6 @@ const IconList: IconListItem[] = [
   {
     name: "Transport",
     icon: Transport,
-  },
-  {
-    name: "Family",
-    icon: Family,
   },
   {
     name: "Shopping",
@@ -181,7 +171,7 @@ const IconList: IconListItem[] = [
 const DynamicIcon: React.FC<DynamicIconProps> = ({
   name,
   style,
-  color = BLACK,
+  color = Colors.BLACK,
   size = 20,
   active,
 }) => {
@@ -195,10 +185,7 @@ const DynamicIcon: React.FC<DynamicIconProps> = ({
   if (Content) {
     return <Content style={style} size={size} color={color} active={active} />;
   }
-
   const IconStringList: string[] = IconList.map((el) => el?.name);
-
-  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   console.warn(
     `[Template icon] - name: ${name} must only equal one of:${IconStringList}`
   );
