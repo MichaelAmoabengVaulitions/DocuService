@@ -15,13 +15,27 @@
         {
           "cameraPermission": "Allow $(PRODUCT_NAME) to use your camera to scan documents."
         }
+      ],
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth",
+      "@react-native-firebase/crashlytics",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static",
+            "buildReactNativeFromSource": true
+          }
+        }
       ]
     ],
     "android": {
-      "package": "com.docuservice"
+      "package": "com.docuservice",
+      "googleServicesFile": "./google-services.json"
     },
     "ios": {
-      "bundleIdentifier": "com.docuservice"
+      "bundleIdentifier": "com.docuservice",
+      "googleServicesFile": "./GoogleService-Info.plist"
     }
   }
 }

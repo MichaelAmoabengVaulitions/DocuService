@@ -392,8 +392,12 @@ const ScanDocumentScreen = ({ navigation }: ScanLetterScreenProps) => {
         <Button
           title="Generate summary"
           onPress={() => {
-            // setIsScanCompletedModalVisible(true);
-            navigation.navigate(SUMMARY);
+            // Map your tiles into LocalFile[]
+            const files = scannedDocuments.map((d: any) => ({
+              uri: d.filePath,
+              name: d.fileName,
+            }));
+            navigation.navigate("Summary", { uploads: files });
           }}
           loading={false}
           disabled={false}

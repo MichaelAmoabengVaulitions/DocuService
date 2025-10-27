@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "921805130807",
+    "project_id": "docuservice-4ccef",
+    "storage_bucket": "docuservice-4ccef.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:921805130807:android:ec3b129ec9dc30ce4a83b2",
+        "android_client_info": {
+          "package_name": "com.docuservice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTrSrWlAUsa9WDNOSU51XpwfZLLPGd1aU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

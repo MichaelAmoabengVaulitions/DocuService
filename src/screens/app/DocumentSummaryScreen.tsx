@@ -9,6 +9,7 @@ import TemplateText from "@/components/TemplateText";
 import ToggleTab from "@/components/ToggleTab";
 import ActionPlanItemModal from "@/components/modals/ActionPlanItemModal";
 import ReminderModal from "@/components/modals/ReminderModal";
+import { useRoute } from "@react-navigation/native";
 
 interface DocumentSummaryScreenProps {
   navigation: any;
@@ -36,6 +37,7 @@ const toggleTabs: ToggleTabs[] = [
 ];
 
 const DocumentSummaryScreen = ({ navigation }: DocumentSummaryScreenProps) => {
+  const route = useRoute<any>();
   const [activeTab, setActiveTab] = useState<string>(toggleTabs[0].value);
   const [isActionPlanItemModalVisible, setIsActionPlanItemModalVisible] =
     useState(false);
