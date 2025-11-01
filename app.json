@@ -3,6 +3,7 @@
     "name": "docuservice",
     "slug": "docuservice",
     "version": "1.0.0",
+    "newArchEnabled": true,
     "plugins": [
       [
         "expo-font",
@@ -26,6 +27,12 @@
             "useFrameworks": "static",
             "buildReactNativeFromSource": true
           }
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
       ]
     ],

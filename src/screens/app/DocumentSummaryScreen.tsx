@@ -10,9 +10,12 @@ import ToggleTab from "@/components/ToggleTab";
 import ActionPlanItemModal from "@/components/modals/ActionPlanItemModal";
 import ReminderModal from "@/components/modals/ReminderModal";
 import { useRoute } from "@react-navigation/native";
+import { useDocumentProcessor } from "@/hooks/useDocProcessor";
+import Button from "@/components/Button";
 
 interface DocumentSummaryScreenProps {
   navigation: any;
+  route: any;
 }
 
 type ToggleTabs = {
@@ -38,6 +41,15 @@ const toggleTabs: ToggleTabs[] = [
 
 const DocumentSummaryScreen = ({ navigation }: DocumentSummaryScreenProps) => {
   const route = useRoute<any>();
+  const uploads = (route.params?.uploads ?? []) as Array<{
+    uri: string;
+    name: string;
+    mimeType: string;
+  }>;
+  console.log("🚀 ~ DocumentSummaryScreen ~ uploads:", uploads);
+  const { processSingleDocumentFromFiles, isProcessing, error } =
+    useDocumentProcessor();
+
   const [activeTab, setActiveTab] = useState<string>(toggleTabs[0].value);
   const [isActionPlanItemModalVisible, setIsActionPlanItemModalVisible] =
     useState(false);
@@ -47,6 +59,9 @@ const DocumentSummaryScreen = ({ navigation }: DocumentSummaryScreenProps) => {
     useState<any>(null);
   const [isReminderModalVisible, setIsReminderModalVisible] = useState(false);
   const [selectedReminderItem, setSelectedReminderItem] = useState<any>(null);
+
+  // Real summary state (fallback to dummy while loading/absent)
+  const [summaryData, setSummaryData] = useState<any>(null);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -60,243 +75,301 @@ const DocumentSummaryScreen = ({ navigation }: DocumentSummaryScreenProps) => {
     });
   }, [navigation]);
 
+  const generateDocumentSummary = async () => {
+    try {
+      const summary = await processSingleDocumentFromFiles(uploads);
+      setSummaryData(summary);
+    } catch (e) {
+      console.log(
+        "🚀 ~ DocumentSummaryScreen ~ generateDocumentSummary error:",
+        e
+      );
+    }
+  };
+
+  // // Process the uploaded files as ONE logical document
+  // useEffect(() => {
+  //   (async () => {
+  //     // If nothing was passed, keep showing the dummy content
+  //     if (!uploads || uploads.length === 0) return;
+
+  //     try {
+  //       const response = await processSingleDocumentFromFiles(uploads);
+  //       console.log(
+  //         "🚀 ~ DocumentSummaryScreen ~ document processing response:ppppppppppppp.......???",
+  //         response
+  //       );
+
+  //       // if (!canceled) {
+  //       //   setSummaryData(summary);
+  //       // }
+  //     } catch (e: any) {
+  //       console.log(
+  //         "🚀 ~ DocumentSummaryScreen ~ document processing error:",
+  //         e
+  //       );
+  //     }
+  //   })();
+  // }, []);
+
+  // useEffect(() => {
+  //   if (error) {
+  //     Alert.alert("Processing error", error);
+  //   }
+  // }, [error]);
+
+  // Use real summary if available, otherwise dummy
+  const activeSummary = summaryData ?? (dummySummary as Record<string, any>);
+
   const filteredContent = useMemo(() => {
-    return (dummySummary as Record<string, any>)[activeTab];
-  }, [activeTab, dummySummary]);
+    return (activeSummary as Record<string, any>)[activeTab];
+  }, [activeTab, activeSummary]);
 
   return (
-    <ScrollView
-      contentContainerStyle={styles.contentContainer}
-      style={styles.container}
-    >
-      <Box>
-        <Box ph={WRAPPER_MARGIN}>
-          <TemplateText
-            semiBold
-            size={16}
-            mb={16}
-            mt={120}
-            color={Colors.WHITE}
-          >
-            {dummySummary.title}
-          </TemplateText>
-          <Box
-            backgroundColor={Colors.WHITE_10}
-            pAll={16}
-            borderRadius={20}
-            borderColor={Colors.WHITE_20}
-            borderWidth={StyleSheet.hairlineWidth}
-          >
+    <Box flex>
+      <ScrollView
+        contentContainerStyle={styles.contentContainer}
+        style={styles.container}
+      >
+        <Box>
+          <Box ph={WRAPPER_MARGIN}>
             <TemplateText
-              color={Colors.WHITE}
-              size={14}
               semiBold
-              numberOfLines={4}
-            >
-              {dummySummary.keyFactsSummary.note}
-            </TemplateText>
-
-            <TemplateText color={Colors.WHITE_50} size={11} mt={8}>
-              {dummySummary.keyFactsSummary.legalReferences.join(" | ")}
-            </TemplateText>
-          </Box>
-        </Box>
-        <ToggleTab
-          tabs={toggleTabs}
-          activeTab={activeTab}
-          onPress={(tab) => {
-            setActiveTab(tab);
-          }}
-          backgroundColor={Colors.WHITE_10}
-          activeBackgroundColor={Colors.WHITE_5}
-        />
-      </Box>
-
-      <Box>
-        <Box row alignItems="center" mv={24} ph={WRAPPER_MARGIN}>
-          <TemplateText medium size={20} color={Colors.WHITE}>
-            {toggleTabs.find((tab) => tab.value === activeTab)?.label}
-          </TemplateText>
-          <Box flex />
-          <Box
-            row
-            alignItems="center"
-            pv={8}
-            ph={12}
-            borderRadius={12}
-            backgroundColor={Colors.WHITE_10}
-            onPress={() => {
-              if (
-                activeTab === toggleTabs[0].value ||
-                activeTab === toggleTabs[1].value
-              ) {
-                // Handle Text-to-Speech
-              } else {
-                setIsReminderModalVisible(true);
-              }
-            }}
-          >
-            <DynamicIcon
-              name={
-                activeTab === toggleTabs[0].value ||
-                activeTab === toggleTabs[1].value
-                  ? "TextToSpeech"
-                  : "Bell"
-              }
-              size={24}
-              color={Colors.WHITE}
-            />
-            <TemplateText color={Colors.WHITE} size={14} ml={12} medium>
-              {`${
-                activeTab === toggleTabs[0].value ||
-                activeTab === toggleTabs[1].value
-                  ? "Read Aloud"
-                  : "Set Up Reminders"
-              }`}
-            </TemplateText>
-          </Box>
-        </Box>
-
-        {(activeTab === toggleTabs[0].value ||
-          activeTab === toggleTabs[1].value) && (
-          <Box ph={WRAPPER_MARGIN} mb={24}>
-            <TemplateText
-              color={Colors.WHITE_60}
               size={16}
-              lineHeight={30}
               mb={16}
-              secondary
+              mt={120}
+              color={Colors.WHITE}
             >
-              {filteredContent}
+              {activeSummary?.title}
             </TemplateText>
-          </Box>
-        )}
-        {activeTab === toggleTabs[2].value && filteredContent?.length > 0 && (
-          <Box ph={WRAPPER_MARGIN} mb={24}>
-            {filteredContent?.map((item: any, index: number) => (
-              <Box
-                key={index}
-                mb={16}
-                pAll={16}
-                backgroundColor={Colors.WHITE_5}
-                borderRadius={20}
-                borderWidth={StyleSheet.hairlineWidth}
-                borderColor={Colors.WHITE_20}
+            <Box
+              backgroundColor={Colors.WHITE_10}
+              pAll={16}
+              borderRadius={20}
+              borderColor={Colors.WHITE_20}
+              borderWidth={StyleSheet.hairlineWidth}
+            >
+              <TemplateText
+                color={Colors.WHITE}
+                size={14}
+                semiBold
+                numberOfLines={4}
               >
+                {activeSummary?.keyFactsSummary?.note}
+              </TemplateText>
+
+              <TemplateText color={Colors.WHITE_50} size={11} mt={8}>
+                {(activeSummary?.keyFactsSummary?.legalReferences || []).join(
+                  " | "
+                )}
+              </TemplateText>
+            </Box>
+          </Box>
+          <ToggleTab
+            tabs={toggleTabs}
+            activeTab={activeTab}
+            onPress={(tab) => {
+              setActiveTab(tab);
+            }}
+            backgroundColor={Colors.WHITE_10}
+            activeBackgroundColor={Colors.WHITE_5}
+          />
+        </Box>
+
+        <Box>
+          <Box row alignItems="center" mv={24} ph={WRAPPER_MARGIN}>
+            <TemplateText medium size={20} color={Colors.WHITE}>
+              {toggleTabs.find((tab) => tab.value === activeTab)?.label}
+            </TemplateText>
+            <Box flex />
+            <Box
+              row
+              alignItems="center"
+              pv={8}
+              ph={12}
+              borderRadius={12}
+              backgroundColor={Colors.WHITE_10}
+              onPress={() => {
+                if (
+                  activeTab === toggleTabs[0].value ||
+                  activeTab === toggleTabs[1].value
+                ) {
+                  // Handle Text-to-Speech
+                } else {
+                  setIsReminderModalVisible(true);
+                }
+              }}
+            >
+              <DynamicIcon
+                name={
+                  activeTab === toggleTabs[0].value ||
+                  activeTab === toggleTabs[1].value
+                    ? "TextToSpeech"
+                    : "Bell"
+                }
+                size={24}
+                color={Colors.WHITE}
+              />
+              <TemplateText color={Colors.WHITE} size={14} ml={12} medium>
+                {`${
+                  activeTab === toggleTabs[0].value ||
+                  activeTab === toggleTabs[1].value
+                    ? "Read Aloud"
+                    : "Set Up Reminders"
+                }`}
+              </TemplateText>
+            </Box>
+          </Box>
+
+          {(activeTab === toggleTabs[0].value ||
+            activeTab === toggleTabs[1].value) && (
+            <Box ph={WRAPPER_MARGIN} mb={24}>
+              <TemplateText
+                color={Colors.WHITE_60}
+                size={16}
+                lineHeight={30}
+                mb={16}
+                secondary
+              >
+                {filteredContent}
+              </TemplateText>
+            </Box>
+          )}
+          {activeTab === toggleTabs[2].value && filteredContent?.length > 0 && (
+            <Box ph={WRAPPER_MARGIN} mb={24}>
+              {filteredContent?.map((item: any, index: number) => (
                 <Box
-                  row
-                  alignItems="center"
-                  onPress={() => {
-                    setSelectedActionPlanItem(item);
-                    setIsActionPlanItemModalVisible(true);
-                  }}
+                  key={index}
+                  mb={16}
+                  pAll={16}
+                  backgroundColor={Colors.WHITE_5}
+                  borderRadius={20}
+                  borderWidth={StyleSheet.hairlineWidth}
+                  borderColor={Colors.WHITE_20}
                 >
-                  <Box width={"90%"}>
-                    <TemplateText color={Colors.WHITE} size={17} medium mb={8}>
-                      {item.title}
-                    </TemplateText>
-                    <TemplateText color={Colors.WHITE_60} size={14}>
-                      {item.description}
-                    </TemplateText>
-                  </Box>
-                  <Box flex />
                   <Box
+                    row
+                    alignItems="center"
                     onPress={() => {
                       setSelectedActionPlanItem(item);
                       setIsActionPlanItemModalVisible(true);
                     }}
                   >
-                    <DynamicIcon
-                      name="ArrowRight"
-                      size={20}
-                      color={Colors.WHITE_60}
-                    />
+                    <Box width={"90%"}>
+                      <TemplateText
+                        color={Colors.WHITE}
+                        size={17}
+                        medium
+                        mb={8}
+                      >
+                        {item.title}
+                      </TemplateText>
+                      <TemplateText color={Colors.WHITE_60} size={14}>
+                        {item.description}
+                      </TemplateText>
+                    </Box>
+                    <Box flex />
+                    <Box
+                      onPress={() => {
+                        setSelectedActionPlanItem(item);
+                        setIsActionPlanItemModalVisible(true);
+                      }}
+                    >
+                      <DynamicIcon
+                        name="ArrowRight"
+                        size={20}
+                        color={Colors.WHITE_60}
+                      />
+                    </Box>
                   </Box>
                 </Box>
-              </Box>
-            ))}
-          </Box>
-        )}
+              ))}
+            </Box>
+          )}
 
-        {activeTab === toggleTabs[3].value && filteredContent?.length > 0 && (
-          <Box
-            mt={24}
-            backgroundColor={Colors.WHITE_5}
-            borderRadius={16}
-            width={WRAPPED_SCREEN_WIDTH}
-            pAll={16}
-            selfCenter
-          >
-            {filteredContent?.map((item: any, index: number) => (
-              <Box key={`checklist-item-${index}`}>
-                <Box
-                  row
-                  alignItems="center"
-                  justifyContent="space-between"
-                  onPress={() => {
-                    Alert.alert(
-                      "Complete Action",
-                      "Mark this action as complete?",
-                      [
-                        { text: "Cancel", style: "cancel" },
-                        {
-                          text: "OK",
-                          onPress: () => {
-                            // Mark action as complete
-                          },
-                        },
-                      ]
-                    );
-                  }}
-                >
-                  <TemplateText
-                    color={Colors.WHITE}
-                    size={14}
-                    maxWidth={"60%"}
-                    left
-                  >
-                    {item.label}
-                  </TemplateText>
-                  <Box flex />
-
-                  <Box>
-                    <DynamicIcon
-                      name={
-                        index < filteredContent.length - 3 ? "Tick" : "Circle"
-                      }
-                      size={20}
-                      color={Colors.WHITE_60}
-                    />
-                  </Box>
-                </Box>
-
-                {index < filteredContent.length - 1 && (
+          {activeTab === toggleTabs[3].value && filteredContent?.length > 0 && (
+            <Box
+              mt={24}
+              backgroundColor={Colors.WHITE_5}
+              borderRadius={16}
+              width={WRAPPED_SCREEN_WIDTH}
+              pAll={16}
+              selfCenter
+            >
+              {filteredContent?.map((item: any, index: number) => (
+                <Box key={`checklist-item-${index}`}>
                   <Box
-                    width={WRAPPED_SCREEN_WIDTH - 20}
-                    height={1}
-                    backgroundColor={Colors.WHITE_5}
-                    selfCenter
-                    ml={16}
-                    mt={12}
-                    mb={16}
-                  />
-                )}
-              </Box>
-            ))}
-          </Box>
-        )}
+                    row
+                    alignItems="center"
+                    justifyContent="space-between"
+                    onPress={() => {
+                      Alert.alert(
+                        "Complete Action",
+                        "Mark this action as complete?",
+                        [
+                          { text: "Cancel", style: "cancel" },
+                          {
+                            text: "OK",
+                            onPress: () => {
+                              // Mark action as complete
+                            },
+                          },
+                        ]
+                      );
+                    }}
+                  >
+                    <TemplateText
+                      color={Colors.WHITE}
+                      size={14}
+                      maxWidth={"60%"}
+                      left
+                    >
+                      {item.label}
+                    </TemplateText>
+                    <Box flex />
+
+                    <Box>
+                      <DynamicIcon
+                        name={
+                          index < filteredContent.length - 3 ? "Tick" : "Circle"
+                        }
+                        size={20}
+                        color={Colors.WHITE_60}
+                      />
+                    </Box>
+                  </Box>
+
+                  {index < filteredContent.length - 1 && (
+                    <Box
+                      width={WRAPPED_SCREEN_WIDTH - 20}
+                      height={1}
+                      backgroundColor={Colors.WHITE_5}
+                      selfCenter
+                      ml={16}
+                      mt={12}
+                      mb={16}
+                    />
+                  )}
+                </Box>
+              ))}
+            </Box>
+          )}
+        </Box>
+        <ActionPlanItemModal
+          visible={isActionPlanItemModalVisible}
+          onClose={() => setIsActionPlanItemModalVisible(false)}
+          item={selectedActionPlanItem}
+        />
+        <ReminderModal
+          visible={isReminderModalVisible}
+          onClose={() => setIsReminderModalVisible(false)}
+          item={selectedReminderItem}
+        />
+      </ScrollView>
+      <Box absolute bottom={0} width="100%" ph={WRAPPER_MARGIN}>
+        <Button title="Generate Summary" onPress={generateDocumentSummary} />
       </Box>
-      <ActionPlanItemModal
-        visible={isActionPlanItemModalVisible}
-        onClose={() => setIsActionPlanItemModalVisible(false)}
-        item={selectedActionPlanItem}
-      />
-      <ReminderModal
-        visible={isReminderModalVisible}
-        onClose={() => setIsReminderModalVisible(false)}
-        item={selectedReminderItem}
-      />
-    </ScrollView>
+    </Box>
   );
 };
 
