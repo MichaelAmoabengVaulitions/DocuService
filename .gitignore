@@ -63,3 +63,6 @@ yarn-error.log
 # Google services files
 /google-services.json
 /GoogleService-Info.plist
+
+
+functions/firebase-debug.log
