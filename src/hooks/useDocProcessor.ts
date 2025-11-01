@@ -273,13 +273,20 @@ export function useDocumentProcessor() {
       await waitUntilLLMReady(llm);
 
       const today = new Date().toISOString().slice(0, 10);
+      const schemaAsString = JSON.stringify(DocumentSummaryJsonSchema);
 
+      // === Updated prompt that enforces the JSON Schema ===
       const system = [
-        "You are an expert document analyst.",
-        "Output MUST be valid JSON exactly matching this schema keys:",
-        "id, title, keyFactsSummary{note, legalReferences[]}, actions[], checklist[], summaryLong, explanationDetailed, provenance{detectedLanguage, processedAt}",
-        "Use clear paragraphs and bullet points in summary fields.",
-        "Derive only from the OCR text. If unknown, use null where the type allows.",
+        "You are an expert document analyst for official letters in Germany.",
+        "Your task: RETURN ONLY RAW JSON that VALIDATES against the provided JSON SCHEMA.",
+        "Do not include markdown fences, comments, or explanations.",
+        "No extra keys beyond the schema. Use null only where the schema allows.",
+        "All required string fields must be non-empty natural language.",
+        "Write 'summaryLong' and 'explanationDetailed' as readable paragraphs with optional bullet points.",
+        "When dates are present, format as YYYY-MM-DD; else use null.",
+        "Populate 'actions' and 'checklist' with concrete, realistic items derived from the text when possible.",
+        "SCHEMA:",
+        schemaAsString,
       ].join("\n");
 
       const user = [
