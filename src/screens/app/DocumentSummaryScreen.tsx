@@ -41,11 +41,7 @@ const toggleTabs: ToggleTabs[] = [
 
 const DocumentSummaryScreen = ({ navigation }: DocumentSummaryScreenProps) => {
   const route = useRoute<any>();
-  const uploads = (route.params?.uploads ?? []) as Array<{
-    uri: string;
-    name: string;
-    mimeType: string;
-  }>;
+  const uploads = route?.params?.uploads ?? [];
   console.log("🚀 ~ DocumentSummaryScreen ~ uploads:", uploads);
   const { processSingleDocumentFromFiles, isProcessing, error } =
     useDocumentProcessor();

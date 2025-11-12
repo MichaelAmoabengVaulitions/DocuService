@@ -67,3 +67,8 @@ yarn-error.log
 
 functions/firebase-debug.log
 functions/*.log
+
+# Environment files
+.env
+.env.*.local
+.env.local
