@@ -72,3 +72,7 @@ functions/*.log
 .env
 .env.*.local
 .env.local
+
+# xcode build errors
+xcodebuild-error.log
+xcodebuild.log

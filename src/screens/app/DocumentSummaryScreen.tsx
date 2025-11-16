@@ -116,6 +116,7 @@ const DocumentSummaryScreen = ({ navigation }: DocumentSummaryScreenProps) => {
 
   // Use real summary if available, otherwise dummy
   const activeSummary = summaryData ?? (dummySummary as Record<string, any>);
+  console.log("🚀 ~ DocumentSummaryScreen ~ summaryData:", summaryData);
 
   const filteredContent = useMemo(() => {
     return (activeSummary as Record<string, any>)[activeTab];
