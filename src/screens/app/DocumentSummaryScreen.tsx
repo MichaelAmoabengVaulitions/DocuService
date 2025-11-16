@@ -42,7 +42,6 @@ const toggleTabs: ToggleTabs[] = [
 const DocumentSummaryScreen = ({ navigation }: DocumentSummaryScreenProps) => {
   const route = useRoute<any>();
   const uploads = route?.params?.uploads ?? [];
-  console.log("🚀 ~ DocumentSummaryScreen ~ uploads:", uploads);
   const { processSingleDocumentFromFiles, isProcessing, error } =
     useDocumentProcessor();
 
@@ -82,37 +81,6 @@ const DocumentSummaryScreen = ({ navigation }: DocumentSummaryScreenProps) => {
       );
     }
   };
-
-  // // Process the uploaded files as ONE logical document
-  // useEffect(() => {
-  //   (async () => {
-  //     // If nothing was passed, keep showing the dummy content
-  //     if (!uploads || uploads.length === 0) return;
-
-  //     try {
-  //       const response = await processSingleDocumentFromFiles(uploads);
-  //       console.log(
-  //         "🚀 ~ DocumentSummaryScreen ~ document processing response:ppppppppppppp.......???",
-  //         response
-  //       );
-
-  //       // if (!canceled) {
-  //       //   setSummaryData(summary);
-  //       // }
-  //     } catch (e: any) {
-  //       console.log(
-  //         "🚀 ~ DocumentSummaryScreen ~ document processing error:",
-  //         e
-  //       );
-  //     }
-  //   })();
-  // }, []);
-
-  // useEffect(() => {
-  //   if (error) {
-  //     Alert.alert("Processing error", error);
-  //   }
-  // }, [error]);
 
   // Use real summary if available, otherwise dummy
   const activeSummary = summaryData ?? (dummySummary as Record<string, any>);

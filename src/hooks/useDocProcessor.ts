@@ -17,11 +17,9 @@ const summarizeWithAiSdk = async (text: string) => {
       throw new Error(`Summarization failed with status ${res.status}`);
     }
     const data = (await res.json()) as DocumentSummary;
-    console.log("🚀 ~ summarizeWithAiSdk ~ data:-------------🎉", data);
     return data;
   } catch (err) {
-    console.log("🚀 ~ summarizeWithAiSdk ~ err:", err);
-    //throw err;
+    throw err;
   }
 };
 
@@ -40,11 +38,6 @@ export function useDocumentProcessor() {
     includeLayout: boolean
   ) => {
     try {
-      // if (!process.env.EXPO_PUBLIC_PROCESS_DOCUMENT_WITH_DOC_AI_URL) {
-      //   throw new Error(
-      //     "EXPO_PUBLIC_PROCESS_DOCUMENT_WITH_DOC_AI_URL is not defined"
-      //   );
-      // }
       const fileBase64 = await readFileAsBase64(primary);
       const resp = await expoFetch(
         "https://processdocumentwithdocai-johrfgfuja-ew.a.run.app/processDocumentWithDocAI",
@@ -87,7 +80,6 @@ export function useDocumentProcessor() {
     ocrText: string
   ): Promise<DocumentSummary> => {
     const summary = await summarizeWithAiSdk(ocrText);
-    console.log("🎉🎉🎉🎉 ~ generateStructuredSummary ~ summary:", summary);
     return summary;
   };
 
@@ -95,25 +87,18 @@ export function useDocumentProcessor() {
     files: LocalFile[],
     includeLayout = false
   ): Promise<{ summary: DocumentSummary; documentLayout?: unknown }> => {
-    console.log("🚀 ~ processSingleDocumentFromFiles ~ files:", "triggered");
     setIsProcessing(true);
     setError(null);
     try {
       if (!files.length) throw new Error("No files provided.");
       const primary = files[0];
-      console.log("🚀 ~ processSingleDocumentFromFiles ~ primary:", primary);
-
       const { text, languageCode } = await requestOcrFromServer(
         primary,
         includeLayout
       );
-      console.log("🚀 ~ processSingleDocumentFromFiles ~ text:", text);
-
       const summary = await generateStructuredSummary(text);
-
       return { summary };
     } catch (err: any) {
-      console.log("🚀 ~ useDocumentProcessor ~ err:", err);
       setError(err?.message || "Document processing failed");
       throw err;
     } finally {

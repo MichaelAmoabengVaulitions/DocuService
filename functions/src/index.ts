@@ -339,6 +339,5 @@ export const generateDocumentSummary = onRequest(
     });
 
     res.json(object);
-    console.log("🚀 ~ Generated Document Summary:", object);
   }
 );
